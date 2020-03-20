@@ -13,6 +13,8 @@ module Kovid
       def by_country(name)
         fetch_url = build_uri(path: "/countries/#{name}")
 
+        binding.pry
+
         response ||= JSON.parse(Typhoeus.get(fetch_url.to_s, cache_ttl: 3600).response_body)
         Kovid::Tablelize.country_table(response)
       end
