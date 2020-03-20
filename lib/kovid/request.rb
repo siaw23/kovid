@@ -14,7 +14,6 @@ module Kovid
         path = "/countries/#{name}"
         fetch_url = BASE_URL + path
 
-
         response ||= JSON.parse(Typhoeus.get(fetch_url.to_s, cache_ttl: 3600).response_body)
         Kovid::Tablelize.country_table(response)
       end
@@ -26,7 +25,6 @@ module Kovid
         response ||= JSON.parse(Typhoeus.get(fetch_url.to_s, cache_ttl: 3600).response_body)
         Kovid::Tablelize.full_country_table(response)
       end
-
     end
   end
 end
