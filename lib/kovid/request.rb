@@ -11,19 +11,25 @@ module Kovid
     class << self
       require 'pry'
       def by_country(name)
-        path = "/countries/#{name}"
-        fetch_url = BASE_URL + path
+        fetch_url = build_uri(path: "/countries/#{name}")
 
         response ||= JSON.parse(Typhoeus.get(fetch_url.to_s, cache_ttl: 3600).response_body)
         Kovid::Tablelize.country_table(response)
       end
 
       def by_country_full(name)
-        path = "/countries/#{name}"
-        fetch_url = BASE_URL + path
+        fetch_url = build_uri(path: "/countries/#{name}")
 
         response ||= JSON.parse(Typhoeus.get(fetch_url.to_s, cache_ttl: 3600).response_body)
         Kovid::Tablelize.full_country_table(response)
+      end
+
+      private
+
+      def build_uri(opts = {})
+        host = 'www.corona.lmao.ninja'
+
+        URI::HTTPS.build(host: host, path: opts[:path]) if opts.key?(:path)
       end
     end
   end
