@@ -29,7 +29,7 @@ module Kovid
       def build_uri(opts = {})
         host = 'www.corona.lmao.ninja'
 
-        URI::HTTPS.build(host: host, path: opts[:path]) if opts.key?(:path)
+        URI::HTTPS.build(host: host, path: opts[:path]).to_s if opts.key?(:path)
       end
     end
   end
