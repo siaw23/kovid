@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+require 'kovid/cli'
+
+Kovid::CLI.start
