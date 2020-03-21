@@ -11,11 +11,26 @@ module Kovid
     class << self
       require 'pry'
       def by_country(name)
-        path = "/countries/#{name}"
-        fetch_url = BASE_URL + path
+        # path = "/countries/#{name}"
+        # fetch_url = BASE_URL + path
 
-        response ||= JSON.parse(Typhoeus.get(fetch_url.to_s, cache_ttl: 3600).response_body)
-        Kovid::Tablelize.country_table(response)
+        # binding.pry
+        # response ||= JSON.parse(Typhoeus.get(fetch_url.to_s, cache_ttl: 3600).response_body)
+        # Kovid::Tablelize.country_table(response)
+
+        begin
+          path = "/countries/#{name}"
+          fetch_url = BASE_URL + path
+
+          response ||= JSON.parse(Typhoeus.get(fetch_url.to_s, cache_ttl: 3600).response_body)
+          Kovid::Tablelize.country_table(response)
+
+        rescue JSON::ParserError
+          rows = []
+          rows << ["Thankfully there are no reported cases in #{name.capitalize}!"]
+          table = Terminal::Table.new :headings => ["#{name}",], :rows => rows
+          puts table
+        end
       end
 
       def by_country_full(name)
