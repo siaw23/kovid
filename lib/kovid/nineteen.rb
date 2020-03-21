@@ -24,6 +24,10 @@ module Kovid
       def country_comparison_full(name)
         puts Kovid::Request.by_country_comparison_full(name)
       end
+
+      def cases
+        puts Kovid::Request.cases
+      end
     end
   end
 end

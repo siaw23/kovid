@@ -29,7 +29,6 @@ module Kovid
       def by_country_comparison(list)
         array = []
 
-
         list.each do |country|
           path = "/countries/#{country}"
           fetch_url = BASE_URL + path
@@ -51,6 +50,14 @@ module Kovid
         end
 
         Kovid::Tablelize.compare_countries_table_full(array)
+      end
+
+      def cases
+        path = '/all'
+        fetch_url = BASE_URL + path
+
+        response ||= JSON.parse(Typhoeus.get(fetch_url.to_s, cache_ttl: 3600).response_body)
+        Kovid::Tablelize.cases(response)
       end
     end
   end

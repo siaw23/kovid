@@ -17,9 +17,9 @@ Before installing:
 
 After installing:
 
-☝️ Avoid touching your eyes, nose, and mouth with unwashed hands later.
+☝️ Avoid touching your eyes, nose and mouth with unwashed hands later.
 
-✌️ Disinfect your phones, keys, door knobs, anything you touch often than you should.
+✌️ Disinfect your phones, keys, door knobs and anything you touch often than you should.
 
 
 
@@ -27,7 +27,9 @@ After installing:
 
 To fetch basic data on a country run:
 
-`kovid check ghana`
+`kovid check ghana`.
+
+If the location contains spaces: `kovid check "Diamond Princess"`
 
 ![kovid](https://i.gyazo.com/ca57d9250c7523a921d0d7e1104716be.png "Covid data.")
 
@@ -45,9 +47,15 @@ To compare country stats:
 
 To compare a countries stats with a full table:
 
-`kovid compare ghana poland -f`
+`kovid compare ghana poland -f` OR `kovid compare ghana poland --full`
 
 ![kovid](https://i.gyazo.com/d0b72207765090b118a5b76d72ddde19.png "Covid data.")
+
+To check for total figures:
+
+`kovid cases`
+
+![kovid](https://i.gyazo.com/f8a21ae54152cd945fbb124b72d12ff7.png "Covid data.")
 
 ## 👨‍💻 Development
 
