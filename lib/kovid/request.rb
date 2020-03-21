@@ -74,7 +74,7 @@ module Kovid
       def no_case_in(country)
         rows = []
         rows << ["Thankfully there are no reported cases in #{country.capitalize}!"]
-        table = Terminal::Table.new :headings => ["#{country}",], :rows => rows
+        table = Terminal::Table.new :headings => ["#{country.capitalize}",], :rows => rows
         puts table
       end
     end
