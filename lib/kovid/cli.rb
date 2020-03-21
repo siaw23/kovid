@@ -6,7 +6,7 @@ require 'kovid'
 module Kovid
   class CLI < Thor
     desc 'whatis', 'Defines COVID-19'
-    def whatis
+    def definition
       Kovid::Nineteen.whatis
     end
 
@@ -22,13 +22,17 @@ module Kovid
 
     desc 'compare', 'Returns full comparison table for given countries'
     def compare(*name)
-      if name[-1] == "-f" || name[-1] == "--full"
+      if name[-1] == '-f' || name[-1] == '--full'
         name = name.reverse.drop(1).reverse
-
         Kovid::Nineteen.country_comparison_full(name)
       else
         Kovid::Nineteen.country_comparison(name)
       end
+    end
+
+    desc 'cases', 'Returns total number of cases, deaths and recoveries'
+    def cases
+      Kovid::Nineteen.cases
     end
   end
 end

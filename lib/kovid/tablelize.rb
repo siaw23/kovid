@@ -59,6 +59,15 @@ module Kovid
 
         puts Terminal::Table.new(headings: headings, rows: rows)
       end
+
+      def cases(cases)
+        headings = %w[Cases Deaths Recoveries]
+
+        rows = []
+
+        rows << [cases['cases'], cases['deaths'], cases['recovered']]
+        puts Terminal::Table.new(title: "Total # of incidents", headings: headings, rows: rows)
+      end
     end
   end
 end
