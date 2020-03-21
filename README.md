@@ -43,6 +43,12 @@ To compare country stats:
 
 ![kovid](https://i.gyazo.com/a15922e13e9e6c1ba804ccf5beeb863b.png "Covid data.")
 
+To compare a countries stats with a full table:
+
+`kovid compare ghana poland -f`
+
+![kovid](https://i.gyazo.com/d0b72207765090b118a5b76d72ddde19.png "Covid data.")
+
 ## 👨‍💻 Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.

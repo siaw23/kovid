@@ -21,9 +21,10 @@ module Kovid
     end
 
     desc 'compare', 'Returns full comparison table for given countries'
-    method_option :full, aliases: '-f'
     def compare(*name)
-      if options[:full]
+      if name[-1] == "-f" || name[-1] == "--full"
+        name = name.reverse.drop(1).reverse
+
         Kovid::Nineteen.country_comparison_full(name)
       else
         Kovid::Nineteen.country_comparison(name)

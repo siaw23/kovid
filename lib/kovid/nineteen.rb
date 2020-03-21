@@ -18,7 +18,7 @@ module Kovid
       end
 
       def country_comparison(name)
-        puts Kovid::Request.by_country_comparison_full(name)
+        puts Kovid::Request.by_country_comparison(name)
       end
 
       def country_comparison_full(name)
