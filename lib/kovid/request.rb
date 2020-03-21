@@ -27,7 +27,6 @@ module Kovid
       end
 
       def by_country_comparison(list)
-        puts "by_country_comparison"
         array = []
 
 
@@ -38,11 +37,10 @@ module Kovid
           array << JSON.parse(Typhoeus.get(fetch_url.to_s, cache_ttl: 3600).response_body)
         end
 
-        Kovid::Tablelize.compare_countries_table_full(array)
+        Kovid::Tablelize.compare_countries_table(array)
       end
 
       def by_country_comparison_full(list)
-        puts "by_country_comparison_full"
         array = []
 
         list.each do |country|
