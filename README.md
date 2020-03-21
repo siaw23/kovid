@@ -1,6 +1,6 @@
 # 🦠 Kovid
 
-Kovid is a small CLI app to fetch data surrounding the coronavirus pandemic of 2019. I found myself checking [Wikipedia](https://en.wikipedia.org/wiki/2019%E2%80%9320_coronavirus_pandemic) constantly for information and since I work mostly in the terminal, like most of you, I thought I'd build this to literally put the data right at our fingertips.
+Kovid is a small CLI app to fetch data surrounding the coronavirus pandemic of 2019. I found myself checking [Wikipedia](https://en.wikipedia.org/wiki/2019%E2%80%9320_coronavirus_pandemic) constantly for information and since I work mostly in the terminal, like most of you, I thought I'd build this to put the data right at our fingertips.
 
 
 
@@ -19,21 +19,36 @@ After installing:
 
 ☝️ Avoid touching your eyes, nose and mouth with unwashed hands later.
 
-✌️ Disinfect your phones, keys, door knobs and anything you touch often than you should.
+✌️ Disinfect your phones, keys, doorknobs and anything you touch often than you should.
 
 
 
 ## ⚒️ Usage
 
+#### Commands Overview
+ **Fetching**
+* `kovid check ghana`.
+* `kovid check ghana -f` OR `kovid check ghana --full`
+
+**Comparing**
+* `kovid compare ghana poland`
+* `kovid compare ghana poland -f` OR `kovid compare ghana poland --full`
+
+**Total figures**
+* `kovid cases`
+
+
+
+#### Commands Details
 To fetch basic data on a country run:
 
-`kovid check ghana`.
+`kovid check ghana`
 
 If the location contains spaces: `kovid check "Diamond Princess"`
 
 ![kovid](https://i.gyazo.com/ca57d9250c7523a921d0d7e1104716be.png "Covid data.")
 
-For a full table info on a country:
+For full table info on a country:
 
 `kovid check ghana -f` OR `kovid check ghana --full`
 
@@ -70,7 +85,7 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/siaw23
 
 ## 🔖 License
 
-The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+The gem is available as open-source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
 
 ## ❤️ Code of Conduct
 
