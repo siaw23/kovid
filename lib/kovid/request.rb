@@ -27,7 +27,7 @@ module Kovid
 
         rescue JSON::ParserError
           rows = []
-          rows << ["Thankfully there are no reported cases in #{name}!"]
+          rows << ["Thankfully there are no reported cases in #{name.capitalize}!"]
           table = Terminal::Table.new :headings => ["#{name}",], :rows => rows
           puts table
         end
