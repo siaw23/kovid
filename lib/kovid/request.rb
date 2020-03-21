@@ -26,6 +26,7 @@ module Kovid
           Kovid::Tablelize.country_table(response)
 
         rescue JSON::ParserError
+          rows = []
           rows = << ["Thankfully there are no reported cases in #{name}!"]
           table = Terminal::Table.new :headings => ["#{name}",], :rows => rows
           puts table
