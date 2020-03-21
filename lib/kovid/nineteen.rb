@@ -6,7 +6,13 @@ module Kovid
   class Nineteen
     class << self
       def whatis
-        puts 'Coronavirus disease (COVID-19) is an infectious disease caused by a new virus.'
+        definition = <<-TEXT
+        Coronavirus disease 2019 (COVID-19) is an infectious disease caused by severe acute
+        respiratory syndrome coronavirus 2 (SARS-CoV-2).
+        The disease was first identified in 2019 in Wuhan, China, and has since spread globally,
+        resulting in the 2019–20 coronavirus pandemic.
+        TEXT
+        puts definition
       end
 
       def country(name)

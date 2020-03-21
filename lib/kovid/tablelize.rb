@@ -66,7 +66,7 @@ module Kovid
         rows = []
 
         rows << [cases['cases'], cases['deaths'], cases['recovered']]
-        puts Terminal::Table.new(title: "Total # of incidents", headings: headings, rows: rows)
+        puts Terminal::Table.new(title: 'Total # of incidents', headings: headings, rows: rows)
       end
     end
   end

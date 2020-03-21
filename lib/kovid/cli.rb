@@ -5,12 +5,12 @@ require 'kovid'
 
 module Kovid
   class CLI < Thor
-    desc 'whatis', 'Defines COVID-19'
-    def definition
+    desc 'define', 'Defines COVID-19'
+    def define
       Kovid::Nineteen.whatis
     end
 
-    desc 'check', 'Returns data on country'
+    desc 'check COUNTRY', 'Returns reported data on provided country'
     method_option :full, aliases: '-f'
     def check(name)
       if options[:full]
@@ -20,7 +20,7 @@ module Kovid
       end
     end
 
-    desc 'compare', 'Returns full comparison table for given countries'
+    desc 'compare COUNTRY COUNTRY', 'Returns full comparison table for given countries. Accepts multiple countries'
     def compare(*name)
       if name[-1] == '-f' || name[-1] == '--full'
         name = name.reverse.drop(1).reverse
