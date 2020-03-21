@@ -25,9 +25,11 @@ After installing:
 
 ## ⚒️ Usage
 
+You can run `kovid --help` to see full list of available commands.
+
 #### Commands Overview
  **Fetching**
-* `kovid check ghana`.
+* `kovid check ghana`
 * `kovid check ghana -f` OR `kovid check ghana --full`
 
 **Comparing**
@@ -80,7 +82,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## 🤲 Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/siaw23/kovid. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/siaw23/kovid/blob/master/CODE_OF_CONDUCT.md).
+There are multiple areas in this repo that can be improved  or use some refactoring and for thats why bug reports and pull requests are welcome here on GitHub. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/siaw23/kovid/blob/master/CODE_OF_CONDUCT.md).
 
 
 ## 🔖 License
@@ -89,4 +91,4 @@ The gem is available as open-source under the terms of the [MIT License](https:/
 
 ## ❤️ Code of Conduct
 
-Everyone interacting in the Kovid project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/siaw23/kovid/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the Kovid project's codebases and issue trackers is expected to follow the [code of conduct](https://github.com/siaw23/kovid/blob/master/CODE_OF_CONDUCT.md).
