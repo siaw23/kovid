@@ -9,7 +9,6 @@ module Kovid
     BASE_URL = 'https://corona.lmao.ninja'
 
     class << self
-      require 'pry'
       def by_country(country_name)
         response = fetch_country(country_name)
 
@@ -50,7 +49,7 @@ module Kovid
         rows = []
         rows << ["Thankfully, there are no reported cases in #{country.capitalize}!"]
         table = Terminal::Table.new headings: [country.capitalize.to_s], rows: rows
-        puts table
+        table
       end
 
       def fetch_countries(list)

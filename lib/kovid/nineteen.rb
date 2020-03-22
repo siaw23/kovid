@@ -6,33 +6,27 @@ module Kovid
   class Nineteen
     class << self
       def whatis
-        definition = <<-TEXT
-        Coronavirus disease 2019 (COVID-19) is an infectious disease caused by severe acute
-        respiratory syndrome coronavirus 2 (SARS-CoV-2).
-        The disease was first identified in 2019 in Wuhan, China, and has since spread globally,
-        resulting in the 2019–20 coronavirus pandemic.
-        TEXT
-        puts definition
+        "Coronavirus disease 2019 (COVID-19) is an infectious disease caused by severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2)."
       end
 
       def country(name)
-        puts Kovid::Request.by_country(name)
+        Kovid::Request.by_country(name)
       end
 
       def country_full(name)
-        puts Kovid::Request.by_country_full(name)
+        Kovid::Request.by_country_full(name)
       end
 
-      def country_comparison(name)
-        puts Kovid::Request.by_country_comparison(name)
+      def country_comparison(names_array)
+        Kovid::Request.by_country_comparison(names_array)
       end
 
-      def country_comparison_full(name)
-        puts Kovid::Request.by_country_comparison_full(name)
+      def country_comparison_full(names_array)
+        Kovid::Request.by_country_comparison_full(names_array)
       end
 
       def cases
-        puts Kovid::Request.cases
+        Kovid::Request.cases
       end
     end
   end
