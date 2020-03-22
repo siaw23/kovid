@@ -39,7 +39,7 @@ module Kovid
       end
 
       def full_state_table(state)
-        headings = ["Cases", "Cases Today", "Deaths", "Deaths Today", "Reovered", "Active"]
+        headings = ['Cases', 'Cases Today', 'Deaths', 'Deaths Today', 'Reovered', 'Active']
         rows = []
         rows << [state['cases'], state['todayCases'], state['deaths'], state['todayDeaths'], state['recovered'], state['active']]
         Terminal::Table.new(title: state['state'], headings: headings, rows: rows)
