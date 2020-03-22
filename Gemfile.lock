@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    kovid (0.1.10)
+    kovid (0.1.11)
       terminal-table
       thor
       typhoeus

@@ -88,7 +88,7 @@ To check for total figures:
 ![kovid](https://i.gyazo.com/f8a21ae54152cd945fbb124b72d12ff7.png "Covid data.")
 
 ## Source
-> https://www.worldometers.info/coronavirus/ vis [NovelCOVID/API](https://github.com/novelcovid/api)
+> https://www.worldometers.info/coronavirus/ via [NovelCOVID/API](https://github.com/novelcovid/api)
 
 
 ## 👨‍💻 Development
