@@ -64,7 +64,7 @@ module Kovid
 
         data.each do |country|
           rows << [
-            ['country'],
+            country['country'],
             country['cases'],
             country['deaths'],
             country['recovered'],
