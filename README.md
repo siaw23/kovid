@@ -32,6 +32,9 @@ You can run `kovid --help` to see full list of available commands.
 * `kovid check ghana`
 * `kovid check ghana -f` OR `kovid check ghana --full`
 
+You can fetch US state-specific data with:
+* `kovid state colorado`
+
 **Comparing**
 * `kovid compare ghana poland` (sorts by cases DESC)
 * `kovid compare ghana poland -f` OR `kovid compare ghana poland --full` (sorts by cases DESC)
@@ -69,6 +72,12 @@ To compare a countries stats with a full table:
 `kovid compare poland italy usa china -f` OR `kovid compare poland italy usa china --full`
 
 ![kovid](https://i.gyazo.com/7ce86c5e93d549e1412fb6104a1d7877.png "Covid data.")
+
+To fetch state-specific data run:
+
+`kovid state colorado`
+
+![kovid](https://i.gyazo.com/133046d9d31c20a8bad1a05b46ba4d3e.png "Covid data.")
 
 To check for total figures:
 
