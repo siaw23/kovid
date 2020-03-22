@@ -87,7 +87,7 @@ module Kovid
 
        # binding.pry
 
-        states_array.select {|state_name| state_name["state"] == state.to_s.capitalize}.first
+        states_array.select {|state_name| state_name["state"] == state.split.map(&:capitalize).join(' ')}.first
       end
     end
   end
