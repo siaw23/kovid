@@ -27,6 +27,8 @@ After installing:
 
 You can run `kovid --help` to see the full list of available commands.
 
+**NOTE:** If you find it irritating to have to type `kovid state michigan`, `covid state michigan` works as well.
+
 #### Commands Overview
 😷 **Fetching**
 * `kovid check ghana`
@@ -43,8 +45,6 @@ You can compare as many countries as you want.
 
 😷 **Total figures**
 * `kovid cases`
-
-**PS:** If you find it irritating to have to type `kovid state michigan`, I got your back, `covid state michigan` will work as well.
 
 
 
@@ -88,7 +88,8 @@ To check for total figures:
 ![kovid](https://i.gyazo.com/f8a21ae54152cd945fbb124b72d12ff7.png "Covid data.")
 
 ## Source
-> https://www.worldometers.info/coronavirus/
+> https://www.worldometers.info/coronavirus/ vis [NovelCOVID/API](https://github.com/novelcovid/api)
+
 
 ## 👨‍💻 Development
 
@@ -99,7 +100,7 @@ To install this gem onto your local machine, run `bundle exec rake install`.
 
 ## 🤲 Contributing
 
-There are multiple areas in this repo that can be improved or use some refactoring and for that's why bug reports and pull requests are welcome here on GitHub. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/siaw23/kovid/blob/master/CODE_OF_CONDUCT.md).
+There are multiple areas in this repo that can be improved or use some refactoring. For that reason, bug reports and pull requests are welcome here on GitHub. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/siaw23/kovid/blob/master/CODE_OF_CONDUCT.md).
 
 
 ## 🔖 License
