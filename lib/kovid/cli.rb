@@ -20,6 +20,11 @@ module Kovid
       end
     end
 
+    desc 'state STATE', 'Return reported data on provided state'
+    def state(state)
+      puts Kovid::Nineteen.state(state)
+    end
+
     desc 'compare COUNTRY COUNTRY', 'Returns full comparison table for given countries. Accepts multiple countries'
     def compare(*name)
       if name[-1] == '-f' || name[-1] == '--full'

@@ -25,6 +25,12 @@ module Kovid
         no_case_in(country_name)
       end
 
+      def state(state)
+        response = fetch_state(state)
+
+        Kovid::Tablelize.full_state_table(response)
+      end
+
       def by_country_comparison(list)
         array = fetch_countries(list)
         Kovid::Tablelize.compare_countries_table(array)
@@ -70,6 +76,18 @@ module Kovid
         fetch_url = BASE_URL + path
 
         JSON.parse(Typhoeus.get(fetch_url.to_s, cache_ttl: 3600).response_body)
+      end
+
+      def fetch_state(state)
+        path = "/states"
+        fetch_url = BASE_URL + path
+
+
+        states_array = JSON.parse(Typhoeus.get(fetch_url.to_s, cache_ttl: 3600).response_body)
+
+       # binding.pry
+
+        states_array.select {|state_name| state_name["state"] == state.to_s.capitalize}.first
       end
     end
   end
