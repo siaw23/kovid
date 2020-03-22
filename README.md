@@ -19,30 +19,32 @@ After installing:
 
 ☝️ Avoid touching your eyes, nose and mouth with unwashed hands later.
 
-✌️ Disinfect your phones, keys, doorknobs and anything you touch often than you should.
+✌️ Disinfect your phones, keys, doorknobs and anything you touch more often than you should.
 
 
 
 ## ⚒️ Usage
 
-You can run `kovid --help` to see full list of available commands.
+You can run `kovid --help` to see the full list of available commands.
 
 #### Commands Overview
- **Fetching**
+😷 **Fetching**
 * `kovid check ghana`
 * `kovid check ghana -f` OR `kovid check ghana --full`
 
-🇺🇸 You can fetch US state-specific data with:
+🇺🇸You can fetch US state-specific data 🇺🇸
 * `kovid state colorado` OR `kovid state "north carolina"`
 
-**Comparing**
+😷 **Comparing**
 * `kovid compare ghana poland` (sorts by cases DESC)
 * `kovid compare ghana poland -f` OR `kovid compare ghana poland --full` (sorts by cases DESC)
 
 You can compare as many countries as you want.
 
-**Total figures**
+😷 **Total figures**
 * `kovid cases`
+
+**PS:** If you find it irritating to have to type `kovid state michigan`, I got your back, `covid state michigan` will work as well.
 
 
 
@@ -85,6 +87,9 @@ To check for total figures:
 
 ![kovid](https://i.gyazo.com/f8a21ae54152cd945fbb124b72d12ff7.png "Covid data.")
 
+## Source
+> https://www.worldometers.info/coronavirus/
+
 ## 👨‍💻 Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
@@ -94,7 +99,7 @@ To install this gem onto your local machine, run `bundle exec rake install`.
 
 ## 🤲 Contributing
 
-There are multiple areas in this repo that can be improved  or use some refactoring and for thats why bug reports and pull requests are welcome here on GitHub. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/siaw23/kovid/blob/master/CODE_OF_CONDUCT.md).
+There are multiple areas in this repo that can be improved or use some refactoring and for that's why bug reports and pull requests are welcome here on GitHub. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/siaw23/kovid/blob/master/CODE_OF_CONDUCT.md).
 
 
 ## 🔖 License
