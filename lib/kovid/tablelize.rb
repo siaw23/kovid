@@ -50,11 +50,29 @@ module Kovid
       end
 
       def compare_countries_table_full(data)
-        headings = ['Country', 'Cases', 'Deaths', 'Recovered', 'Cases Today', 'Deaths Today', 'Critical', 'Cases/Million']
+        headings = [
+          'Country',
+          'Cases',
+          'Deaths',
+          'Recovered',
+          'Cases Today',
+          'Deaths Today',
+          'Critical',
+          'Cases/Million'
+        ]
         rows = []
 
         data.each do |country|
-          rows << [country['country'], country['cases'], country['deaths'], country['recovered'], country['todayCases'], country['todayDeaths'], country['critical'], country['casesPerOneMillion']]
+          rows << [
+            ['country'],
+            country['cases'],
+            country['deaths'],
+            country['recovered'],
+            country['todayCases'],
+            country['todayDeaths'],
+            country['critical'],
+            country['casesPerOneMillion']
+          ]
         end
 
         puts Terminal::Table.new(headings: headings, rows: rows)
