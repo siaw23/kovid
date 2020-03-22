@@ -11,7 +11,7 @@ module Kovid
     class << self
       require 'pry'
       def by_country(country_name)
-        fetch_country(country_name)
+        response = fetch_country(country_name)
 
         Kovid::Tablelize.country_table(response)
       rescue JSON::ParserError
@@ -19,7 +19,7 @@ module Kovid
       end
 
       def by_country_full(country_name)
-        fetch_country(country_name)
+        response = fetch_country(country_name)
 
         Kovid::Tablelize.full_country_table(response)
       rescue JSON::ParserError
