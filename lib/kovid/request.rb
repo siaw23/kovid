@@ -79,15 +79,12 @@ module Kovid
       end
 
       def fetch_state(state)
-        path = "/states"
+        path = '/states'
         fetch_url = BASE_URL + path
-
 
         states_array = JSON.parse(Typhoeus.get(fetch_url.to_s, cache_ttl: 3600).response_body)
 
-       # binding.pry
-
-        states_array.select {|state_name| state_name["state"] == state.to_s.capitalize}.first
+        states_array.select { |state_name| state_name['state'] == state.split.map(&:capitalize).join(' ') }.first
       end
     end
   end

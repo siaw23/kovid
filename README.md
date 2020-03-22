@@ -33,7 +33,7 @@ You can run `kovid --help` to see full list of available commands.
 * `kovid check ghana -f` OR `kovid check ghana --full`
 
 🇺🇸 You can fetch US state-specific data with:
-* `kovid state colorado`
+* `kovid state colorado` OR `kovid state "north carolina"`
 
 **Comparing**
 * `kovid compare ghana poland` (sorts by cases DESC)
