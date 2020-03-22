@@ -9,7 +9,7 @@ module Kovid
         headings = %w[Cases Deaths Recovered]
         rows = []
         rows << [data['cases'], data['deaths'], data['recovered']]
-        puts Terminal::Table.new(title: data['country'], headings: headings, rows: rows)
+        Terminal::Table.new(title: data['country'], headings: headings, rows: rows)
       end
 
       def full_country_table(data)
@@ -33,9 +33,9 @@ module Kovid
           data['critical'],
           data['casesPerOneMillion']
         ]
-        puts Terminal::Table.new(title: data['country'],
-                                 headings: headings,
-                                 rows: rows)
+        Terminal::Table.new(title: data['country'],
+                            headings: headings,
+                            rows: rows)
       end
 
       def compare_countries_table(data)
@@ -46,7 +46,7 @@ module Kovid
           rows << [country['country'], country['cases'], country['deaths'], country['recovered']]
         end
 
-        puts Terminal::Table.new(headings: headings, rows: rows)
+        Terminal::Table.new(headings: headings, rows: rows)
       end
 
       def compare_countries_table_full(data)
@@ -75,7 +75,7 @@ module Kovid
           ]
         end
 
-        puts Terminal::Table.new(headings: headings, rows: rows)
+        Terminal::Table.new(headings: headings, rows: rows)
       end
 
       def cases(cases)
@@ -84,7 +84,7 @@ module Kovid
         rows = []
 
         rows << [cases['cases'], cases['deaths'], cases['recovered']]
-        puts Terminal::Table.new(title: 'Total # of incidents', headings: headings, rows: rows)
+        Terminal::Table.new(title: 'Total # of incidents', headings: headings, rows: rows)
       end
     end
   end
