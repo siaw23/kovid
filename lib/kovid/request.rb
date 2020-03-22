@@ -40,6 +40,8 @@ module Kovid
           array << JSON.parse(Typhoeus.get(fetch_url.to_s, cache_ttl: 3600).response_body)
         end
 
+        array = array.sort_by { |json| -json['cases'] }
+
         Kovid::Tablelize.compare_countries_table(array)
       end
 
@@ -52,6 +54,7 @@ module Kovid
 
           array << JSON.parse(Typhoeus.get(fetch_url.to_s, cache_ttl: 3600).response_body)
         end
+        array = array.sort_by { |json| -json['cases'] }
 
         Kovid::Tablelize.compare_countries_table_full(array)
       end
@@ -68,7 +71,7 @@ module Kovid
 
       def no_case_in(country)
         rows = []
-        rows << ["Thankfully there are no reported cases in #{country.capitalize}!"]
+        rows << ["Thankfully, there are no reported cases in #{country.capitalize}!"]
         table = Terminal::Table.new headings: [country.capitalize.to_s], rows: rows
         puts table
       end

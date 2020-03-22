@@ -12,7 +12,7 @@ Before installing:
 
 ☝️ Wash your hands with soap and water for at least 20 seconds.
 
-✌️ Run `$ gem install kovid`
+✌️ Run `gem install kovid`
 
 
 After installing:
@@ -33,8 +33,10 @@ You can run `kovid --help` to see full list of available commands.
 * `kovid check ghana -f` OR `kovid check ghana --full`
 
 **Comparing**
-* `kovid compare ghana poland`
-* `kovid compare ghana poland -f` OR `kovid compare ghana poland --full`
+* `kovid compare ghana poland` (sorts by cases DESC)
+* `kovid compare ghana poland -f` OR `kovid compare ghana poland --full` (sorts by cases DESC)
+
+You can compare as many countries as you want.
 
 **Total figures**
 * `kovid cases`
@@ -64,9 +66,9 @@ To compare country stats:
 
 To compare a countries stats with a full table:
 
-`kovid compare ghana poland -f` OR `kovid compare ghana poland --full`
+`kovid compare poland italy usa china -f` OR `kovid compare poland italy usa china --full`
 
-![kovid](https://i.gyazo.com/d0b72207765090b118a5b76d72ddde19.png "Covid data.")
+![kovid](https://i.gyazo.com/7ce86c5e93d549e1412fb6104a1d7877.png "Covid data.")
 
 To check for total figures:
 
