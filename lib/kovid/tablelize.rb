@@ -87,10 +87,8 @@ module Kovid
 
       def cases(cases)
         headings = %w[Cases Deaths Recoveries]
+        rows = [[cases['cases'], cases['deaths'], cases['recovered']]]
 
-        rows = []
-
-        rows << [cases['cases'], cases['deaths'], cases['recovered']]
         Terminal::Table.new(title: 'Total # of incidents', headings: headings, rows: rows)
       end
     end
