@@ -39,7 +39,7 @@ You can run `kovid --help` to see the full list of available commands.
 
 😷 **Comparing**
 * `kovid compare ghana poland` (sorts by cases DESC)
-* `kovid compare ghana poland -f` OR `kovid compare ghana poland --full` (sorts by cases DESC)
+* `kovid compare germany poland -f` OR `kovid compare germany poland --full` (sorts by cases DESC)
 
 You can compare as many countries as you want.
 
@@ -55,39 +55,39 @@ To fetch basic data on a country run:
 
 If the location contains spaces: `kovid check "Diamond Princess"`
 
-![kovid](https://i.gyazo.com/ca57d9250c7523a921d0d7e1104716be.png "Covid data.")
+![kovid](https://i.gyazo.com/ab779c3fc838ac279bae5b9d6d10d617.png "Covid data.")
 
 For full table info on a country:
 
 `kovid check ghana -f` OR `kovid check ghana --full`
 
-![kovid](https://i.gyazo.com/628f07faf8e3c1c2a0b6ab05e4a86404.png "Covid data.")
+![kovid](https://i.gyazo.com/151c8e7ac55a7b4efd27b734720863f1.png "Covid data.")
 
 To compare country stats:
 
-`kovid compare ghana poland`
+`kovid compare germany poland`
 
-![kovid](https://i.gyazo.com/a15922e13e9e6c1ba804ccf5beeb863b.png "Covid data.")
+![kovid](https://i.gyazo.com/be3bcba3d2943c60618b59ae82a3c586.png "Covid data.")
 
 To compare a countries stats with a full table:
 
 `kovid compare poland italy usa china -f` OR `kovid compare poland italy usa china --full`
 
-![kovid](https://i.gyazo.com/7ce86c5e93d549e1412fb6104a1d7877.png "Covid data.")
+![kovid](https://i.gyazo.com/79ad61c33114a0bee0a9e2ab94a3d46e.png "Covid data.")
 
 To fetch state-specific data run:
 
 `kovid state colorado`
 
-![kovid](https://i.gyazo.com/133046d9d31c20a8bad1a05b46ba4d3e.png "Covid data.")
+![kovid](https://i.gyazo.com/d00b1c5bbb6251cbd517f801c856ba66.png "Covid data.")
 
 To check for total figures:
 
 `kovid cases`
 
-![kovid](https://i.gyazo.com/f8a21ae54152cd945fbb124b72d12ff7.png "Covid data.")
+![kovid](https://i.gyazo.com/323f0f10d444e2ee629d05a90488adba.png "Covid data.")
 
-## Source
+## Information Source
 > https://www.worldometers.info/coronavirus/ via [NovelCOVID/API](https://github.com/novelcovid/api)
 
 
@@ -100,7 +100,7 @@ To install this gem onto your local machine, run `bundle exec rake install`.
 
 ## 🤲 Contributing
 
-There are multiple areas in this repo that can be improved or use some refactoring. For that reason, bug reports and pull requests are welcome here on GitHub. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/siaw23/kovid/blob/master/CODE_OF_CONDUCT.md).
+There are multiple areas in this repo that can be improved or use some refactoring(there's a lot to be refactorted in fact!). For that reason, bug reports and pull requests are welcome! This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/siaw23/kovid/blob/master/CODE_OF_CONDUCT.md).
 
 
 ## 🔖 License
