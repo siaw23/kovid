@@ -45,7 +45,7 @@ module Kovid
         path = '/all'
         fetch_url = BASE_URL + path
 
-        response ||= JSON.parse(Typhoeus.get(fetch_url.to_s, cache_ttl: 1800).response_body)
+        response ||= JSON.parse(Typhoeus.get(fetch_url.to_s, cache_ttl: 900).response_body)
 
         Kovid::Tablelize.cases(response)
       end
@@ -64,7 +64,7 @@ module Kovid
           path = "/countries/#{country}"
           fetch_url = BASE_URL + path
 
-          array << JSON.parse(Typhoeus.get(fetch_url.to_s, cache_ttl: 1800).response_body)
+          array << JSON.parse(Typhoeus.get(fetch_url.to_s, cache_ttl: 900).response_body)
         end
 
         array = array.sort_by { |json| -json['cases'] }
@@ -74,14 +74,14 @@ module Kovid
         path = "/countries/#{country_name}"
         fetch_url = BASE_URL + path
 
-        JSON.parse(Typhoeus.get(fetch_url.to_s, cache_ttl: 1800).response_body)
+        JSON.parse(Typhoeus.get(fetch_url.to_s, cache_ttl: 900).response_body)
       end
 
       def fetch_state(state)
         path = '/states'
         fetch_url = BASE_URL + path
 
-        states_array = JSON.parse(Typhoeus.get(fetch_url.to_s, cache_ttl: 1800).response_body)
+        states_array = JSON.parse(Typhoeus.get(fetch_url.to_s, cache_ttl: 900).response_body)
 
         states_array.select { |state_name| state_name['state'] == state.split.map(&:capitalize).join(' ') }.first
       end
