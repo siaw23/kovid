@@ -23,7 +23,8 @@ Gem::Specification.new do |spec|
       There isn't much we can do now aside:
 
       * Washing our hands with soap frequently.
-      * Limiting our movements and social distancing.
+      * Limiting our movements, how much we touch our faces & social distancing.
+      * Disinfecting our phones, keys, doorknobs, keyboards, etc.
       * Being there for each other.
 
       Stay safe!

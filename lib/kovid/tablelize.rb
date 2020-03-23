@@ -2,11 +2,19 @@
 
 require 'terminal-table'
 require_relative 'painter'
-
+require 'pry'
+require 'date'
 module Kovid
   class Tablelize
     class << self
       CASES_DEATHS_RECOVERED = [
+        'Cases'.paint_white,
+        'Deaths'.paint_red,
+        'Recovered'.paint_green
+      ].freeze
+
+      DATE_CASES_DEATHS_RECOVERED = [
+        'Date'.paint_white,
         'Cases'.paint_white,
         'Deaths'.paint_red,
         'Recovered'.paint_green
@@ -111,8 +119,37 @@ module Kovid
         headings = CASES_DEATHS_RECOVERED
         rows = [[cases['cases'], cases['deaths'], cases['recovered']]]
 
-        Terminal::Table.new(title: 'Total # of incidents', headings: headings, rows: rows)
+        Terminal::Table.new(title: 'Total Number of Incidents Worldwide', headings: headings, rows: rows)
       end
+
+      def history(country)
+        headings = DATE_CASES_DEATHS_RECOVERED
+        rows = []
+        stats = country['timeline'].values.map(&:values).transpose.each do |data|
+          data.map! { |number| comma_delimit(number) }
+        end
+
+        dates = country['timeline']['cases'].keys
+
+        data = stats.each_with_index do |val, index|
+                 val.unshift(Date.parse(Date.strptime(dates[index], '%m/%d/%y').to_s).strftime('%d %b, %y'))
+               end.each do |row|
+          rows << row
+        end
+
+
+        rows << ["------------", "------------","------------","------------"]
+        rows << DATE_CASES_DEATHS_RECOVERED
+
+        Terminal::Table.new(title: country['standardizedCountryName'].capitalize.to_s, headings: headings, rows: rows)
+      end
+
+      private def comma_delimit(number)
+        number.to_s.chars.to_a.reverse.each_slice(3).map(&:join).join(',').reverse
+      end
+
     end
+
+
   end
 end

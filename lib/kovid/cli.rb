@@ -42,5 +42,10 @@ module Kovid
     def cases
       puts Kovid.cases
     end
+
+    desc 'history COUNTRY', 'Return history of incidents of COUNTRY'
+    def history(country)
+      puts Kovid.history(country)
+    end
   end
 end
