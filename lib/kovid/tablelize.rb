@@ -51,7 +51,7 @@ module Kovid
           'Cases Today',
           'Deaths'.paint_red,
           'Deaths Today'.paint_red,
-          'Reovered'.paint_green,
+          'Recovered'.paint_green,
           'Active'.paint_yellow
         ]
 
