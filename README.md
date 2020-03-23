@@ -32,7 +32,7 @@ You can run `kovid --help` to see the full list of available commands.
 #### Commands Overview
 😷 **Fetching**
 * `kovid check ghana`
-* `kovid check ghana -f` OR `kovid check ghana --full`
+* `kovid check italy -f` OR `kovid check italy --full`
 
 🇺🇸You can fetch US state-specific data 🇺🇸
 * `kovid state colorado` OR `kovid state "north carolina"`
@@ -59,9 +59,9 @@ If the location contains spaces: `kovid check "Diamond Princess"`
 
 For full table info on a country:
 
-`kovid check ghana -f` OR `kovid check ghana --full`
+`kovid check italy -f` OR `kovid check italy -f --full`
 
-![kovid](https://i.gyazo.com/151c8e7ac55a7b4efd27b734720863f1.png "Covid data.")
+![kovid](https://i.gyazo.com/789fa6795d06f529a9b5f37cb51fb516.png "Covid data.")
 
 To compare country stats:
 
