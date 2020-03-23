@@ -61,8 +61,8 @@ module Kovid
       private
 
       def no_case_in(country)
-        rows = [["Thankfully, there are no reported cases in #{country.capitalize}!"]]
-        Terminal::Table.new headings: [country.capitalize.to_s], rows: rows
+        rows = [["No reported cases OR check your spelling!"]]
+        Terminal::Table.new headings: ["You checked: #{country.capitalize.to_s}"], rows: rows
       end
 
       def fetch_countries(list)

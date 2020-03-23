@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 require 'terminal-table'
-require_relative 'painter'
 require 'date'
+require_relative 'painter'
+
 module Kovid
   class Tablelize
     class << self
