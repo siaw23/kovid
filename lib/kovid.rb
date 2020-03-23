@@ -2,7 +2,6 @@
 
 require 'kovid/version'
 require 'kovid/request'
-require 'pry'
 
 module Kovid
   class Error < StandardError; end
