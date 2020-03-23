@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require 'typhoeus'
 require 'json'
 require_relative 'tablelize'
+require_relative 'cache'
 
 module Kovid
   class Request
@@ -46,6 +46,7 @@ module Kovid
         fetch_url = BASE_URL + path
 
         response ||= JSON.parse(Typhoeus.get(fetch_url.to_s, cache_ttl: 3600).response_body)
+
         Kovid::Tablelize.cases(response)
       end
 
@@ -66,6 +67,8 @@ module Kovid
           fetch_url = BASE_URL + path
 
           array << JSON.parse(Typhoeus.get(fetch_url.to_s, cache_ttl: 3600).response_body)
+
+          puts
         end
 
         array = array.sort_by { |json| -json['cases'] }
