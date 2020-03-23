@@ -6,8 +6,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Emmanuel Hayford"]
   spec.email         = ["siawmensah@gmail.com"]
 
-  spec.summary       = %q{🦠 A CLI tool to fetch and compare the 2019 coronavirus pandemic numbers.}
-  spec.description   = %q{A CLI tool to fetch and compare the 2019 coronavirus pandemic numbers.}
+  spec.summary       = %q{A CLI to fetch and compare the 2019 coronavirus pandemic statistics.}
+  spec.description   = %q{A CLI to fetch and compare the 2019 coronavirus pandemic statistics.}
   spec.homepage      = "https://github.com/siaw23/kovid"
   spec.license       = "MIT"
   spec.required_ruby_version = Gem::Requirement.new(">= 2.3.0")
