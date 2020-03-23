@@ -48,7 +48,7 @@ module Kovid
       def full_state_table(state)
         headings = [
           'Cases'.paint_white,
-          'Cases Today',
+          'Cases Today'.paint_white,
           'Deaths'.paint_red,
           'Deaths Today'.paint_red,
           'Recovered'.paint_green,

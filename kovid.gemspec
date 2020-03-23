@@ -14,6 +14,23 @@ Gem::Specification.new do |spec|
 
   spec.metadata["allowed_push_host"] = "https://rubygems.org/"
 
+  spec.post_install_message = %q{
+    ============================================================================
+      COVID-19 has devasted the world! But while we're fighting
+      with the novel coronavirus, I think stats on the issue should be easily
+      reachable.
+
+      There isn't much we can do now aside:
+
+      * Washing our hands with soap frequently.
+      * Limiting our movements and social distancing.
+      * Being there for each other.
+
+      Stay safe!
+      Emmanuel Hayford.
+    ============================================================================
+    }
+
   spec.metadata["homepage_uri"] = spec.homepage
   spec.metadata["source_code_uri"] = "https://github.com/siaw23/kovid"
   spec.metadata["changelog_uri"] = "https://github.com/siaw23/kovid"
