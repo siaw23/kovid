@@ -2,7 +2,6 @@
 
 require 'terminal-table'
 require_relative 'painter'
-require 'pry'
 require 'date'
 module Kovid
   class Tablelize
@@ -131,14 +130,13 @@ module Kovid
 
         dates = country['timeline']['cases'].keys
 
-        data = stats.each_with_index do |val, index|
-                 val.unshift(Date.parse(Date.strptime(dates[index], '%m/%d/%y').to_s).strftime('%d %b, %y'))
-               end.each do |row|
+        stats.each_with_index do |val, index|
+          val.unshift(Date.parse(Date.strptime(dates[index], '%m/%d/%y').to_s).strftime('%d %b, %y'))
+        end.each do |row|
           rows << row
         end
 
-
-        rows << ["------------", "------------","------------","------------"]
+        rows << ['------------', '------------', '------------', '------------']
         rows << DATE_CASES_DEATHS_RECOVERED
 
         Terminal::Table.new(title: country['standardizedCountryName'].capitalize.to_s, headings: headings, rows: rows)
@@ -147,9 +145,6 @@ module Kovid
       private def comma_delimit(number)
         number.to_s.chars.to_a.reverse.each_slice(3).map(&:join).join(',').reverse
       end
-
     end
-
-
   end
 end
