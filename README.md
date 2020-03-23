@@ -1,8 +1,8 @@
 # 🦠 Kovid
 
-Kovid is a small CLI app to fetch data surrounding the coronavirus pandemic of 2019. I found myself checking [Wikipedia](https://en.wikipedia.org/wiki/2019%E2%80%9320_coronavirus_pandemic) constantly for information and since I work mostly in the terminal, like most of you, I thought I'd build this to put the data right at our fingertips.
+[gem]: https://rubygems.org/gems/kovid
 
-
+Kovid is a small CLI app to fetch data surrounding the coronavirus pandemic of 2019. I found myself checking [Wikipedia](https://en.wikipedia.org/wiki/2019%E2%80%9320_coronavirus_pandemic) constantly for information and since I work mostly in the terminal, like some of you, I thought I'd build this to put the data right at our fingertips.
 
 Please feel free to contribute or suggest ideas!
 
@@ -13,13 +13,6 @@ Before installing:
 ☝️ Wash your hands with soap and water for at least 20 seconds.
 
 ✌️ Run `gem install kovid`
-
-
-After installing:
-
-☝️ Avoid touching your eyes, nose and mouth with unwashed hands later.
-
-✌️ Disinfect your phones, keys, doorknobs and anything you touch more often than you should.
 
 
 
@@ -43,6 +36,9 @@ You can run `kovid --help` to see the full list of available commands.
 
 You can compare as many countries as you want.
 
+😷 **History**
+* `kovid history italy`
+
 😷 **Total figures**
 * `kovid cases`
 
@@ -59,7 +55,7 @@ If the location contains spaces: `kovid check "Diamond Princess"`
 
 For full table info on a country:
 
-`kovid check italy -f` OR `kovid check italy -f --full`
+`kovid check italy -f` OR `kovid check italy --full`
 
 ![kovid](https://i.gyazo.com/789fa6795d06f529a9b5f37cb51fb516.png "Covid data.")
 
@@ -80,6 +76,12 @@ To fetch state-specific data run:
 `kovid state colorado`
 
 ![kovid](https://i.gyazo.com/d00b1c5bbb6251cbd517f801c856ba66.png "Covid data.")
+
+You can check historical statistics by running
+
+`kovid history COUNTRY` eg:
+
+![kovid](https://i.gyazo.com/1e2e61620ddd012246999716580cf9b0.png "Covid data.")
 
 To check for total figures:
 

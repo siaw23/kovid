@@ -50,6 +50,14 @@ module Kovid
         Kovid::Tablelize.cases(response)
       end
 
+      def history(country)
+        path = '/historical'
+        fetch_url = BASE_URL + path + "/#{country}"
+
+        response ||= JSON.parse(Typhoeus.get(fetch_url.to_s, cache_ttl: 900).response_body)
+        Kovid::Tablelize.history(response)
+      end
+
       private
 
       def no_case_in(country)
