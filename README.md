@@ -81,7 +81,7 @@ You can check historical statistics by running
 
 `kovid history COUNTRY` eg:
 
-![kovid](https://i.gyazo.com/1e2e61620ddd012246999716580cf9b0.png "Covid data.")
+![kovid](https://i.gyazo.com/45d306694cbf793f2e4f7646854cbac8.png "Covid data.")
 
 To check for total figures:
 
