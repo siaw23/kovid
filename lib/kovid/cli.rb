@@ -32,8 +32,7 @@ module Kovid
     desc 'compare COUNTRY COUNTRY', 'Returns full comparison table for given countries. Accepts multiple countries.'
     def compare(*name)
       if FULL_FLAG.include?(name.fetch(-1))
-        name = name.reverse.drop(1).reverse
-        puts Kovid.country_comparison_full(name)
+        puts Kovid.country_comparison_full(name[0..-2])
       else
         puts Kovid.country_comparison(name)
       end
