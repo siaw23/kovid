@@ -5,6 +5,8 @@ require 'kovid'
 
 module Kovid
   class CLI < Thor
+    FULL_FLAG = %w[-f --full].freeze
+
     desc 'define', 'Defines COVID-19'
     def define
       puts Kovid::Nineteen.whatis
@@ -27,7 +29,7 @@ module Kovid
 
     desc 'compare COUNTRY COUNTRY', 'Returns full comparison table for given countries. Accepts multiple countries'
     def compare(*name)
-      if name[-1] == '-f' || name[-1] == '--full'
+      if FULL_FLAG.include?(name.fetch(-1))
         name = name.reverse.drop(1).reverse
         puts Kovid::Nineteen.country_comparison_full(name)
       else
