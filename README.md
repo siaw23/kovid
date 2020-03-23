@@ -87,7 +87,7 @@ To check for total figures:
 
 ![kovid](https://i.gyazo.com/f8a21ae54152cd945fbb124b72d12ff7.png "Covid data.")
 
-## Source
+## Information Source
 > https://www.worldometers.info/coronavirus/ via [NovelCOVID/API](https://github.com/novelcovid/api)
 
 
@@ -100,7 +100,7 @@ To install this gem onto your local machine, run `bundle exec rake install`.
 
 ## 🤲 Contributing
 
-There are multiple areas in this repo that can be improved or use some refactoring. For that reason, bug reports and pull requests are welcome here on GitHub. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/siaw23/kovid/blob/master/CODE_OF_CONDUCT.md).
+There are multiple areas in this repo that can be improved or use some refactoring(there's a lot to be refactorted in fact!). For that reason, bug reports and pull requests are welcome! This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/siaw23/kovid/blob/master/CODE_OF_CONDUCT.md).
 
 
 ## 🔖 License

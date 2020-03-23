@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 RSpec.describe Kovid do
+  it 'has a version number' do
+    expect(Kovid::VERSION).not_to be nil
+  end
+
   describe 'whatis' do
     it 'defines COVID-19' do
       text = 'Coronavirus disease 2019 (COVID-19) is an infectious disease caused by severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2).'
@@ -20,7 +24,7 @@ RSpec.describe Kovid do
 
     it 'raise a JSON::ParseError when country specified has no reported case' do
       table = Kovid.country(no_country)
-      good_news = "Thankfully, there are no reported cases in Wonderland!"
+      good_news = 'Thankfully, there are no reported cases in Wonderland!'
 
       expect(table.rows.first.cells.first.value).to eq(good_news)
     end
@@ -38,7 +42,7 @@ RSpec.describe Kovid do
 
     it 'raise a JSON::ParseError when country specified has no reported case' do
       table = Kovid.country_full(no_country)
-      good_news = "Thankfully, there are no reported cases in Wonderland!"
+      good_news = 'Thankfully, there are no reported cases in Wonderland!'
 
       expect(table.rows.first.cells.first.value).to eq(good_news)
     end
@@ -49,8 +53,8 @@ RSpec.describe Kovid do
     it 'returns table with country data' do
       table = Kovid.country_comparison(country)
 
-      expect(table.headings.first.cells.last.value).to eq('Recovered')
-      expect(table.headings.first.cells.first.value).to eq('Country')
+      expect(table.headings.first.cells.last.value).to include('Recovered')
+      expect(table.headings.first.cells.first.value).to include('Country')
     end
   end
 
@@ -59,8 +63,8 @@ RSpec.describe Kovid do
     it 'returns table with country data' do
       table = Kovid.country_comparison_full(country)
 
-      expect(table.headings.first.cells.first.value).to eq('Country')
-      expect(table.headings.first.cells.last.value).to eq('Cases/Million')
+      expect(table.headings.first.cells.first.value).to include('Country')
+      expect(table.headings.first.cells.last.value).to include('Cases/Million')
     end
   end
 
@@ -68,8 +72,8 @@ RSpec.describe Kovid do
     it 'returns summary of cases' do
       table = Kovid.cases
 
-      expect(table.headings.first.cells.first.value).to eq('Cases')
-      expect(table.headings.first.cells.last.value).to eq('Recoveries')
+      expect(table.headings.first.cells.first.value).to include('Cases')
+      expect(table.headings.first.cells.last.value).to include('Recovered')
     end
   end
 end

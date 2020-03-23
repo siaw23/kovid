@@ -12,7 +12,7 @@ module Kovid
       puts Kovid.whatis
     end
 
-    desc 'check COUNTRY or check "COUNTRY NAME"', 'Returns reported data on provided country. eg: "kovid check "hong kong"'
+    desc 'check COUNTRY or check "COUNTRY NAME"', 'Returns reported data on provided country. eg: "kovid check "hong kong".'
     method_option :full, aliases: '-f'
     def check(name)
       if options[:full]
@@ -21,16 +21,15 @@ module Kovid
         puts Kovid.country(name)
       end
     end
-    desc 'country COUNTRY or country "COUNTRY NAME"', 'Returns reported data on provided country. eg: "kovid country "hong kong"'
-    alias :country :check
+    desc 'country COUNTRY or country "COUNTRY NAME"', 'Returns reported data on provided country. eg: "kovid country "hong kong".'
+    alias country check
 
-
-    desc 'state STATE', 'Return reported data on provided state'
+    desc 'state STATE', 'Return reported data on provided state.'
     def state(state)
       puts Kovid.state(state)
     end
 
-    desc 'compare COUNTRY COUNTRY', 'Returns full comparison table for given countries. Accepts multiple countries'
+    desc 'compare COUNTRY COUNTRY', 'Returns full comparison table for given countries. Accepts multiple countries.'
     def compare(*name)
       if FULL_FLAG.include?(name.fetch(-1))
         name = name.reverse.drop(1).reverse
@@ -40,7 +39,7 @@ module Kovid
       end
     end
 
-    desc 'cases', 'Returns total number of cases, deaths and recoveries'
+    desc 'cases', 'Returns total number of cases, deaths and recoveries.'
     def cases
       puts Kovid.cases
     end
