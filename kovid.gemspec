@@ -48,7 +48,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "thor", "~> 1.0"
   spec.add_dependency "terminal-table", "~> 1.8"
   spec.add_dependency "typhoeus", "~> 1.3"
-  spec.add_dependency "colorize", "~> 0.8"
+  spec.add_dependency "rainbow", "~> 3.0"
 
   spec.add_development_dependency "pry"
   spec.add_development_dependency "cucumber"

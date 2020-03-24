@@ -1,21 +1,21 @@
 # frozen_string_literal: true
 
-require 'colorize'
+require 'rainbow'
 
 class String
   def paint_white
-    colorize(:white).colorize(background: :black).colorize(mode: :bold)
+    Rainbow(self).white.bg(:black).bold
   end
 
   def paint_red
-    colorize(:red).colorize(background: :black).colorize(mode: :bold)
+    Rainbow(self).red.bg(:black).bold
   end
 
   def paint_green
-    colorize(:green).colorize(background: :black).colorize(mode: :bold)
+    Rainbow(self).green.bg(:black).bold
   end
 
   def paint_yellow
-    colorize(:yellow).colorize(background: :black).colorize(mode: :bold)
+    Rainbow(self).yellow.bg(:black).bold
   end
 end
