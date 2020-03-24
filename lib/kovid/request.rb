@@ -48,11 +48,11 @@ module Kovid
         Kovid::Tablelize.cases(response)
       end
 
-      def history(country)
+      def history(country, last)
         history_path = UriBuilder.new('/historical').url
         response ||= JSON.parse(Typhoeus.get(history_path + "/#{country}", cache_ttl: 900).response_body)
 
-        Kovid::Tablelize.history(response)
+        Kovid::Tablelize.history(response, last)
       end
 
       private

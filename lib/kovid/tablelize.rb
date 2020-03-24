@@ -26,7 +26,7 @@ module Kovid
         headings = CASES_DEATHS_RECOVERED
         rows = [[data['cases'], data['deaths'], data['recovered']]]
 
-        Terminal::Table.new(title: data['country'], headings: headings, rows: rows)
+        Terminal::Table.new(title: data['country'].upcase, headings: headings, rows: rows)
       end
 
       def full_country_table(data)
@@ -50,7 +50,7 @@ module Kovid
           data['critical'],
           data['casesPerOneMillion']
         ]
-        Terminal::Table.new(title: data['country'],
+        Terminal::Table.new(title: data['country'].upcase,
                             headings: headings,
                             rows: rows)
       end
@@ -72,7 +72,7 @@ module Kovid
         puts "‼️  Swap value of 'Recovered' for 'Active'. API scraper broke."
         puts "‼️  So 'Active' is #{state['recovered']} and not #{state['active']}."
 
-        Terminal::Table.new(title: state['state'], headings: headings, rows: rows)
+        Terminal::Table.new(title: state['state'].upcase, headings: headings, rows: rows)
       end
 
       def compare_countries_table(data)
@@ -126,17 +126,28 @@ module Kovid
         headings = CASES_DEATHS_RECOVERED
         rows = [[cases['cases'], cases['deaths'], cases['recovered']]]
 
-        Terminal::Table.new(title: 'Total Number of Incidents Worldwide', headings: headings, rows: rows)
+        Terminal::Table.new(title: 'Total Number of Incidents Worldwide'.upcase, headings: headings, rows: rows)
       end
 
-      def history(country)
+      def history(country, last)
         headings = DATE_CASES_DEATHS_RECOVERED
         rows = []
-        stats = country['timeline'].values.map(&:values).transpose.each do |data|
-          data.map! { |number| comma_delimit(number) }
-        end
 
-        dates = country['timeline']['cases'].keys
+        stats = if last
+                  country['timeline'].values.map(&:values).transpose.each do |data|
+                    data.map! { |number| comma_delimit(number) }
+                  end.last(last.to_i)
+                else
+                  country['timeline'].values.map(&:values).transpose.each do |data|
+                    data.map! { |number| comma_delimit(number) }
+                  end
+                end
+
+        dates = if last
+                  country['timeline']['cases'].keys.last(last.to_i)
+                else
+                  country['timeline']['cases'].keys
+                end
 
         stats.each_with_index do |val, index|
           val.unshift(Date.parse(Date.strptime(dates[index], '%m/%d/%y').to_s).strftime('%d %b, %y'))
@@ -144,10 +155,12 @@ module Kovid
           rows << row
         end
 
-        rows << FOOTER_LINE
-        rows << DATE_CASES_DEATHS_RECOVERED
+        if stats.size > 10
+          rows << FOOTER_LINE
+          rows << DATE_CASES_DEATHS_RECOVERED
+        end
 
-        Terminal::Table.new(title: country['standardizedCountryName'].split.map(&:capitalize).join(' '), headings: headings, rows: rows)
+        Terminal::Table.new(title: country['standardizedCountryName'].upcase, headings: headings, rows: rows)
       end
 
       private

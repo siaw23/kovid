@@ -37,7 +37,8 @@ You can run `kovid --help` to see the full list of available commands.
 You can compare as many countries as you want.
 
 😷 **History**
-* `kovid history COUNTRY`
+* `kovid history COUNTRY` (Full history)
+* `kovid history COUNTRY N` (History in the last N days)
 
 😷 **Total figures**
 * `kovid cases`
@@ -73,15 +74,15 @@ To compare a countries stats with a full table:
 
 To fetch state-specific data run:
 
-`kovid state colorado`
+`kovid state colorado` OR `kovid state "north carolina"`
 
 ![kovid](https://i.gyazo.com/d00b1c5bbb6251cbd517f801c856ba66.png "Covid data.")
 
 You can check historical statistics by running
 
-`kovid history COUNTRY` eg:
+`kovid history italy 7` eg:
 
-![kovid](https://i.gyazo.com/45d306694cbf793f2e4f7646854cbac8.png "Covid data.")
+![kovid](https://i.gyazo.com/e4872b5047eeaebbd354847a943de268.png "Covid data.")
 
 To check for total figures:
 
