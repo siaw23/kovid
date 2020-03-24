@@ -8,6 +8,7 @@ require_relative 'uri_builder'
 module Kovid
   class Request
     COUNTRIES_PATH = UriBuilder.new('/countries').url
+    STATES_URL = UriBuilder.new('/states').url
 
     class << self
       def by_country(country_name)
@@ -73,20 +74,16 @@ module Kovid
       end
 
       def fetch_country(country_name)
-        url = COUNTRIES_PATH + "/#{country_name}"
+        country_url = COUNTRIES_PATH + "/#{country_name}"
 
-        JSON.parse(Typhoeus.get(url, cache_ttl: 900).response_body)
+        JSON.parse(Typhoeus.get(country_url, cache_ttl: 900).response_body)
       end
 
       def fetch_state(state)
-        url = UriBuilder.new('/states').url
-
-        states_array = JSON.parse(Typhoeus.get(url, cache_ttl: 900).response_body)
+        states_array = JSON.parse(Typhoeus.get(STATES_URL, cache_ttl: 900).response_body)
 
         states_array.select { |state_name| state_name['state'] == capitalize_words(state) }.first
       end
-
-      private
 
       def capitalize_words(string)
         string.split.map(&:capitalize).join(' ')
