@@ -6,7 +6,6 @@ Kovid is a small CLI app to fetch data surrounding the coronavirus pandemic of 2
 
 Code contribution and ideas welcome.
 
-NOTE: There **may be** issues with requests because the "API" is changing servers.
 
 ## ⚙️ Installation
 
