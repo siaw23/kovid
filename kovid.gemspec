@@ -45,10 +45,10 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "thor"
-  spec.add_dependency "terminal-table"
-  spec.add_dependency "typhoeus"
-  spec.add_dependency "colorize"
+  spec.add_dependency "thor", "~> 1.0"
+  spec.add_dependency "terminal-table", "~> 1.8"
+  spec.add_dependency "typhoeus", "~> 1.3"
+  spec.add_dependency "colorize", "~> 0.8"
 
   spec.add_development_dependency "pry"
   spec.add_development_dependency "cucumber"
