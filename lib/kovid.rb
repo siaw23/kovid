@@ -36,7 +36,7 @@ module Kovid
     Kovid::Request.cases
   end
 
-  def history(country)
-    Kovid::Request.history(country)
+  def history(country, last)
+    Kovid::Request.history(country, last)
   end
 end

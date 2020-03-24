@@ -19,7 +19,7 @@ RSpec.describe Kovid do
     it 'returns table with country data' do
       table = Kovid.country(country)
 
-      expect(table.title).to eq('Ghana')
+      expect(table.title).to eq('GHANA')
     end
 
     it 'raise a JSON::ParseError when country specified has no reported case' do
@@ -37,7 +37,7 @@ RSpec.describe Kovid do
     it 'returns table with country data' do
       table = Kovid.country_full(country)
 
-      expect(table.title).to eq('Italy')
+      expect(table.title).to eq('ITALY')
     end
 
     it 'raise a JSON::ParseError when country specified has no reported case' do

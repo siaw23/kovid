@@ -44,8 +44,12 @@ module Kovid
     end
 
     desc 'history COUNTRY', 'Return history of incidents of COUNTRY'
-    def history(country)
-      puts Kovid.history(country)
+    def history(*params)
+      if params.size == 2
+        puts Kovid.history(params.first, params.last)
+      else
+        puts Kovid.history(params.first, nil)
+      end
     end
   end
 end
