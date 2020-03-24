@@ -16,9 +16,9 @@ Gem::Specification.new do |spec|
 
   spec.post_install_message = %q{
     ============================================================================
-      COVID-19 has devasted the world! But while we're fighting
-      with the novel coronavirus, I think stats on the issue should be easily
-      reachable.
+      COVID-19 has devasted the world. But while we're fighting
+      with the novel coronavirus, I think stats on the issue should be
+      accessible.
 
       There isn't much we can do now aside:
 

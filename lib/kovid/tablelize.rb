@@ -20,6 +20,8 @@ module Kovid
         'Recovered'.paint_green
       ].freeze
 
+      FOOTER_LINE = ['------------', '------------', '------------', '------------'].freeze
+
       def country_table(data)
         headings = CASES_DEATHS_RECOVERED
         rows = [[data['cases'], data['deaths'], data['recovered']]]
@@ -137,13 +139,15 @@ module Kovid
           rows << row
         end
 
-        rows << ['------------', '------------', '------------', '------------']
+        rows << FOOTER_LINE
         rows << DATE_CASES_DEATHS_RECOVERED
 
-        Terminal::Table.new(title: country['standardizedCountryName'].capitalize.to_s, headings: headings, rows: rows)
+        Terminal::Table.new(title: country['standardizedCountryName'].split.map(&:capitalize).join(' '), headings: headings, rows: rows)
       end
 
-      private def comma_delimit(number)
+      private
+
+      def comma_delimit(number)
         number.to_s.chars.to_a.reverse.each_slice(3).map(&:join).join(',').reverse
       end
     end

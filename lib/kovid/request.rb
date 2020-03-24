@@ -3,10 +3,11 @@
 require 'json'
 require_relative 'tablelize'
 require_relative 'cache'
+require_relative 'uri_builder'
 
 module Kovid
   class Request
-    BASE_URL = 'https://corona.lmao.ninja'
+    COUNTRIES_PATH = UriBuilder.new('/countries').url
 
     class << self
       def by_country(country_name)
@@ -42,56 +43,52 @@ module Kovid
       end
 
       def cases
-        path = '/all'
-        fetch_url = BASE_URL + path
-
-        response ||= JSON.parse(Typhoeus.get(fetch_url.to_s, cache_ttl: 900).response_body)
+        response ||= JSON.parse(Typhoeus.get(UriBuilder.new('/all').url, cache_ttl: 900).response_body)
 
         Kovid::Tablelize.cases(response)
       end
 
       def history(country)
-        path = '/historical'
-        fetch_url = BASE_URL + path + "/#{country}"
+        history_path = UriBuilder.new('/historical').url
+        response ||= JSON.parse(Typhoeus.get(history_path + "/#{country}", cache_ttl: 900).response_body)
 
-        response ||= JSON.parse(Typhoeus.get(fetch_url.to_s, cache_ttl: 900).response_body)
         Kovid::Tablelize.history(response)
       end
 
       private
 
       def no_case_in(country)
-        rows = [["No reported cases OR check your spelling!"]]
-        Terminal::Table.new headings: ["You checked: #{country.capitalize.to_s}"], rows: rows
+        rows = [['No reported cases OR check your spelling!']]
+        Terminal::Table.new headings: ["You checked: #{country.capitalize}"], rows: rows
       end
 
       def fetch_countries(list)
         array = []
 
         list.each do |country|
-          path = "/countries/#{country}"
-          fetch_url = BASE_URL + path
-
-          array << JSON.parse(Typhoeus.get(fetch_url.to_s, cache_ttl: 900).response_body)
+          array << JSON.parse(Typhoeus.get(COUNTRIES_PATH + "/#{country}", cache_ttl: 900).response_body)
         end
 
         array = array.sort_by { |json| -json['cases'] }
       end
 
       def fetch_country(country_name)
-        path = "/countries/#{country_name}"
-        fetch_url = BASE_URL + path
+        url = COUNTRIES_PATH + "/#{country_name}"
 
-        JSON.parse(Typhoeus.get(fetch_url.to_s, cache_ttl: 900).response_body)
+        JSON.parse(Typhoeus.get(url, cache_ttl: 900).response_body)
       end
 
       def fetch_state(state)
-        path = '/states'
-        fetch_url = BASE_URL + path
+        url = UriBuilder.new('/states').url
+        states_array = JSON.parse(Typhoeus.get(url, cache_ttl: 900).response_body)
 
-        states_array = JSON.parse(Typhoeus.get(fetch_url.to_s, cache_ttl: 900).response_body)
+        states_array.select { |state_name| state_name['state'] == capitalize_words(state) }.first
+      end
 
-        states_array.select { |state_name| state_name['state'] == state.split.map(&:capitalize).join(' ') }.first
+      private
+
+      def capitalize_words(string)
+        string.split.map(&:capitalize).join(' ')
       end
     end
   end
