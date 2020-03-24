@@ -4,7 +4,9 @@
 
 Kovid is a small CLI app to fetch data surrounding the coronavirus pandemic of 2019. I found myself checking [Wikipedia](https://en.wikipedia.org/wiki/2019%E2%80%9320_coronavirus_pandemic) constantly for information and since I work mostly in the terminal, like some of you, I thought I'd build this to put the data right at our fingertips.
 
-Please feel free to contribute or suggest ideas!
+Code contribution and ideas welcome.
+
+NOTE: There **may be** issues with requests because the "API" is changing servers.
 
 ## ⚙️ Installation
 
@@ -24,7 +26,7 @@ You can run `kovid --help` to see the full list of available commands.
 
 #### Commands Overview
 😷 **Fetching**
-* `kovid check COUNTRY`
+* `kovid check COUNTRY` (`kovid country COUNTRY` works as well)
 * `kovid check COUNTRY -f` OR `kovid check COUNTRY --full`
 
 🇺🇸You can fetch US state-specific data 🇺🇸
@@ -37,8 +39,8 @@ You can run `kovid --help` to see the full list of available commands.
 You can compare as many countries as you want.
 
 😷 **History**
-* `kovid history COUNTRY` (Full history)
-* `kovid history COUNTRY N` (History in the last N days)
+* `kovid history COUNTRY` (full history)
+* `kovid history COUNTRY N` (history in the last N days)
 
 😷 **Total figures**
 * `kovid cases`

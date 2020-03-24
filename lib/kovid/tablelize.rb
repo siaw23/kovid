@@ -86,7 +86,7 @@ module Kovid
         rows = []
 
         data.each do |country|
-          rows << [country['country'], country['cases'], country['deaths'], country['recovered']]
+          rows << [country['country'].upcase, country['cases'], country['deaths'], country['recovered']]
         end
 
         Terminal::Table.new(headings: headings, rows: rows)
