@@ -24,7 +24,7 @@ RSpec.describe Kovid do
 
     it 'raise a JSON::ParseError when country specified has no reported case' do
       table = Kovid.country(no_country)
-      good_news = 'No reported cases OR check your spelling!'
+      good_news = 'No reported cases OR wrong spelling of country/state!'
 
       expect(table.rows.first.cells.first.value).to eq(good_news)
     end
@@ -42,7 +42,7 @@ RSpec.describe Kovid do
 
     it 'raise a JSON::ParseError when country specified has no reported case' do
       table = Kovid.country_full(no_country)
-      good_news = 'No reported cases OR check your spelling!'
+      good_news = 'No reported cases OR wrong spelling of country/state!'
 
       expect(table.rows.first.cells.first.value).to eq(good_news)
     end
