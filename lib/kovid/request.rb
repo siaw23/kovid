@@ -80,6 +80,7 @@ module Kovid
 
       def fetch_state(state)
         url = UriBuilder.new('/states').url
+
         states_array = JSON.parse(Typhoeus.get(url, cache_ttl: 900).response_body)
 
         states_array.select { |state_name| state_name['state'] == capitalize_words(state) }.first
