@@ -15,6 +15,8 @@ Before installing:
 
 ✌️ Run `gem install kovid`
 
+UPDATE often with `gem update kovid`
+
 
 
 ## ⚒️ Usage

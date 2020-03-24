@@ -61,12 +61,11 @@ module Kovid
           'Cases Today'.paint_white,
           'Deaths'.paint_red,
           'Deaths Today'.paint_red,
-          'Recovered'.paint_green,
           'Active'.paint_yellow
         ]
 
         rows = []
-        rows << [state['cases'], state['todayCases'], state['deaths'], state['todayDeaths'], state['recovered'], state['active']]
+        rows << [state['cases'], check_if_positve(state['todayCases']), state['deaths'], check_if_positve(state['todayDeaths']), state['active']]
 
         Terminal::Table.new(title: state['state'].upcase, headings: headings, rows: rows)
       end
@@ -108,8 +107,8 @@ module Kovid
             country['cases'],
             country['deaths'],
             country['recovered'],
-            country['todayCases'],
-            country['todayDeaths'],
+            check_if_positve(country['todayCases']),
+            check_if_positve(country['todayDeaths']),
             country['critical'],
             country['casesPerOneMillion']
           ]
@@ -163,6 +162,10 @@ module Kovid
 
       def comma_delimit(number)
         number.to_s.chars.to_a.reverse.each_slice(3).map(&:join).join(',').reverse
+      end
+
+      def check_if_positve(num)
+        num.to_i.positive? ? "+#{num}" : num.to_s
       end
     end
   end
