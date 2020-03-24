@@ -67,8 +67,11 @@ module Kovid
 
         rows = []
         rows << [state['cases'], state['todayCases'], state['deaths'], state['todayDeaths'], state['recovered'], state['active']]
+        
         puts
         puts "‼️  Swap value of 'Recovered' for 'Active'. API scraper broke."
+        puts "‼️  So 'Active' is #{state['recovered']} and not #{state['active']}."
+
         Terminal::Table.new(title: state['state'], headings: headings, rows: rows)
       end
 
