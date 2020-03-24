@@ -20,24 +20,24 @@ Before installing:
 
 You can run `kovid --help` to see the full list of available commands.
 
-**NOTE:** If you find it irritating to have to type `kovid state michigan`, `covid state michigan` works as well.
+**NOTE:** If you find it irritating to have to type `kovid state STATE`, `covid state STATE` works as well.
 
 #### Commands Overview
 😷 **Fetching**
-* `kovid check ghana`
-* `kovid check italy -f` OR `kovid check italy --full`
+* `kovid check COUNTRY`
+* `kovid check COUNTRY -f` OR `kovid check COUNTRY --full`
 
 🇺🇸You can fetch US state-specific data 🇺🇸
-* `kovid state colorado` OR `kovid state "north carolina"`
+* `kovid state STATE` OR `kovid state "STATE WITH SPACES"`
 
 😷 **Comparing**
-* `kovid compare ghana poland` (sorts by cases DESC)
-* `kovid compare germany poland -f` OR `kovid compare germany poland --full` (sorts by cases DESC)
+* `kovid compare COUNTRYA COUNTRYB` (sorts by cases DESC)
+* `kovid compare COUNTRYA COUNTRYB -f` OR `kovid compare COUNTRYA COUNTRYB --full` (sorts by cases DESC)
 
 You can compare as many countries as you want.
 
 😷 **History**
-* `kovid history italy`
+* `kovid history COUNTRY`
 
 😷 **Total figures**
 * `kovid cases`
