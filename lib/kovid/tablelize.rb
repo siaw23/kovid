@@ -21,12 +21,18 @@ module Kovid
       ].freeze
 
       FOOTER_LINE = ['------------', '------------', '------------', '------------'].freeze
+      COUNTRY_LETTERS = 'A'.upto('Z').with_index(127_462).to_h.freeze
 
       def country_table(data)
         headings = CASES_DEATHS_RECOVERED
         rows = [[data['cases'], data['deaths'], data['recovered']]]
 
-        Terminal::Table.new(title: data['country'].upcase, headings: headings, rows: rows)
+        if iso = data['countryInfo']['iso2']
+          Terminal::Table.new(title: "#{data['country'].upcase} #{country_emoji(iso)}", headings: headings, rows: rows)
+        else
+          Terminal::Table.new(title: data['country'].upcase, headings: headings, rows: rows)
+        end
+        # TODO: Rafactor this
       end
 
       def full_country_table(data)
@@ -45,14 +51,22 @@ module Kovid
           data['cases'],
           data['deaths'],
           data['recovered'],
-          data['todayCases'],
-          data['todayDeaths'],
+          check_if_positve(data['todayCases']),
+          check_if_positve(data['todayDeaths']),
           data['critical'],
           data['casesPerOneMillion']
         ]
-        Terminal::Table.new(title: data['country'].upcase,
-                            headings: headings,
-                            rows: rows)
+
+        if iso = data['countryInfo']['iso2']
+          Terminal::Table.new(title: "#{data['country'].upcase} #{country_emoji(iso)}",
+                              headings: headings,
+                              rows: rows)
+        else
+          Terminal::Table.new(title: data['country'].upcase,
+                              headings: headings,
+                              rows: rows)
+        end
+        # TODO: Rafactor this
       end
 
       def full_state_table(state)
@@ -166,6 +180,10 @@ module Kovid
 
       def check_if_positve(num)
         num.to_i.positive? ? "+#{num}" : num.to_s
+      end
+
+      def country_emoji(iso)
+        COUNTRY_LETTERS.values_at(*iso.chars).pack('U*')
       end
     end
   end
