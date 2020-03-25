@@ -72,8 +72,8 @@ module Kovid
     def data_source
       source = <<~TEXT
         Sources:
-        https://www.worldometers.info/coronavirus/
-        JHU CSSE GISand Data
+         * JHU CSSE GISand Data
+         * https://www.worldometers.info/coronavirus/
       TEXT
       puts source
       puts

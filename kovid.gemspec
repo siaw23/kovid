@@ -53,9 +53,9 @@ Gem::Specification.new do |spec|
       Stay safe!
       Emmanuel Hayford.
 
-      Data sources:
-      https://www.worldometers.info/coronavirus/
-      JHU CSSE GISand Data
+      Data Sources:
+        * JHU CSSE GISand Data
+        * https://www.worldometers.info/coronavirus/
     ============================================================================
     }
 end
