@@ -23,9 +23,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency "typhoeus", "~> 1.3"
   spec.add_dependency "rainbow", "~> 3.0"
 
-  spec.add_development_dependency "pry"
-  spec.add_development_dependency "cucumber"
-  spec.add_development_dependency "aruba"
   spec.add_development_dependency "simplecov"
 
   # Specify which files should be added to the gem when it is released.
