@@ -52,6 +52,7 @@ Gem::Specification.new do |spec|
 
       Stay safe!
       Emmanuel Hayford.
+      https://emmanuelhayford.com/
 
       Data Sources:
         * JHU CSSE GISand Data
