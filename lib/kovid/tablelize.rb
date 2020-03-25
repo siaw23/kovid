@@ -13,14 +13,13 @@ module Kovid
         'Recovered'.paint_green
       ].freeze
 
-      DATE_CASES_DEATHS_RECOVERED = [
+      DATE_CASES_DEATHS = [
         'Date'.paint_white,
         'Cases'.paint_white,
-        'Deaths'.paint_red,
-        'Recovered'.paint_green
+        'Deaths'.paint_red
       ].freeze
 
-      FOOTER_LINE = ['------------', '------------', '------------', '------------'].freeze
+      FOOTER_LINE = ['------------', '------------', '------------'].freeze
       COUNTRY_LETTERS = 'A'.upto('Z').with_index(127_462).to_h.freeze
 
       def country_table(data)
@@ -146,7 +145,7 @@ module Kovid
       end
 
       def history(country, last)
-        headings = DATE_CASES_DEATHS_RECOVERED
+        headings = DATE_CASES_DEATHS
         rows = []
 
         stats = if last
@@ -173,10 +172,10 @@ module Kovid
 
         if stats.size > 10
           rows << FOOTER_LINE
-          rows << DATE_CASES_DEATHS_RECOVERED
+          rows << DATE_CASES_DEATHS
         end
 
-        Terminal::Table.new(title: country['standardizedCountryName'].upcase, headings: headings, rows: rows)
+        Terminal::Table.new(title: country['country'].upcase, headings: headings, rows: rows)
       end
 
       def eu_aggregate(eu_data)
