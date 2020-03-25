@@ -58,15 +58,15 @@ module Kovid
           data['casesPerOneMillion']
         ]
 
-        if iso = data['countryInfo']['iso2']
-          Terminal::Table.new(title: "#{data['country'].upcase} #{country_emoji(iso)}",
-                              headings: headings,
-                              rows: rows)
-        else
+        # if iso = data['countryInfo']['iso2']
+        #   Terminal::Table.new(title: "#{data['country'].upcase} #{country_emoji(iso)}",
+        #                       headings: headings,
+        #                       rows: rows)
+        # else
           Terminal::Table.new(title: data['country'].upcase,
                               headings: headings,
                               rows: rows)
-        end
+        # end
         # TODO: Rafactor this
       end
 
@@ -138,7 +138,7 @@ module Kovid
           [
             comma_delimit(cases['cases']),
             comma_delimit(cases['deaths']),
-              comma_delimit(cases['recovered'])
+            comma_delimit(cases['recovered'])
           ]
         ]
 
