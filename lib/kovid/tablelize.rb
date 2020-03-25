@@ -200,7 +200,7 @@ module Kovid
           comma_delimit(eu_data['critical'])
         ]
 
-        Terminal::Table.new(title: 'Aggregated EU Data'.upcase, headings: EU_AGGREGATE_HEADINGS, rows: rows)
+        Terminal::Table.new(title: 'Aggregated EU (27 States) Data'.upcase, headings: EU_AGGREGATE_HEADINGS, rows: rows)
       end
 
       private

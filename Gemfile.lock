@@ -48,7 +48,7 @@ DEPENDENCIES
   kovid!
   rake (~> 12.0)
   rspec (~> 3.0)
-  simplecov
+  simplecov (~> 0.18)
 
 BUNDLED WITH
    2.1.4
