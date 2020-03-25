@@ -96,7 +96,7 @@ module Kovid
         rows = []
 
         data.each do |country|
-          rows << [country['country'].upcase, country['cases'], country['deaths'], country['recovered']]
+          rows << [country['country'].upcase, comma_delimit(country['cases']), comma_delimit(country['deaths']), comma_delimit(country['recovered'])]
         end
 
         Terminal::Table.new(headings: headings, rows: rows)
@@ -119,13 +119,13 @@ module Kovid
         data.each do |country|
           rows << [
             country['country'],
-            country['cases'],
-            country['deaths'],
-            country['recovered'],
+            comma_delimit(country['cases']),
+            comma_delimit(country['deaths']),
+            comma_delimit(country['recovered']),
             check_if_positve(country['todayCases']),
             check_if_positve(country['todayDeaths']),
-            country['critical'],
-            country['casesPerOneMillion']
+            comma_delimit(country['critical']),
+            comma_delimit(country['casesPerOneMillion'])
           ]
         end
 
@@ -134,7 +134,13 @@ module Kovid
 
       def cases(cases)
         headings = CASES_DEATHS_RECOVERED
-        rows = [[cases['cases'], cases['deaths'], cases['recovered']]]
+        rows = [
+          [
+            comma_delimit(cases['cases']),
+            comma_delimit(cases['deaths']),
+              comma_delimit(cases['recovered'])
+          ]
+        ]
 
         Terminal::Table.new(title: 'Total Number of Incidents Worldwide'.upcase, headings: headings, rows: rows)
       end
@@ -180,7 +186,7 @@ module Kovid
       end
 
       def check_if_positve(num)
-        num.to_i.positive? ? "+#{num}" : num.to_s
+        num.to_i.positive? ? "+#{comma_delimit(num)}" : comma_delimit(num).to_s
       end
 
       def country_emoji(iso)
