@@ -28,11 +28,12 @@ module Kovid
         rows = [[data['cases'], data['deaths'], data['recovered']]]
 
         if iso = data['countryInfo']['iso2']
-          Terminal::Table.new(title: "#{data['country'].upcase} #{country_emoji(iso)}", headings: headings, rows: rows)
+          Terminal::Table.new(title: "#{data['country'].upcase}", headings: headings, rows: rows)
         else
           Terminal::Table.new(title: data['country'].upcase, headings: headings, rows: rows)
         end
         # TODO: Rafactor this
+        # TODO: Fix emoji
       end
 
       def full_country_table(data)
