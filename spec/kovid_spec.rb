@@ -37,7 +37,7 @@ RSpec.describe Kovid do
     it 'returns table with country data' do
       table = Kovid.country_full(country)
 
-      expect(table.title).to eq('ITALY')
+      expect(table.title).to include('ITALY')
     end
 
     it 'raise a JSON::ParseError when country specified has no reported case' do

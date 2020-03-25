@@ -21,8 +21,16 @@ module Kovid
         puts Kovid.country(name)
       end
     end
+
     desc 'country COUNTRY or country "COUNTRY NAME"', 'Returns reported data on provided country. eg: "kovid country "hong kong".'
-    alias country check
+    method_option :full, aliases: '-f'
+    def country(name)
+      if options[:full]
+        puts Kovid.country_full(name)
+      else
+        puts Kovid.country(name)
+      end
+    end
 
     desc 'state STATE', 'Return reported data on provided state.'
     def state(state)
