@@ -58,13 +58,13 @@ module Kovid
 
         rows = []
         rows << [
-          data['cases'],
-          data['deaths'],
-          data['recovered'],
+          comma_delimit(data['cases']),
+          comma_delimit(data['deaths']),
+          comma_delimit(data['recovered']),
           check_if_positve(data['todayCases']),
           check_if_positve(data['todayDeaths']),
-          data['critical'],
-          data['casesPerOneMillion']
+          comma_delimit(data['critical']),
+          comma_delimit(data['casesPerOneMillion'])
         ]
 
         # if iso = data['countryInfo']['iso2']
