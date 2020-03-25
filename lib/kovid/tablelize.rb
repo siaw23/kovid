@@ -27,7 +27,7 @@ module Kovid
         'Recovered'.paint_green,
         'Active'.paint_yellow,
         'Critical'.paint_red
-      ].freeze
+      ]
 
       FOOTER_LINE = ['------------', '------------', '------------'].freeze
       COUNTRY_LETTERS = 'A'.upto('Z').with_index(127_462).to_h.freeze
@@ -200,7 +200,7 @@ module Kovid
           comma_delimit(eu_data['critical'])
         ]
 
-        Terminal::Table.new(title: 'Aggregated EU Data'.upcase, EU_AGGREGATE_HEADINGS: headings, rows: rows)
+        Terminal::Table.new(title: 'Aggregated EU Data'.upcase, headings: EU_AGGREGATE_HEADINGS, rows: rows)
       end
 
       private

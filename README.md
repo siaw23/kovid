@@ -56,49 +56,49 @@ To fetch basic data on a country run:
 
 `kovid check ghana`. If the location contains spaces: `kovid check "Diamond Princess"`
 
-![kovid](https://i.gyazo.com/ab779c3fc838ac279bae5b9d6d10d617.png "Covid data.")
+![kovid](https://i.gyazo.com/ee88b41c05da3be0295dd3a158e7ba70.png "Covid data.")
 
 For full table info on a country:
 
 `kovid check italy -f` OR `kovid check italy --full`
 
-![kovid](https://i.gyazo.com/789fa6795d06f529a9b5f37cb51fb516.png "Covid data.")
+![kovid](https://i.gyazo.com/7e5afce548d8a01b9bdf3f8bdb529cd1.png "Covid data.")
 
 To compare country stats:
 
 `kovid compare germany poland`
 
-![kovid](https://i.gyazo.com/be3bcba3d2943c60618b59ae82a3c586.png "Covid data.")
+![kovid](https://i.gyazo.com/876b19988da4cd7b375cde3e23376ba7.png "Covid data.")
 
 To compare a countries stats with a full table:
 
 `kovid compare poland italy usa china -f` OR `kovid compare poland italy usa china --full`
 
-![kovid](https://i.gyazo.com/79ad61c33114a0bee0a9e2ab94a3d46e.png "Covid data.")
+![kovid](https://i.gyazo.com/8b57865ae9b28f5afa895ebc49a2de31.png "Covid data.")
 
 To fetch state-specific data run:
 
 `kovid state colorado` OR `kovid state "north carolina"`
 
-![kovid](https://i.gyazo.com/d00b1c5bbb6251cbd517f801c856ba66.png "Covid data.")
+![kovid](https://i.gyazo.com/51509c3986f56bbc25068e0d541d9bdd.png "Covid data.")
 
 To fetch EU data run:
 
 `kovid eu`
 
-![kovid](https://i.gyazo.com/51d2adcb8e9feb0a0fbe38ff9cf4c550.png "Covid data.")
+![kovid](https://i.gyazo.com/0a78afae2a5b9d2beb9f2c61dc1d3ac7.png "Covid data.")
 
 You can check historical statistics by running
 
 `kovid history italy 7` eg:
 
-![kovid](https://i.gyazo.com/e4872b5047eeaebbd354847a943de268.png "Covid data.")
+![kovid](https://i.gyazo.com/bc18fdaf99cacf2c921086f189d542b4.png "Covid data.")
 
 To check for total figures:
 
 `kovid cases`
 
-![kovid](https://i.gyazo.com/323f0f10d444e2ee629d05a90488adba.png "Covid data.")
+![kovid](https://i.gyazo.com/e01f4769a2b9e31ce50cec212e55810c.png "Covid data.")
 
 ## Information Source
 > https://www.worldometers.info/coronavirus/ via [NovelCOVID/API](https://github.com/novelcovid/api)
