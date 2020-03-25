@@ -5,14 +5,6 @@ RSpec.describe Kovid do
     expect(Kovid::VERSION).not_to be nil
   end
 
-  describe 'whatis' do
-    it 'defines COVID-19' do
-      text = 'Coronavirus disease 2019 (COVID-19) is an infectious disease caused by severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2).'
-
-      expect(Kovid.whatis).to eq(text)
-    end
-  end
-
   describe 'country(name)' do
     let(:country) { 'ghana' }
     let(:no_country) { 'wonderland' }
