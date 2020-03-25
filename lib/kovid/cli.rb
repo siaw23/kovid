@@ -7,11 +7,6 @@ module Kovid
   class CLI < Thor
     FULL_FLAG = %w[-f --full].freeze
 
-    desc 'define', 'Defines COVID-19'
-    def define
-      puts Kovid.whatis
-    end
-
     desc 'check COUNTRY or check "COUNTRY NAME"', 'Returns reported data on provided country. eg: "kovid check "hong kong".'
     method_option :full, aliases: '-f'
     def check(name)

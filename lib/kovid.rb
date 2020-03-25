@@ -8,10 +8,6 @@ module Kovid
 
   module_function
 
-  def whatis
-    'Coronavirus disease 2019 (COVID-19) is an infectious disease caused by severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2).'
-  end
-
   def country(name)
     Kovid::Request.by_country(name)
   end
