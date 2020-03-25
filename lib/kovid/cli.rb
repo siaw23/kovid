@@ -15,21 +15,13 @@ module Kovid
     desc 'check COUNTRY or check "COUNTRY NAME"', 'Returns reported data on provided country. eg: "kovid check "hong kong".'
     method_option :full, aliases: '-f'
     def check(name)
-      if options[:full]
-        puts Kovid.country_full(name)
-      else
-        puts Kovid.country(name)
-      end
+      fetch_country_stats(name)
     end
 
     desc 'country COUNTRY or country "COUNTRY NAME"', 'Returns reported data on provided country. eg: "kovid country "hong kong".'
     method_option :full, aliases: '-f'
     def country(name)
-      if options[:full]
-        puts Kovid.country_full(name)
-      else
-        puts Kovid.country(name)
-      end
+      fetch_country_stats(name)
     end
 
     desc 'state STATE', 'Return reported data on provided state.'
@@ -57,6 +49,16 @@ module Kovid
         puts Kovid.history(params.first, params.last)
       else
         puts Kovid.history(params.first, nil)
+      end
+    end
+
+    private
+
+    def fetch_country_stats(country)
+      if options[:full]
+        puts Kovid.country_full(country)
+      else
+        puts Kovid.country(country)
       end
     end
   end

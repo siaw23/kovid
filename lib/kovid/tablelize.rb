@@ -28,7 +28,7 @@ module Kovid
         rows = [[data['cases'], data['deaths'], data['recovered']]]
 
         if iso = data['countryInfo']['iso2']
-          Terminal::Table.new(title: "#{data['country'].upcase}", headings: headings, rows: rows)
+          Terminal::Table.new(title: data['country'].upcase.to_s, headings: headings, rows: rows)
         else
           Terminal::Table.new(title: data['country'].upcase, headings: headings, rows: rows)
         end
@@ -63,9 +63,9 @@ module Kovid
         #                       headings: headings,
         #                       rows: rows)
         # else
-          Terminal::Table.new(title: data['country'].upcase,
-                              headings: headings,
-                              rows: rows)
+        Terminal::Table.new(title: data['country'].upcase,
+                            headings: headings,
+                            rows: rows)
         # end
         # TODO: Rafactor this
       end
