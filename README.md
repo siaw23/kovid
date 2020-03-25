@@ -1,59 +1,55 @@
 # 🦠 Kovid
 
-[gem]: https://rubygems.org/gems/kovid
-
-Kovid is a small CLI app to fetch data surrounding the coronavirus pandemic of 2019. I found myself checking [Wikipedia](https://en.wikipedia.org/wiki/2019%E2%80%9320_coronavirus_pandemic) constantly for information and since I work mostly in the terminal, like some of you, I thought I'd build this to put the data right at our fingertips.
+Kovid is a small CLI app to fetch data surrounding the coronavirus pandemic of 2019. I found myself checking [Wikipedia](https://en.wikipedia.org/wiki/2019%E2%80%9320_coronavirus_pandemic) constantly for information so I thought I'd build this to provide info directly in the terminal. It's where some of us spend time more.
 
 Code contribution and ideas welcome.
 
 
 ## ⚙️ Installation
 
-Before installing:
+To install:
 
-☝️ Wash your hands with soap and water for at least 20 seconds.
+* ️ Wash your hands with soap and water for at least 20 seconds.
 
-✌️ Run `gem install kovid`
+*  Run `gem install kovid`.
 
-UPDATE often with `gem update kovid`
-
-
+It's recommended you update often with `gem update kovid`.
 
 ## ⚒️ Usage
 
 You can run `kovid --help` to see the full list of available commands.
 
-**NOTE:** If you find it irritating to have to type `kovid state STATE`, `covid state STATE` works as well.
-
 #### Commands Overview
 😷 **Fetching**
-* `kovid check COUNTRY` (`kovid country COUNTRY` works as well)
-* `kovid check COUNTRY -f` OR `kovid check COUNTRY --full`
+* `kovid check COUNTRY` OR `kovid country COUNTRY`.
+* `kovid check COUNTRY -f` OR `kovid check COUNTRY --full`.
 
-🇺🇸You can fetch US state-specific data 🇺🇸
-* `kovid state STATE` OR `kovid state "STATE WITH SPACES"`
+🇺🇸🇺🇸🇺🇸
+
+You can fetch US state-specific data:
+* `kovid state STATE` OR `kovid state "STATE NAME"`.
 
 😷 **Comparing**
-* `kovid compare COUNTRYA COUNTRYB` (sorts by cases DESC)
-* `kovid compare COUNTRYA COUNTRYB -f` OR `kovid compare COUNTRYA COUNTRYB --full` (sorts by cases DESC)
+* `kovid compare FOO BAR` (sorts by cases DESC).
+* `kovid compare FOO BAR -f` OR `kovid compare FOO BAR --full` (sorts by cases DESC).
 
-You can compare as many countries as you want.
+Where `FOO` and `BAR` are different countries.
+
+You can compare as many countries as you want; `kovid compare FOO BAR BAZ` OR `kovid compare FOO BAR BAZ -f`
 
 😷 **History**
-* `kovid history COUNTRY` (full history)
-* `kovid history COUNTRY N` (history in the last N days)
+* `kovid history COUNTRY` (full history).
+* `kovid history COUNTRY N` (history in the last N days).
 
 😷 **Total figures**
-* `kovid cases`
+* `kovid cases` (summary of reported incidents globally).
 
-
+**NOTE:** If you find it irritating to have to type `kovid state STATE`, `covid state STATE` works as well.
 
 #### Commands Details
 To fetch basic data on a country run:
 
-`kovid check ghana`
-
-If the location contains spaces: `kovid check "Diamond Princess"`
+`kovid check ghana`. If the location contains spaces: `kovid check "Diamond Princess"`
 
 ![kovid](https://i.gyazo.com/ab779c3fc838ac279bae5b9d6d10d617.png "Covid data.")
 
@@ -106,7 +102,7 @@ To install this gem onto your local machine, run `bundle exec rake install`.
 
 ## 🤲 Contributing
 
-There are multiple areas in this repo that can be improved or use some refactoring(there's a lot to be refactorted in fact!). For that reason, bug reports and pull requests are welcome! This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/siaw23/kovid/blob/master/CODE_OF_CONDUCT.md).
+There are multiple areas in this repo that can be improved or use some refactoring(there's a lot to be refactored in fact!). For that reason, bug reports and pull requests are welcome! This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/siaw23/kovid/blob/master/CODE_OF_CONDUCT.md).
 
 
 ## 🔖 License
