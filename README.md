@@ -112,7 +112,7 @@ To check for total figures:
 ![kovid](https://i.gyazo.com/e01f4769a2b9e31ce50cec212e55810c.png "Covid data.")
 
 ## Information Source
-> https://www.worldometers.info/coronavirus/ via [NovelCOVID/API](https://github.com/novelcovid/api)
+> [JHU CSSE GISand Data](https://gisanddata.maps.arcgis.com/apps/opsdashboard/index.html#/bda7594740fd40299423467b48e9ecf6) and https://www.worldometers.info/coronavirus/ via [NovelCOVID/API](https://github.com/novelcovid/api)
 
 
 ## 👨‍💻 Development
