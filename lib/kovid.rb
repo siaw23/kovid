@@ -8,6 +8,10 @@ module Kovid
 
   module_function
 
+  def eu_aggregate
+    Kovid::Request.eu_aggregate
+  end
+
   def country(name)
     Kovid::Request.by_country(name)
   end

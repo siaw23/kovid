@@ -24,6 +24,11 @@ You can run `kovid --help` to see the full list of available commands.
 * `kovid check COUNTRY` OR `kovid country COUNTRY`.
 * `kovid check COUNTRY -f` OR `kovid check COUNTRY --full`.
 
+🇪🇺🇪🇺🇪🇺
+
+You can fetch aggregated EU (all 27 countries combined) data:
+* `kovid eu`.
+
 🇺🇸🇺🇸🇺🇸
 
 You can fetch US state-specific data:
@@ -76,6 +81,12 @@ To fetch state-specific data run:
 `kovid state colorado` OR `kovid state "north carolina"`
 
 ![kovid](https://i.gyazo.com/d00b1c5bbb6251cbd517f801c856ba66.png "Covid data.")
+
+To fetch EU data run:
+
+`kovid eu`
+
+![kovid](https://i.gyazo.com/51d2adcb8e9feb0a0fbe38ff9cf4c550.png "Covid data.")
 
 You can check historical statistics by running
 
