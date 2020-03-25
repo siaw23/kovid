@@ -20,7 +20,7 @@ It's recommended you update often with `gem update kovid`.
 You can run `kovid --help` to see the full list of available commands.
 
 #### Commands Overview
-___
+
 😷 **Fetching**
 * `kovid check COUNTRY` OR `kovid country COUNTRY`.
 * `kovid check COUNTRY -f` OR `kovid check COUNTRY --full`.
@@ -32,15 +32,15 @@ You can fetch aggregated EU (all 27 countries combined) data:
 
 🇺🇸🇺🇸🇺🇸
 
-##### 🔜 Upcoming Fetch Features
+You can fetch US state-specific data:
+* `kovid state STATE` OR `kovid state "STATE NAME"`.
+
+##### 🔜 Upcoming Fetch Features 👷‍♀️
 
 * `kovid europe` Aggrated stats on Europe
 * `kovid africa` Aggrated stats on Africa
 * `kovid asia` Aggrated stats on Asia
 * `kovid south_america` Aggrated stats on South America
-
-You can fetch US state-specific data:
-* `kovid state STATE` OR `kovid state "STATE NAME"`.
 ___
 😷 **Comparing**
 * `kovid compare FOO BAR` (sorts by cases DESC).
@@ -50,7 +50,7 @@ Where `FOO` and `BAR` are different countries.
 
 You can compare as many countries as you want; `kovid compare FOO BAR BAZ` OR `kovid compare FOO BAR BAZ -f`
 
-##### 🔜 Upcoming Compare Features
+##### 🔜 Upcoming Compare Features 👷‍♂️
 * `kovid compare US_STATE1 US_STATE ...` Side-by-side stats on two/more US states.
 ___
 😷 **History**
