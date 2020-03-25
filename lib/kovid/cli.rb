@@ -3,9 +3,17 @@
 require 'thor'
 require 'kovid'
 
+# ["AT", "BE", "BG", "CY", "CZ", "DE", "DK", "EE", "ES", "FI", "FR", "GR", "HR", "HU", "IE", "IT", "LT", "LU", "LV", "MT", "NL", "PL", "PT", "RO", "SE", "SI", "SK"]
+
+# Czechia has no code
 module Kovid
   class CLI < Thor
     FULL_FLAG = %w[-f --full].freeze
+
+    desc 'check EU', 'Returns aggregated data on the EU.'
+    def eu
+      puts Kovid.eu_aggregate
+    end
 
     desc 'check COUNTRY or check "COUNTRY NAME"', 'Returns reported data on provided country. eg: "kovid check "hong kong".'
     method_option :full, aliases: '-f'

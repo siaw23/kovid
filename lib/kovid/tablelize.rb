@@ -179,6 +179,16 @@ module Kovid
         Terminal::Table.new(title: country['standardizedCountryName'].upcase, headings: headings, rows: rows)
       end
 
+      def eu_aggregate(eu_data)
+        headings = ['Cases'.paint_white, 'Cases Today'.paint_white, 'Deaths'.paint_red, 'Deaths Today'.paint_red, 'Recovered'.paint_green, 'Active'.paint_yellow, 'Critical'.paint_green]
+
+        rows = []
+
+        rows << [comma_delimit(eu_data['cases']), check_if_positve(eu_data['todayCases']), comma_delimit(eu_data['deaths']), check_if_positve(eu_data['todayDeaths']), comma_delimit(eu_data['recovered']), comma_delimit(eu_data['active']), comma_delimit(eu_data['critical'])]
+
+        Terminal::Table.new(title: 'EU Aggragation'.upcase, headings: headings, rows: rows)
+      end
+
       private
 
       def comma_delimit(number)

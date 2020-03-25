@@ -9,8 +9,25 @@ module Kovid
   class Request
     COUNTRIES_PATH = UriBuilder.new('/countries').url
     STATES_URL = UriBuilder.new('/states').url
+    EU_ISOS = %w[AT BE BG CY CZ DE DK EE ES FI FR GR HR HU IE IT LT LU LV MT NL PL PT RO SE SI SK].freeze
 
     class << self
+      def eu_aggregate
+        countries_array = JSON.parse(Typhoeus.get(UriBuilder.new('/countries').url, cache_ttl: 900).response_body)
+
+        eu_array = countries_array.select do |hash|
+          EU_ISOS.include?(hash['countryInfo']['iso2']) || hash['country'] == 'Czechia'
+          # Check API later to see if ISO-Alpha-2 code has been added for Czechia
+        end
+
+        first, *rest = eu_array
+        eu_data = first.merge(*rest) do |key, left, right|
+          left + right unless %w[country countryInfo].include?(key)
+        end .compact
+
+        Kovid::Tablelize.eu_aggregate(eu_data)
+      end
+
       def by_country(country_name)
         response = fetch_country(country_name)
 
