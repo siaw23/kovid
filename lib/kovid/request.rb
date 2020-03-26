@@ -22,6 +22,8 @@ module Kovid
 
         👤, *👥 = 🇪🇺
         eu_data = 👤.merge(*👥) do |key, left, right|
+          left = left || 0
+          right = right || 0
           left + right unless %w[country countryInfo].include?(key)
         end .compact
 
