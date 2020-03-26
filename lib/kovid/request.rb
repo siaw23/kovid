@@ -52,7 +52,6 @@ module Kovid
         else
           Kovid::Tablelize.full_country_table(response)
         end
-
       rescue JSON::ParserError
         puts 'Server overwhelmed. Try again in a moment.'
       end
