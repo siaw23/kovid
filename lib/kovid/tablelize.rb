@@ -180,13 +180,9 @@ module Kovid
         rows = []
 
         stats = if last
-                  country['timeline'].values.map(&:values).transpose.each do |data|
-                    data.map! { |number| comma_delimit(number) }
-                  end.last(last.to_i)
+                  transpose(country).last(last.to_i)
                 else
-                  country['timeline'].values.map(&:values).transpose.each do |data|
-                    data.map! { |number| comma_delimit(number) }
-                  end
+                  transpose(country)
                 end
 
         dates = if last
@@ -195,8 +191,9 @@ module Kovid
                   country['timeline']['cases'].keys
                 end
 
-
-        stats.reject! { |stat| stat[0].to_i.zero? && stat[1].to_i.zero? } unless last
+        unless last
+          stats.reject! { |stat| stat[0].to_i.zero? && stat[1].to_i.zero? }
+        end
 
         stats.each_with_index do |val, index|
           date_to_parse = Date.strptime(dates[index], '%m/%d/%y').to_s
@@ -251,6 +248,12 @@ module Kovid
 
       def country_emoji(iso)
         COUNTRY_LETTERS.values_at(*iso.chars).pack('U*')
+      end
+
+      def transpose(load)
+        load['timeline'].values.map(&:values).transpose.each do |data|
+          data.map! { |number| comma_delimit(number) }
+        end
       end
     end
   end
