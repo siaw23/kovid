@@ -40,7 +40,7 @@ Gem::Specification.new do |spec|
       with the novel coronavirus, I think stats on the issue should be
       accessible.
 
-      There isn't much we can do now aside:
+      There isn't much we can do now besides:
 
       * Washing our hands with soap frequently.
       * Limiting our movements, how much we touch our faces & social distancing.
