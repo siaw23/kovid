@@ -46,10 +46,9 @@ module Kovid
           ]
         ]
 
-        # binding.irb
 
         if iso = data['countryInfo']['iso2']
-          Terminal::Table.new(title: data['country'].upcase.to_s, headings: headings, rows: rows)
+          Terminal::Table.new(title: "#{country_emoji(iso)} #{data['country'].upcase}", headings: headings, rows: rows)
         else
           Terminal::Table.new(title: data['country'].upcase, headings: headings, rows: rows)
         end
@@ -79,15 +78,15 @@ module Kovid
           comma_delimit(data['casesPerOneMillion'])
         ]
 
-        # if iso = data['countryInfo']['iso2']
-        #   Terminal::Table.new(title: "#{data['country'].upcase} #{country_emoji(iso)}",
-        #                       headings: headings,
-        #                       rows: rows)
-        # else
+        if iso = data['countryInfo']['iso2']
+          Terminal::Table.new(title: "#{country_emoji(iso)} #{data['country'].upcase}",
+                              headings: headings,
+                              rows: rows)
+        else
         Terminal::Table.new(title: data['country'].upcase,
                             headings: headings,
                             rows: rows)
-        # end
+        end
         # TODO: Rafactor this
       end
 
@@ -248,7 +247,7 @@ module Kovid
       end
 
       def country_emoji(iso)
-        COUNTRY_LETTERS.values_at(*iso.chars).pack('U*')
+        COUNTRY_LETTERS.values_at(*iso.chars).pack('U*') + 8203.chr(Encoding::UTF_8)
       end
 
       def transpose(load)
