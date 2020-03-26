@@ -28,6 +28,8 @@ module Kovid
         end.compact
 
         Kovid::Tablelize.eu_aggregate(eu_data)
+      rescue JSON::ParserError
+        puts 'Server overwhelmed. Try again in a moment.'
       end
 
       def by_country(country_name)
@@ -38,6 +40,8 @@ module Kovid
         else
           Kovid::Tablelize.country_table(response)
         end
+      rescue JSON::ParserError
+        puts 'Server overwhelmed. Try again in a moment.'
       end
 
       def by_country_full(country_name)
@@ -48,28 +52,47 @@ module Kovid
         else
           Kovid::Tablelize.full_country_table(response)
         end
+
+      rescue JSON::ParserError
+        puts 'Server overwhelmed. Try again in a moment.'
       end
 
       def state(state)
         response = fetch_state(state)
 
         Kovid::Tablelize.full_state_table(response)
+      rescue JSON::ParserError
+        puts 'Server overwhelmed. Try again in a moment.'
+      end
+
+      def states(list)
+        array = fetch_states(list)
+
+        Kovid::Tablelize.compare_us_states(array)
+      rescue JSON::ParserError
+        puts 'Server overwhelmed. Try again in a moment.'
       end
 
       def by_country_comparison(list)
         array = fetch_countries(list)
         Kovid::Tablelize.compare_countries_table(array)
+      rescue JSON::ParserError
+        puts 'Server overwhelmed. Try again in a moment.'
       end
 
       def by_country_comparison_full(list)
         array = fetch_countries(list)
         Kovid::Tablelize.compare_countries_table_full(array)
+      rescue JSON::ParserError
+        puts 'Server overwhelmed. Try again in a moment.'
       end
 
       def cases
         response ||= JSON.parse(Typhoeus.get(UriBuilder.new('/all').url, cache_ttl: 900).response_body)
 
         Kovid::Tablelize.cases(response)
+      rescue JSON::ParserError
+        puts 'Server overwhelmed. Try again in a moment.'
       end
 
       def history(country, last)
@@ -77,6 +100,8 @@ module Kovid
         response ||= JSON.parse(Typhoeus.get(history_path + "/#{country}", cache_ttl: 900).response_body)
 
         Kovid::Tablelize.history(response, last)
+      rescue JSON::ParserError
+        puts 'Server overwhelmed. Try again in a moment.'
       end
 
       private
@@ -94,6 +119,14 @@ module Kovid
         end
 
         array = array.sort_by { |json| -json['cases'] }
+      end
+
+      def fetch_states(list)
+        array = []
+
+        list.each do |state|
+          array << JSON.parse(Typhoeus.get(COUNTRIES_PATH + "/#{state}", cache_ttl: 900).response_body)
+        end
       end
 
       def fetch_country(country_name)
