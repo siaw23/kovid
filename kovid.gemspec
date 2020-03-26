@@ -54,6 +54,8 @@ Gem::Specification.new do |spec|
       Data Sources:
         * JHU CSSE GISand Data
         * https://www.worldometers.info/coronavirus/
+
+      PS: Please update often, contribute code/ideas, report issues 🙏.
     ============================================================================
     }
 end
