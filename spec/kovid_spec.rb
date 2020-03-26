@@ -65,7 +65,7 @@ RSpec.describe Kovid do
       table = Kovid.cases
 
       expect(table.headings.first.cells.first.value).to include('Cases')
-      expect(table.headings.first.cells.last.value).to include('Deaths Today')
+      expect(table.headings.first.cells.last.value).to include('Recovered')
     end
   end
 
