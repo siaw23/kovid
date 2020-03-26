@@ -192,7 +192,8 @@ module Kovid
                 end
 
         unless last
-          stats.reject! { |stat| stat[0].to_i.zero? && stat[1].to_i.zero? }
+          stats = stats.reject! { |stat| stat[0].to_i.zero? && stat[1].to_i.zero? }
+          dates = dates.last(stats.count)
         end
 
         stats.each_with_index do |val, index|
