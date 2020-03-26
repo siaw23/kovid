@@ -10,7 +10,9 @@ module Kovid
       CASES_DEATHS_RECOVERED = [
         'Cases'.paint_white,
         'Deaths'.paint_red,
-        'Recovered'.paint_green
+        'Recovered'.paint_green,
+        'Cases Today'.paint_white,
+        'Deaths Today'.paint_red
       ].freeze
 
       DATE_CASES_DEATHS = [
@@ -34,7 +36,15 @@ module Kovid
 
       def country_table(data)
         headings = CASES_DEATHS_RECOVERED
-        rows = [[data['cases'], data['deaths'], data['recovered']]]
+        rows = [
+          [
+            data['cases'],
+            data['deaths'],
+            data['recovered'],
+            check_if_positve(data['todayCases']),
+            check_if_positve(data['todayDeaths'])
+          ]
+        ]
 
         if iso = data['countryInfo']['iso2']
           Terminal::Table.new(title: data['country'].upcase.to_s, headings: headings, rows: rows)
@@ -99,13 +109,22 @@ module Kovid
           'Country'.paint_white,
           'Cases'.paint_white,
           'Deaths'.paint_red,
-          'Recovered'.paint_green
+          'Recovered'.paint_green,
+          'Cases Today'.paint_white,
+          'Deaths Today'.paint_red
         ]
 
         rows = []
 
         data.each do |country|
-          rows << [country['country'].upcase, comma_delimit(country['cases']), comma_delimit(country['deaths']), comma_delimit(country['recovered'])]
+          rows << [
+            country['country'].upcase,
+            comma_delimit(country['cases']),
+            comma_delimit(country['deaths']),
+            comma_delimit(country['recovered']),
+            check_if_positve(country['todayCases']),
+            check_if_positve(country['todayDeaths'])
+          ]
         end
 
         Terminal::Table.new(headings: headings, rows: rows)
