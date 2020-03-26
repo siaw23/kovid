@@ -46,6 +46,8 @@ module Kovid
           ]
         ]
 
+        # binding.irb
+
         if iso = data['countryInfo']['iso2']
           Terminal::Table.new(title: data['country'].upcase.to_s, headings: headings, rows: rows)
         else

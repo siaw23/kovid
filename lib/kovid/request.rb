@@ -33,17 +33,21 @@ module Kovid
       def by_country(country_name)
         response = fetch_country(country_name)
 
-        Kovid::Tablelize.country_table(response)
-      rescue JSON::ParserError
-        no_case_in(country_name)
+        if response.values.first.include?('not found')
+          not_found(country_name)
+        else
+          Kovid::Tablelize.country_table(response)
+        end
       end
 
       def by_country_full(country_name)
         response = fetch_country(country_name)
 
-        Kovid::Tablelize.full_country_table(response)
-      rescue JSON::ParserError
-        no_case_in(country_name)
+        if response.values.first.include?('not found')
+          not_found(country_name)
+        else
+          Kovid::Tablelize.full_country_table(response)
+        end
       end
 
       def state(state)
@@ -77,8 +81,8 @@ module Kovid
 
       private
 
-      def no_case_in(country)
-        rows = [["Wrong spelling of location/API has no info on #{country.upcase} at the moment."]]
+      def not_found(country)
+        rows = [["Wrong spelling/No reported cases on #{country.upcase}."]]
         Terminal::Table.new title: "You checked: #{country.upcase}", rows: rows
       end
 
