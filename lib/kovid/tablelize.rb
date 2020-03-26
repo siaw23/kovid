@@ -195,6 +195,9 @@ module Kovid
                   country['timeline']['cases'].keys
                 end
 
+
+        stats.reject! { |stat| stat[0].to_i.zero? && stat[1].to_i.zero? } unless last
+
         stats.each_with_index do |val, index|
           date_to_parse = Date.strptime(dates[index], '%m/%d/%y').to_s
           val.unshift(Date.parse(date_to_parse).strftime('%d %b, %y'))
