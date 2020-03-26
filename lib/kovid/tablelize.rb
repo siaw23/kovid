@@ -10,6 +10,12 @@ module Kovid
       CASES_DEATHS_RECOVERED = [
         'Cases'.paint_white,
         'Deaths'.paint_red,
+        'Recovered'.paint_green
+      ].freeze
+
+      CASES_DEATHS_RECOVERED_CTODAY_DTODAY = [
+        'Cases'.paint_white,
+        'Deaths'.paint_red,
         'Recovered'.paint_green,
         'Cases Today'.paint_white,
         'Deaths Today'.paint_red
@@ -35,7 +41,7 @@ module Kovid
       COUNTRY_LETTERS = 'A'.upto('Z').with_index(127_462).to_h.freeze
 
       def country_table(data)
-        headings = CASES_DEATHS_RECOVERED
+        headings = CASES_DEATHS_RECOVERED_CTODAY_DTODAY
         rows = [
           [
             data['cases'],
@@ -45,7 +51,6 @@ module Kovid
             check_if_positve(data['todayDeaths'])
           ]
         ]
-
 
         if iso = data['countryInfo']['iso2']
           Terminal::Table.new(title: "#{country_emoji(iso)} #{data['country'].upcase}", headings: headings, rows: rows)
@@ -83,9 +88,9 @@ module Kovid
                               headings: headings,
                               rows: rows)
         else
-        Terminal::Table.new(title: data['country'].upcase,
-                            headings: headings,
-                            rows: rows)
+          Terminal::Table.new(title: data['country'].upcase,
+                              headings: headings,
+                              rows: rows)
         end
         # TODO: Rafactor this
       end
@@ -171,7 +176,7 @@ module Kovid
           ]
         ]
 
-        Terminal::Table.new(title: 'Total Number of Incidents Worldwide'.upcase, headings: headings, rows: rows)
+        Terminal::Table.new(title: '🌍 Total Number of Incidents Worldwide'.upcase, headings: headings, rows: rows)
       end
 
       def history(country, last)
