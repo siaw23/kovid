@@ -7,12 +7,6 @@ module Kovid
   class CLI < Thor
     FULL_FLAG = %w[-f --full].freeze
 
-    desc 'eu', 'Returns aggregated data on the EU.'
-    def eu
-      puts Kovid.eu_aggregate
-      data_source
-    end
-
     desc 'check COUNTRY or check "COUNTRY NAME"', 'Returns reported data on provided country. eg: "kovid check "hong kong".'
     method_option :full, aliases: '-f'
     def check(name)
@@ -56,6 +50,12 @@ module Kovid
       else
         puts Kovid.history(params.first, nil)
       end
+      data_source
+    end
+
+    desc 'eu', 'Returns aggregated data on the EU.'
+    def eu
+      puts Kovid.eu_aggregate
       data_source
     end
 
