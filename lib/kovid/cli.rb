@@ -74,6 +74,7 @@ module Kovid
         Sources:
          * JHU CSSE GISand Data
          * https://www.worldometers.info/coronavirus/
+        Please update often, contribute, report issues 🙏.
       TEXT
       puts source
       puts
