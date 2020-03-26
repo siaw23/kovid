@@ -27,7 +27,7 @@ module Kovid
         'Recovered'.paint_green,
         'Active'.paint_yellow,
         'Critical'.paint_red
-      ]
+      ].freeze
 
       FOOTER_LINE = ['------------', '------------', '------------'].freeze
       COUNTRY_LETTERS = 'A'.upto('Z').with_index(127_462).to_h.freeze
@@ -175,7 +175,8 @@ module Kovid
                 end
 
         stats.each_with_index do |val, index|
-          val.unshift(Date.parse(Date.strptime(dates[index], '%m/%d/%y').to_s).strftime('%d %b, %y'))
+          date_to_parse = Date.strptime(dates[index], '%m/%d/%y').to_s
+          val.unshift(Date.parse(date_to_parse).strftime('%d %b, %y'))
         end.each do |row|
           rows << row
         end
@@ -185,7 +186,11 @@ module Kovid
           rows << DATE_CASES_DEATHS
         end
 
-        Terminal::Table.new(title: country['country'].upcase, headings: headings, rows: rows)
+        Terminal::Table.new(
+          title: country['country'].upcase,
+          headings: headings,
+          rows: rows
+        )
       end
 
       def eu_aggregate(eu_data)
@@ -200,13 +205,20 @@ module Kovid
           comma_delimit(eu_data['critical'])
         ]
 
-        Terminal::Table.new(title: 'Aggregated EU (27 States) Data'.upcase, headings: EU_AGGREGATE_HEADINGS, rows: rows)
+        Terminal::Table.new(
+          title: 'Aggregated EU (27 States) Data'.upcase,
+          headings: EU_AGGREGATE_HEADINGS,
+          rows: rows
+        )
       end
 
       private
 
       def comma_delimit(number)
-        number.to_s.chars.to_a.reverse.each_slice(3).map(&:join).join(',').reverse
+        number.to_s.chars.to_a.reverse.each_slice(3)
+              .map(&:join)
+              .join(',')
+              .reverse
       end
 
       def check_if_positve(num)

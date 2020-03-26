@@ -16,16 +16,16 @@ module Kovid
         countries_array = JSON.parse(Typhoeus.get(UriBuilder.new('/countries').url, cache_ttl: 900).response_body)
 
         🇪🇺 = countries_array.select do |hash|
-          EU_ISOS.include?(hash['countryInfo']['iso2']) || hash['country'] == 'Czechia'
-          # Check API later to see if ISO-Alpha-2 code has been added for Czechia
+          EU_ISOS.include?(hash['countryInfo']['iso2'])
         end
 
         👤, *👥 = 🇪🇺
         eu_data = 👤.merge(*👥) do |key, left, right|
-          left = left || 0
-          right = right || 0
+          left ||= 0
+          right ||= 0
+
           left + right unless %w[country countryInfo].include?(key)
-        end .compact
+        end.compact
 
         Kovid::Tablelize.eu_aggregate(eu_data)
       end
