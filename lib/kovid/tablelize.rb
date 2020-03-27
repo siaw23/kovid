@@ -44,9 +44,9 @@ module Kovid
         headings = CASES_DEATHS_RECOVERED_CTODAY_DTODAY
         rows = [
           [
-            data['cases'],
-            data['deaths'],
-            data['recovered'],
+            comma_delimit(data['cases']),
+            comma_delimit(data['deaths']),
+            comma_delimit(data['recovered']),
             check_if_positve(data['todayCases']),
             check_if_positve(data['todayDeaths'])
           ]
