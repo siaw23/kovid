@@ -10,7 +10,7 @@ module Kovid
     COUNTRIES_PATH = UriBuilder.new('/countries').url
     STATES_URL = UriBuilder.new('/states').url
     EU_ISOS = %w[AT BE BG CY CZ DE DK EE ES FI FR GR HR HU IE IT LT LU LV MT NL PL PT RO SE SI SK].freeze
-    SERVER_DOWN = SERVER_DOWN
+    SERVER_DOWN = 'Server overwhelmed. Please try again in a moment.'
 
     class << self
       def eu_aggregate
