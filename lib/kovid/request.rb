@@ -15,12 +15,12 @@ module Kovid
       def eu_aggregate
         countries_array = JSON.parse(Typhoeus.get(UriBuilder.new('/countries').url, cache_ttl: 900).response_body)
 
-        🇪🇺 = countries_array.select do |hash|
+        eu = countries_array.select do |hash|
           EU_ISOS.include?(hash['countryInfo']['iso2'])
         end
 
-        👤, *👥 = 🇪🇺
-        eu_data = 👤.merge(*👥) do |key, left, right|
+        head, *tails = eu
+        eu_data = head.merge(*tails) do |key, left, right|
           left ||= 0
           right ||= 0
 
