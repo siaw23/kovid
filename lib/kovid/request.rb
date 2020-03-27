@@ -10,6 +10,7 @@ module Kovid
     COUNTRIES_PATH = UriBuilder.new('/countries').url
     STATES_URL = UriBuilder.new('/states').url
     EU_ISOS = %w[AT BE BG CY CZ DE DK EE ES FI FR GR HR HU IE IT LT LU LV MT NL PL PT RO SE SI SK].freeze
+    SERVER_DOWN = SERVER_DOWN
 
     class << self
       def eu_aggregate
@@ -29,7 +30,7 @@ module Kovid
 
         Kovid::Tablelize.eu_aggregate(eu_data)
       rescue JSON::ParserError
-        puts 'Server overwhelmed. Try again in a moment.'
+        puts SERVER_DOWN
       end
 
       def by_country(country_name)
@@ -41,7 +42,7 @@ module Kovid
           Kovid::Tablelize.country_table(response)
         end
       rescue JSON::ParserError
-        puts 'Server overwhelmed. Try again in a moment.'
+        puts SERVER_DOWN
       end
 
       def by_country_full(country_name)
@@ -53,7 +54,7 @@ module Kovid
           Kovid::Tablelize.full_country_table(response)
         end
       rescue JSON::ParserError
-        puts 'Server overwhelmed. Try again in a moment.'
+        puts SERVER_DOWN
       end
 
       def state(state)
@@ -61,7 +62,7 @@ module Kovid
 
         Kovid::Tablelize.full_state_table(response)
       rescue JSON::ParserError
-        puts 'Server overwhelmed. Try again in a moment.'
+        puts SERVER_DOWN
       end
 
       def states(list)
@@ -69,21 +70,21 @@ module Kovid
 
         Kovid::Tablelize.compare_us_states(array)
       rescue JSON::ParserError
-        puts 'Server overwhelmed. Try again in a moment.'
+        puts SERVER_DOWN
       end
 
       def by_country_comparison(list)
         array = fetch_countries(list)
         Kovid::Tablelize.compare_countries_table(array)
       rescue JSON::ParserError
-        puts 'Server overwhelmed. Try again in a moment.'
+        puts SERVER_DOWN
       end
 
       def by_country_comparison_full(list)
         array = fetch_countries(list)
         Kovid::Tablelize.compare_countries_table_full(array)
       rescue JSON::ParserError
-        puts 'Server overwhelmed. Try again in a moment.'
+        puts SERVER_DOWN
       end
 
       def cases
@@ -91,7 +92,7 @@ module Kovid
 
         Kovid::Tablelize.cases(response)
       rescue JSON::ParserError
-        puts 'Server overwhelmed. Try again in a moment.'
+        puts SERVER_DOWN
       end
 
       def history(country, last)
@@ -100,7 +101,7 @@ module Kovid
 
         Kovid::Tablelize.history(response, last)
       rescue JSON::ParserError
-        puts 'Server overwhelmed. Try again in a moment.'
+        puts SERVER_DOWN
       end
 
       private

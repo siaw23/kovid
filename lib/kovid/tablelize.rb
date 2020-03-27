@@ -232,7 +232,7 @@ module Kovid
         ]
 
         Terminal::Table.new(
-          title: "🇪🇺" + 8203.chr(Encoding::UTF_8) + " Aggregated EU (27 States) Data".upcase,
+          title: '🇪🇺' + 8203.chr(Encoding::UTF_8) + ' Aggregated EU (27 States) Data'.upcase,
           headings: EU_AGGREGATE_HEADINGS,
           rows: rows
         )
