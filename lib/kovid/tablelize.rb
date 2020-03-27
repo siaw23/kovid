@@ -37,6 +37,17 @@ module Kovid
         'Critical'.paint_red
       ].freeze
 
+      COMPARE_COUNTRY_TABLE_FULL = [
+        'Country'.paint_white,
+        'Cases'.paint_white,
+        'Deaths'.paint_red,
+        'Recovered'.paint_green,
+        'Cases Today'.paint_white,
+        'Deaths Today'.paint_red,
+        'Critical'.paint_yellow,
+        'Cases/Million'.paint_white
+      ].freeze
+
       FOOTER_LINE = ['------------', '------------', '------------'].freeze
       COUNTRY_LETTERS = 'A'.upto('Z').with_index(127_462).to_h.freeze
 
@@ -137,33 +148,21 @@ module Kovid
       end
 
       def compare_countries_table_full(data)
-        headings = [
-          'Country'.paint_white,
-          'Cases'.paint_white,
-          'Deaths'.paint_red,
-          'Recovered'.paint_green,
-          'Cases Today'.paint_white,
-          'Deaths Today'.paint_red,
-          'Critical'.paint_yellow,
-          'Cases/Million'.paint_white
-        ]
+        rows = data.map do |country|
+          [
+            country.fetch('country'),
+            comma_delimit(country.fetch('cases')),
+            comma_delimit(country.fetch('deaths')),
+            comma_delimit(country.fetch('recovered')),
+            check_if_positve(country.fetch('todayCases')),
+            check_if_positve(country.fetch('todayDeaths')),
+            comma_delimit(country.fetch('critical')),
+            comma_delimit(country.fetch('casesPerOneMillion'))
 
-        rows = []
-
-        data.each do |country|
-          rows << [
-            country['country'],
-            comma_delimit(country['cases']),
-            comma_delimit(country['deaths']),
-            comma_delimit(country['recovered']),
-            check_if_positve(country['todayCases']),
-            check_if_positve(country['todayDeaths']),
-            comma_delimit(country['critical']),
-            comma_delimit(country['casesPerOneMillion'])
           ]
         end
 
-        Terminal::Table.new(headings: headings, rows: rows)
+        Terminal::Table.new(headings: COMPARE_COUNTRY_TABLE_FULL, rows: rows)
       end
 
       def cases(cases)

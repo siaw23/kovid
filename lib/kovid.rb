@@ -24,8 +24,8 @@ module Kovid
     Kovid::Request.state(state)
   end
 
-  def states(*_states)
-    Kovid::Request.states(state)
+  def states(*states)
+    Kovid::Request.states(states)
   end
 
   def country_comparison(names_array)
