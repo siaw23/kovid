@@ -104,6 +104,17 @@ module Kovid
         puts SERVER_DOWN
       end
 
+      def histogram(country, date)
+        history_path = UriBuilder.new('/v2/historical').url
+        response = JSON.parse(Typhoeus.get(history_path + "/#{country}", cache_ttl: 900).response_body)
+
+        Kovid::Tablelize.histogram(response, date)
+      end
+
+      def capitalize_words(string)
+        string.split.map(&:capitalize).join(' ')
+      end
+
       private
 
       def not_found(country)
@@ -139,10 +150,6 @@ module Kovid
         states_array = JSON.parse(Typhoeus.get(STATES_URL, cache_ttl: 900).response_body)
 
         states_array.select { |state_name| state_name['state'] == capitalize_words(state) }.first
-      end
-
-      def capitalize_words(string)
-        string.split.map(&:capitalize).join(' ')
       end
     end
   end
