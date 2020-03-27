@@ -4,6 +4,8 @@ require 'kovid/version'
 require 'kovid/request'
 
 module Kovid
+  require 'kovid/helpers'
+
   class Error < StandardError; end
 
   module_function
@@ -42,5 +44,9 @@ module Kovid
 
   def history(country, last)
     Kovid::Request.history(country, last)
+  end
+
+  def histogram(country, date)
+    Kovid::Request.histogram(country, date)
   end
 end

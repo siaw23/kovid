@@ -1,3 +1,7 @@
+[![Gem Version](https://badge.fury.io/rb/kovid.svg)](https://badge.fury.io/rb/kovid)
+[![Open Source Helpers](https://www.codetriage.com/siaw23/kovid/badges/users.svg)](https://www.codetriage.com/siaw23/kovid)
+
+
 # 🦠 Kovid
 
 Kovid is a small CLI app to fetch data surrounding the coronavirus pandemic of 2019. I found myself checking [Wikipedia](https://en.wikipedia.org/wiki/2019%E2%80%9320_coronavirus_pandemic) constantly for information so I thought I'd build this to provide info directly in the terminal. It's where some of us spend time more.
@@ -58,7 +62,7 @@ ___
 * `kovid history COUNTRY N` (history in the last N days).
 ___
 😷 **Total figures**
-* `kovid cases` (summary of reported incidents globally).
+* `kovid world` (summary of reported incidents globally).
 
 **NOTE:** If you find it irritating to have to type `kovid state STATE`, `covid state STATE` works as well.
 
@@ -107,11 +111,11 @@ You can check historical statistics by running
 
 To check for total figures:
 
-`kovid cases`
+`kovid world`
 
 ![kovid](https://i.gyazo.com/e01f4769a2b9e31ce50cec212e55810c.png "Covid data.")
 
-## Information Source
+## Data Source
 > [JHU CSSE GISand Data](https://gisanddata.maps.arcgis.com/apps/opsdashboard/index.html#/bda7594740fd40299423467b48e9ecf6) and https://www.worldometers.info/coronavirus/ via [NovelCOVID/API](https://github.com/novelcovid/api)
 
 

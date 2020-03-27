@@ -37,8 +37,8 @@ module Kovid
       data_source
     end
 
-    desc 'cases', 'Returns total number of cases, deaths and recoveries.'
-    def cases
+    desc 'world', 'Returns total number of cases, deaths and recoveries.'
+    def world
       puts Kovid.cases
       data_source
     end
@@ -62,6 +62,16 @@ module Kovid
     desc 'version', 'Returns version of kovid'
     def version
       puts Kovid::VERSION
+    end
+
+    desc 'histogram', 'Returns a histogram of incidents.'
+    def histogram(country, date = nil)
+      if date.nil?
+        Kovid.info_table("Please add a month and year in the form 'M.YY'")
+      else
+        puts Kovid.histogram(country, date)
+        data_source
+      end
     end
 
     private

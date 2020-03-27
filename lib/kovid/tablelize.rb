@@ -3,6 +3,7 @@
 require 'terminal-table'
 require 'date'
 require_relative 'painter'
+require 'ascii_charts'
 
 module Kovid
   class Tablelize
@@ -218,6 +219,55 @@ module Kovid
         )
       end
 
+      def histogram(country, date_string)
+        @date = date_string.split('.')
+
+        if @date.last.to_i != 20
+          Kovid.info_table('Only 2020 histgrams are available.')
+          return
+        end
+
+        # From dates where number of !cases.zero?
+        positive_cases_figures = country['timeline']['cases'].values.reject!(&:zero?)
+        dates = country['timeline']['cases'].reject { |_k, v| v.zero? }.keys
+        data = []
+
+        # Improve this later, like everything else.
+        # Returns array of days.to_i from the date param
+        dates = dates.map do |date|
+          date.split('/')
+        end.select do |date|
+          date.last == @date.last
+        end.select do |date|
+          date.first == @date.first
+        end.map do |array|
+          array[1]
+        end.map(&:to_i).last(positive_cases_figures.count)
+
+        # Arranges dates and figures in [x,y] for histogram
+        # With x being day, y being number of cases
+        if dates.empty?
+          if @date.first.to_i > Time.now.month
+            Kovid.info_table('Seriously...??! 😏')
+          else
+            Kovid.info_table('No infections for this month.')
+          end
+
+        else
+          dates.each_with_index do |val, index|
+            data << [val, positive_cases_figures[index]]
+          end
+          y_range = AsciiCharts::Cartesian.new(data, bar: true, hide_zero: true).y_range
+
+          last_two_y = y_range.last 2
+          y_interval = last_two_y.last - last_two_y.first
+
+          scale("Scale on Y: #{y_interval}:#{(y_interval / last_two_y.last.to_f * positive_cases_figures.last).round(2) / y_interval}")
+
+          AsciiCharts::Cartesian.new(data, bar: true, hide_zero: true).draw
+        end
+      end
+
       def eu_aggregate(eu_data)
         rows = []
         rows << [
@@ -258,6 +308,11 @@ module Kovid
         load['timeline'].values.map(&:values).transpose.each do |data|
           data.map! { |number| comma_delimit(number) }
         end
+      end
+
+      def scale(msg)
+        rows = [[msg]]
+        puts Terminal::Table.new title: 'SCALE', rows: rows
       end
     end
   end
