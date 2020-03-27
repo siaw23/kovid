@@ -1,14 +1,8 @@
-GIT
-  remote: https://github.com/siaw23/ascii_charts
-  revision: 834a0f1819ea5c1ad8db6fe5581add9ef88bb63b
-  specs:
-    ascii_charts (0.9.1)
-
 PATH
   remote: .
   specs:
     kovid (0.4.2)
-      ascii_charts
+      ascii_charts (~> 0.9.1)
       rainbow (~> 3.0)
       terminal-table (~> 1.8)
       thor (~> 1.0)
@@ -17,6 +11,7 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
+    ascii_charts (0.9.1)
     diff-lcs (1.3)
     docile (1.3.2)
     ethon (0.12.0)
@@ -52,7 +47,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  ascii_charts!
   kovid!
   rake (~> 12.0)
   rspec (~> 3.0)
