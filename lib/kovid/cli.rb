@@ -59,6 +59,11 @@ module Kovid
       data_source
     end
 
+    desc 'version', 'Returns version of kovid'
+    def version
+      puts Kovid::VERSION
+    end
+
     private
 
     def fetch_country_stats(country)
