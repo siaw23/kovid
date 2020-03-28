@@ -126,10 +126,10 @@ module Kovid
         headings = [
           'Country'.paint_white,
           'Cases'.paint_white,
-          'Deaths'.paint_red,
-          'Recovered'.paint_green,
           'Cases Today'.paint_white,
-          'Deaths Today'.paint_red
+          'Deaths'.paint_red,
+          'Deaths Today'.paint_red,
+          'Recovered'.paint_green
         ]
 
         rows = []
@@ -138,10 +138,10 @@ module Kovid
           rows << [
             country['country'].upcase,
             comma_delimit(country['cases']),
-            comma_delimit(country['deaths']),
-            comma_delimit(country['recovered']),
             check_if_positve(country['todayCases']),
-            check_if_positve(country['todayDeaths'])
+            comma_delimit(country['deaths']),
+            check_if_positve(country['todayDeaths']),
+            comma_delimit(country['recovered'])
           ]
         end
 

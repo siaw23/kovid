@@ -45,7 +45,7 @@ RSpec.describe Kovid do
     it 'returns table with country data' do
       table = Kovid.country_comparison(country)
 
-      expect(table.headings.first.cells.last.value).to include('Deaths Today')
+      expect(table.headings.first.cells.last.value).to include('Recovered')
       expect(table.headings.first.cells.first.value).to include('Country')
     end
   end
