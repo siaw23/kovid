@@ -59,6 +59,13 @@ module Kovid
       data_source
     end
 
+
+    desc 'africa', 'Returns aggregated data on Africa.'
+    def africa
+      puts Kovid.africa_aggregate
+      data_source
+    end
+
     desc 'version', 'Returns version of kovid'
     def version
       puts Kovid::VERSION

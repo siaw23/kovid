@@ -10,6 +10,7 @@ module Kovid
     COUNTRIES_PATH = UriBuilder.new('/countries').url
     STATES_URL = UriBuilder.new('/states').url
     EU_ISOS = %w[AT BE BG CY CZ DE DK EE ES FI FR GR HR HU IE IT LT LU LV MT NL PL PT RO SE SI SK].freeze
+    AFRICA_ISOS = %w[DZ AO BJ BW BF BI CM CV CF TD KM CD CG CI DJ EG GQ ER SZ ET GA GM GH GN GW KE LS LR LY MG MW ML MR MU MA MZ NA NE NG RW ST SN SC SL SO ZA SS SD TZ TG TN UG ZM ZW EH].freeze
     SERVER_DOWN = 'Server overwhelmed. Please try again in a moment.'
 
     class << self
@@ -29,6 +30,26 @@ module Kovid
         end.compact
 
         Kovid::Tablelize.eu_aggregate(eu_data)
+      rescue JSON::ParserError
+        puts SERVER_DOWN
+      end
+
+      def africa_aggregate
+        countries_array = JSON.parse(Typhoeus.get(UriBuilder.new('/countries').url, cache_ttl: 900).response_body)
+
+        africa_arry = countries_array.select do |hash|
+          AFRICA_ISOS.include?(hash['countryInfo']['iso2'])
+        end
+
+        head, *tail = africa_arry
+        africa_data = head.merge(*tail) do |key, left, right|
+          left ||= 0
+          right ||= 0
+
+          left + right unless %w[country countryInfo].include?(key)
+        end.compact
+
+        Kovid::Tablelize.africa_aggregate(africa_data)
       rescue JSON::ParserError
         puts SERVER_DOWN
       end
