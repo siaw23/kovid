@@ -312,9 +312,9 @@ module Kovid
 
       def aggregated_table(collated_data, continent, iso, emoji)
         title = if emoji.codepoints.size > 1
-                  emoji + 8203.chr(Encoding::UTF_8) + " Aggregated Data of #{continent} (#{iso.size} States)".upcase
+                  emoji + 8203.chr(Encoding::UTF_8) + " Aggregated Data on #{continent} (#{iso.size} States)".upcase
                 else
-                  emoji + " Aggregated Data of #{continent} (#{iso.size} States)".upcase
+                  emoji + " Aggregated Data on #{continent} (#{iso.size} States)".upcase
                 end
 
         rows = []
