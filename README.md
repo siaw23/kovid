@@ -66,6 +66,10 @@ ___
 
 **NOTE:** If you find it irritating to have to type `kovid state STATE`, `covid state STATE` works as well.
 
+#### Histogram (Experimental) 🧪
+
+`kovid histogram COUNTRY M.YY` (draws a histogram of cases in the given month `M` and years `YY`)
+
 #### Commands Details
 To fetch basic data on a country run:
 
@@ -114,6 +118,13 @@ To check for total figures:
 `kovid world`
 
 ![kovid](https://i.gyazo.com/e01f4769a2b9e31ce50cec212e55810c.png "Covid data.")
+
+## 👩🏾‍🔬 Experimental Feature
+
+`kovid histogram italy 3.20` tries to build a histogram on number of cases. In the example here `3.20` is date in the format of `M.YY`. If you can please play with it and report issues on how this could be improved.
+
+![kovid](https://i.gyazo.com/35833cba37be8ca10830fad066b85bb3.png "Covid data.")
+
 
 ## Data Source
 > [JHU CSSE GISand Data](https://gisanddata.maps.arcgis.com/apps/opsdashboard/index.html#/bda7594740fd40299423467b48e9ecf6) and https://www.worldometers.info/coronavirus/ via [NovelCOVID/API](https://github.com/novelcovid/api)
