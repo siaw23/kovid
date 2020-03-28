@@ -174,8 +174,7 @@ module Kovid
           left + right unless %w[country countryInfo].include?(key)
         end.compact
 
-        # Kovid::Tablelize.eu_aggregate(data)
-        meth.call(data)
+        meth === data
       rescue JSON::ParserError
         puts SERVER_DOWN
       end
