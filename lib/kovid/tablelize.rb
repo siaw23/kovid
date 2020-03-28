@@ -49,6 +49,15 @@ module Kovid
         'Cases/Million'.paint_white
       ].freeze
 
+      COMPARE_COUNTRIES_TABLE_HEADINGS = [
+        'Country'.paint_white,
+        'Cases'.paint_white,
+        'Cases Today'.paint_white,
+        'Deaths'.paint_red,
+        'Deaths Today'.paint_red,
+        'Recovered'.paint_green
+      ].freeze
+
       FOOTER_LINE = ['------------', '------------', '------------'].freeze
       COUNTRY_LETTERS = 'A'.upto('Z').with_index(127_462).to_h.freeze
 
@@ -69,8 +78,6 @@ module Kovid
         else
           Terminal::Table.new(title: data['country'].upcase, headings: headings, rows: rows)
         end
-        # TODO: Rafactor this
-        # TODO: Fix emoji
       end
 
       def full_country_table(data)
@@ -123,29 +130,25 @@ module Kovid
       end
 
       def compare_countries_table(data)
-        headings = [
-          'Country'.paint_white,
-          'Cases'.paint_white,
-          'Cases Today'.paint_white,
-          'Deaths'.paint_red,
-          'Deaths Today'.paint_red,
-          'Recovered'.paint_green
-        ]
-
         rows = []
 
         data.each do |country|
-          rows << [
-            country['country'].upcase,
+          base_rows = [
             comma_delimit(country['cases']),
             check_if_positve(country['todayCases']),
             comma_delimit(country['deaths']),
             check_if_positve(country['todayDeaths']),
             comma_delimit(country['recovered'])
           ]
+
+          rows << if iso = country['countryInfo']['iso2']
+                    base_rows.unshift("#{country_emoji(iso)} #{country['country'].upcase}")
+                  else
+                    base_rows.unshift(country['country'].upcase.to_s)
+                  end
         end
 
-        Terminal::Table.new(headings: headings, rows: rows)
+        Terminal::Table.new(headings: COMPARE_COUNTRIES_TABLE_HEADINGS, rows: rows)
       end
 
       def compare_countries_table_full(data)
