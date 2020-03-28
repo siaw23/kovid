@@ -21,6 +21,10 @@ module Kovid
     Kovid::Request.africa_aggregate
   end
 
+  def south_america_aggregate
+    Kovid::Request.south_america_aggregate
+  end
+
   def country(name)
     Kovid::Request.by_country(name)
   end

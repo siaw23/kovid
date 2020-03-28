@@ -282,6 +282,10 @@ module Kovid
         aggregated_table(africa_data, 'Africa', Kovid::Request::AFRICA_ISOS, '🌍')
       end
 
+      def south_america_aggregate(south_america_data)
+        aggregated_table(south_america_data, 'South America', Kovid::Request::SOUTH_AMERICA_ISOS, "🌎")
+      end
+
       private
 
       def comma_delimit(number)
