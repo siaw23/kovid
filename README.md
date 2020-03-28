@@ -75,19 +75,19 @@ To fetch basic data on a country run:
 
 `kovid check ghana`. If the location contains spaces: `kovid check "Diamond Princess"`
 
-![kovid](https://i.gyazo.com/ee88b41c05da3be0295dd3a158e7ba70.png "Covid data.")
+![kovid](https://i.gyazo.com/1d86ba2cd05f215b16c8d1fd13085c6e.png "Covid data.")
 
 For full table info on a country:
 
 `kovid check italy -f` OR `kovid check italy --full`
 
-![kovid](https://i.gyazo.com/7e5afce548d8a01b9bdf3f8bdb529cd1.png "Covid data.")
+![kovid](https://i.gyazo.com/1d9720b9fa2c08fb801f5361fba359bb.png "Covid data.")
 
 To compare country stats:
 
-`kovid compare germany poland`
+`kovid compare germany poland spain`
 
-![kovid](https://i.gyazo.com/876b19988da4cd7b375cde3e23376ba7.png "Covid data.")
+![kovid](https://i.gyazo.com/4100e845fea6936f5c8d21d78617110d.png "Covid data.")
 
 To compare a countries stats with a full table:
 
