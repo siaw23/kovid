@@ -162,7 +162,6 @@ module Kovid
             check_if_positve(country.fetch('todayDeaths')),
             comma_delimit(country.fetch('critical')),
             comma_delimit(country.fetch('casesPerOneMillion'))
-
           ]
         end
 
