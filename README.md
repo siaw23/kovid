@@ -42,7 +42,6 @@ You can fetch US state-specific data:
 ##### 🔜 Upcoming Fetch Features 👷‍♀️
 
 * `kovid europe` Aggrated stats on Europe
-* `kovid africa` Aggrated stats on Africa
 * `kovid asia` Aggrated stats on Asia
 * `kovid south_america` Aggrated stats on South America
 ___
