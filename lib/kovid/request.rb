@@ -10,48 +10,34 @@ module Kovid
     COUNTRIES_PATH = UriBuilder.new('/countries').url
     STATES_URL = UriBuilder.new('/states').url
     EU_ISOS = %w[AT BE BG CY CZ DE DK EE ES FI FR GR HR HU IE IT LT LU LV MT NL PL PT RO SE SI SK].freeze
+    EUROPE_ISOS = EU_ISOS + %w[GB IS NO CH MC AD SM VA BA RS ME MK AL BY UA RU MD]
     AFRICA_ISOS = %w[DZ AO BJ BW BF BI CM CV CF TD KM CD CG CI DJ EG GQ ER SZ ET GA GM GH GN GW KE LS LR LY MG MW ML MR MU MA MZ NA NE NG RW ST SN SC SL SO ZA SS SD TZ TG TN UG ZM ZW EH].freeze
+
     SERVER_DOWN = 'Server overwhelmed. Please try again in a moment.'
 
     class << self
       def eu_aggregate
-        countries_array = JSON.parse(Typhoeus.get(UriBuilder.new('/countries').url, cache_ttl: 900).response_body)
-
-        eu_array = countries_array.select do |hash|
-          EU_ISOS.include?(hash['countryInfo']['iso2'])
+        eu_proc = proc do |data|
+          Kovid::Tablelize.eu_aggregate(data)
         end
 
-        head, *tail = eu_array
-        eu_data = head.merge(*tail) do |key, left, right|
-          left ||= 0
-          right ||= 0
+        aggregator(EU_ISOS, eu_proc)
+      end
 
-          left + right unless %w[country countryInfo].include?(key)
-        end.compact
+      def europe_aggregate
+        europe_proc = proc do |data|
+          Kovid::Tablelize.europe_aggregate(data)
+        end
 
-        Kovid::Tablelize.eu_aggregate(eu_data)
-      rescue JSON::ParserError
-        puts SERVER_DOWN
+        aggregator(EUROPE_ISOS, europe_proc)
       end
 
       def africa_aggregate
-        countries_array = JSON.parse(Typhoeus.get(UriBuilder.new('/countries').url, cache_ttl: 900).response_body)
-
-        africa_arry = countries_array.select do |hash|
-          AFRICA_ISOS.include?(hash['countryInfo']['iso2'])
+        africa_proc = proc do |data|
+          Kovid::Tablelize.africa_aggregate(data)
         end
 
-        head, *tail = africa_arry
-        africa_data = head.merge(*tail) do |key, left, right|
-          left ||= 0
-          right ||= 0
-
-          left + right unless %w[country countryInfo].include?(key)
-        end.compact
-
-        Kovid::Tablelize.africa_aggregate(africa_data)
-      rescue JSON::ParserError
-        puts SERVER_DOWN
+        aggregator(AFRICA_ISOS, africa_proc)
       end
 
       def by_country(country_name)
@@ -171,6 +157,27 @@ module Kovid
         states_array = JSON.parse(Typhoeus.get(STATES_URL, cache_ttl: 900).response_body)
 
         states_array.select { |state_name| state_name['state'] == capitalize_words(state) }.first
+      end
+
+      def aggregator(isos, meth)
+        countries_array = JSON.parse(Typhoeus.get(UriBuilder.new('/countries').url, cache_ttl: 900).response_body)
+
+        country_array = countries_array.select do |hash|
+          isos.include?(hash['countryInfo']['iso2'])
+        end
+
+        head, *tail = country_array
+        data = head.merge(*tail) do |key, left, right|
+          left ||= 0
+          right ||= 0
+
+          left + right unless %w[country countryInfo].include?(key)
+        end.compact
+
+        # Kovid::Tablelize.eu_aggregate(data)
+        meth.call(data)
+      rescue JSON::ParserError
+        puts SERVER_DOWN
       end
     end
   end

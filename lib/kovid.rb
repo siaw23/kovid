@@ -13,6 +13,9 @@ module Kovid
   def eu_aggregate
     Kovid::Request.eu_aggregate
   end
+  def europe_aggregate
+    Kovid::Request.europe_aggregate
+  end
 
   def africa_aggregate
     Kovid::Request.africa_aggregate

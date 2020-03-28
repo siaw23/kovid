@@ -59,6 +59,11 @@ module Kovid
       data_source
     end
 
+    desc 'europe', 'Returns aggregated data on Europe.'
+    def europe
+      puts Kovid.europe_aggregate
+      data_source
+    end
 
     desc 'africa', 'Returns aggregated data on Africa.'
     def africa
