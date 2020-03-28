@@ -31,7 +31,7 @@ You can run `kovid --help` to see the full list of available commands.
 
 🦁🦁🦁
 
-You can fetch aggregated data on Africa:
+You can fetch aggregated data on Africa (55 states):
 * `kovid africa`.
 
 🏰🏰🏰
@@ -44,6 +44,11 @@ You can fetch aggregated Europe (all 44 countries combined) data:
 You can fetch aggregated EU (all 27 countries combined) data:
 * `kovid eu`.
 
+🌎🌎🌎
+
+You can fetch aggregated South America (all 15 countries combined) data:
+* `kovid sa`.
+
 🇺🇸🇺🇸🇺🇸
 
 You can fetch US state-specific data:
@@ -52,7 +57,7 @@ You can fetch US state-specific data:
 ##### 🔜 Upcoming Fetch Features 👷‍♀️
 
 * `kovid asia` Aggrated stats on Asia
-* `kovid south_america` Aggrated stats on South America
+
 ___
 😷 **Comparing**
 * `kovid compare FOO BAR` (sorts by cases DESC).

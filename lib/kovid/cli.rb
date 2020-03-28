@@ -71,6 +71,12 @@ module Kovid
       data_source
     end
 
+    desc 'sa', 'Returns aggregated data on South America.'
+    def sa
+      puts Kovid.south_america_aggregate
+      data_source
+    end
+
     desc 'version', 'Returns version of kovid'
     def version
       puts Kovid::VERSION
