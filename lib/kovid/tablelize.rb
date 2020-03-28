@@ -271,41 +271,15 @@ module Kovid
       end
 
       def eu_aggregate(eu_data)
-        rows = []
-        rows << [
-          comma_delimit(eu_data['cases']),
-          check_if_positve(eu_data['todayCases']),
-          comma_delimit(eu_data['deaths']),
-          check_if_positve(eu_data['todayDeaths']),
-          comma_delimit(eu_data['recovered']),
-          comma_delimit(eu_data['active']),
-          comma_delimit(eu_data['critical'])
-        ]
+        aggregated_table(eu_data, 'The EU', Kovid::Request::EU_ISOS, '🇪🇺')
+      end
 
-        Terminal::Table.new(
-          title: '🇪🇺' + 8203.chr(Encoding::UTF_8) + ' Aggregated EU (27 States) Data'.upcase,
-          headings: CONTINENTAL_AGGREGATE_HEADINGS,
-          rows: rows
-        )
+      def europe_aggregate(europe_data)
+        aggregated_table(europe_data, 'Europe', Kovid::Request::EUROPE_ISOS, "🏰")
       end
 
       def africa_aggregate(africa_data)
-        rows = []
-        rows << [
-          comma_delimit(africa_data['cases']),
-          check_if_positve(africa_data['todayCases']),
-          comma_delimit(africa_data['deaths']),
-          check_if_positve(africa_data['todayDeaths']),
-          comma_delimit(africa_data['recovered']),
-          comma_delimit(africa_data['active']),
-          comma_delimit(africa_data['critical'])
-        ]
-
-        Terminal::Table.new(
-          title: 'Aggregated Data of Africa (55 States)'.upcase,
-          headings: CONTINENTAL_AGGREGATE_HEADINGS,
-          rows: rows
-        )
+        aggregated_table(africa_data, 'Africa', Kovid::Request::AFRICA_ISOS, '🌍')
       end
 
       private
@@ -334,6 +308,31 @@ module Kovid
       def scale(msg)
         rows = [[msg]]
         puts Terminal::Table.new title: 'SCALE', rows: rows
+      end
+
+      def aggregated_table(collated_data, continent, iso, emoji)
+        title = if emoji.codepoints.size > 1
+                  emoji + 8203.chr(Encoding::UTF_8) + " Aggregated Data of #{continent} (#{iso.size} States)".upcase
+                else
+                  emoji + " Aggregated Data of #{continent} (#{iso.size} States)".upcase
+                end
+
+        rows = []
+        rows << [
+          comma_delimit(collated_data['cases']),
+          check_if_positve(collated_data['todayCases']),
+          comma_delimit(collated_data['deaths']),
+          check_if_positve(collated_data['todayDeaths']),
+          comma_delimit(collated_data['recovered']),
+          comma_delimit(collated_data['active']),
+          comma_delimit(collated_data['critical'])
+        ]
+
+        Terminal::Table.new(
+          title: title,
+          headings: CONTINENTAL_AGGREGATE_HEADINGS,
+          rows: rows
+        )
       end
     end
   end
