@@ -28,7 +28,7 @@ module Kovid
         'Deaths'.paint_red
       ].freeze
 
-      EU_AGGREGATE_HEADINGS = [
+      CONTINENTAL_AGGREGATE_HEADINGS = [
         'Cases'.paint_white,
         'Cases Today'.paint_white,
         'Deaths'.paint_red,
@@ -284,7 +284,26 @@ module Kovid
 
         Terminal::Table.new(
           title: '🇪🇺' + 8203.chr(Encoding::UTF_8) + ' Aggregated EU (27 States) Data'.upcase,
-          headings: EU_AGGREGATE_HEADINGS,
+          headings: CONTINENTAL_AGGREGATE_HEADINGS,
+          rows: rows
+        )
+      end
+
+      def africa_aggregate(africa_data)
+        rows = []
+        rows << [
+          comma_delimit(africa_data['cases']),
+          check_if_positve(africa_data['todayCases']),
+          comma_delimit(africa_data['deaths']),
+          check_if_positve(africa_data['todayDeaths']),
+          comma_delimit(africa_data['recovered']),
+          comma_delimit(africa_data['active']),
+          comma_delimit(africa_data['critical'])
+        ]
+
+        Terminal::Table.new(
+          title: 'Aggregated Data of Africa (55 States)'.upcase,
+          headings: CONTINENTAL_AGGREGATE_HEADINGS,
           rows: rows
         )
       end
