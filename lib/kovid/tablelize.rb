@@ -250,7 +250,13 @@ module Kovid
         # With x being day, y being number of cases
         if dates.empty?
           if @date.first.to_i > Time.now.month
-            Kovid.info_table('Seriously...??! 😏')
+            msgs = [
+              'Seriously...??! 😏', 'Did you just check the future??',
+              'You just checked the future Morgan.',
+              'Knowing too much of your future is never a good thing.'
+            ]
+
+            Kovid.info_table(msgs.sample)
           else
             Kovid.info_table('No infections for this month.')
           end
