@@ -259,7 +259,7 @@ module Kovid
 
             Kovid.info_table(msgs.sample)
           else
-            Kovid.info_table('No infections for this month.')
+            Kovid.info_table('Check your spelling/No infections for this month.')
           end
 
         else

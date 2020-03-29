@@ -65,6 +65,7 @@ ___
 #### Histogram (Experimental) 🧪
 
 `kovid histogram COUNTRY M.YY` (draws a histogram of cases in the given month `M` and years `YY`)
+(If the histogram appears messy, you might want to resize your window.)
 
 #### Commands Details
 To fetch basic data on a country run:
