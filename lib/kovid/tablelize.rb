@@ -230,7 +230,7 @@ module Kovid
         end
 
         # From dates where number of !cases.zero?
-        positive_cases_figures = country['timeline']['cases'].values.reject!(&:zero?)
+        positive_cases_figures = country['timeline']['cases'].values.reject(&:zero?)
         dates = country['timeline']['cases'].reject { |_k, v| v.zero? }.keys
         data = []
 
