@@ -33,9 +33,10 @@ You can get continental information with the following commands:
 
 * `kovid africa`.
 * `kovid europe`.
-* `kovid eu`.
+* `kovid eu`. (The European Union)
 * `kovid sa`. (South America)
 * `kovid asia`.
+* `kovid world`. (Worldwide Statistics)
 
 🇺🇸🇺🇸🇺🇸
 
@@ -58,8 +59,6 @@ ___
 * `kovid history COUNTRY` (full history).
 * `kovid history COUNTRY N` (history in the last N days).
 ___
-😷 **Total figures**
-* `kovid world` (summary of reported incidents globally).
 
 **NOTE:** If you find it irritating to have to type `kovid state STATE`, `covid state STATE` works as well.
 
