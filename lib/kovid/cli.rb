@@ -6,6 +6,10 @@ require 'kovid'
 module Kovid
   class CLI < Thor
     FULL_FLAG = %w[-f --full].freeze
+    
+    def self.exit_on_failure?
+      true
+    end
 
     def self.exit_on_failure?
       true

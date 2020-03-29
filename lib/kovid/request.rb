@@ -85,7 +85,7 @@ module Kovid
       def state(state)
         response = fetch_state(state)
         if response.nil?
-          not_found(state)
+          not_found(state)        
         else
           Kovid::Tablelize.full_state_table(response)
         end
