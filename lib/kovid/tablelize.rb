@@ -182,6 +182,7 @@ module Kovid
       end
 
       def history(country, last)
+        # Write checks for when country is spelt wrong.
         headings = DATE_CASES_DEATHS
         rows = []
 
@@ -198,7 +199,7 @@ module Kovid
                 end
 
         unless last
-          stats = stats.reject! { |stat| stat[0].to_i.zero? && stat[1].to_i.zero? }
+          stats = stats.reject { |stat| stat[0].to_i.zero? && stat[1].to_i.zero? }
           dates = dates.last(stats.count)
         end
 
