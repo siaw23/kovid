@@ -141,7 +141,7 @@ module Kovid
             comma_delimit(country['recovered'])
           ]
 
-          rows << if iso = country['countryInfo']['iso2']
+          rows << if (iso = country['countryInfo']['iso2'])
                     base_rows.unshift("#{country_emoji(iso)} #{country['country'].upcase}")
                   else
                     base_rows.unshift(country['country'].upcase.to_s)
@@ -273,6 +273,8 @@ module Kovid
 
           scale("Scale on Y: #{y_interval}:#{(y_interval / last_two_y.last.to_f * positive_cases_figures.last).round(2) / y_interval}")
 
+          puts "Experimental feature, please report issues."
+
           AsciiCharts::Cartesian.new(data, bar: true, hide_zero: true).draw
         end
       end
@@ -286,7 +288,8 @@ module Kovid
       end
 
       def africa_aggregate(africa_data)
-        aggregated_table(africa_data, 'Africa', Kovid::Request::AFRICA_ISOS, '🌍')
+        aggregated_table(africa_data, 'Africa',
+                         Kovid::Request::AFRICA_ISOS, '🌍')
       end
 
       def south_america_aggregate(south_america_data)
