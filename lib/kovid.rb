@@ -13,6 +13,7 @@ module Kovid
   def eu_aggregate
     Kovid::Request.eu_aggregate
   end
+
   def europe_aggregate
     Kovid::Request.europe_aggregate
   end
@@ -23,6 +24,10 @@ module Kovid
 
   def south_america_aggregate
     Kovid::Request.south_america_aggregate
+  end
+
+  def asia_aggregate
+    Kovid::Request.asia_aggregate
   end
 
   def country(name)
