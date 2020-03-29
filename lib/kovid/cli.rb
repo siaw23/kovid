@@ -6,6 +6,10 @@ require 'kovid'
 module Kovid
   class CLI < Thor
     FULL_FLAG = %w[-f --full].freeze
+    
+    def self.exit_on_failure?
+      true
+    end
 
     desc 'check COUNTRY or check "COUNTRY NAME"', 'Returns reported data on provided country. eg: "kovid check "hong kong".'
     method_option :full, aliases: '-f'
