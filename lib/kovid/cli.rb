@@ -92,7 +92,7 @@ module Kovid
       puts Kovid::VERSION
     end
 
-    desc 'histogram', 'Returns a histogram of incidents.'
+    desc 'histogram COUNTRY M.YY', 'Returns a histogram of incidents.'
     def histogram(country, date = nil)
       if date.nil?
         Kovid.info_table("Please add a month and year in the form 'M.YY'")
