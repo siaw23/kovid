@@ -29,40 +29,18 @@ You can run `kovid --help` to see the full list of available commands.
 * `kovid check COUNTRY` OR `kovid country COUNTRY`.
 * `kovid check COUNTRY -f` OR `kovid check COUNTRY --full`.
 
-🦁🦁🦁
+You can get continental information with the following commands:
 
-You can fetch aggregated data on Africa (55 states):
 * `kovid africa`.
-
-🏰🏰🏰
-
-You can fetch aggregated Europe (all 44 countries combined) data:
 * `kovid europe`.
-
-🇪🇺🇪🇺🇪🇺
-
-You can fetch aggregated EU (all 27 countries combined) data:
 * `kovid eu`.
-
-
-🌎🌎🌎
-
-You can fetch aggregated South America (all 15 countries combined) data:
-* `kovid sa`.
-
-🌏🌏🌏
-
-You can fetch aggregated Asia (all 51 countries combined) data:
+* `kovid sa`. (South America)
 * `kovid asia`.
 
 🇺🇸🇺🇸🇺🇸
 
 You can fetch US state-specific data:
 * `kovid state STATE` OR `kovid state "STATE NAME"`.
-
-##### 🔜 Upcoming Fetch Features 👷‍♀️
-
-* `kovid asia` Aggrated stats on Asia
 
 ___
 😷 **Comparing**
