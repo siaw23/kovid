@@ -11,6 +11,10 @@ module Kovid
       true
     end
 
+    def self.exit_on_failure?
+      true
+    end
+
     desc 'check COUNTRY or check "COUNTRY NAME"', 'Returns reported data on provided country. eg: "kovid check "hong kong".'
     method_option :full, aliases: '-f'
     def check(name)
@@ -92,7 +96,7 @@ module Kovid
       puts Kovid::VERSION
     end
 
-    desc 'histogram', 'Returns a histogram of incidents.'
+    desc 'histogram COUNTRY M.YY', 'Returns a histogram of incidents.'
     def histogram(country, date = nil)
       if date.nil?
         Kovid.info_table("Please add a month and year in the form 'M.YY'")
