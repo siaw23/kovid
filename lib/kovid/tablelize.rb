@@ -275,7 +275,7 @@ module Kovid
       end
 
       def europe_aggregate(europe_data)
-        aggregated_table(europe_data, 'Europe', Kovid::Request::EUROPE_ISOS, "🏰")
+        aggregated_table(europe_data, 'Europe', Kovid::Request::EUROPE_ISOS, '🏰')
       end
 
       def africa_aggregate(africa_data)
@@ -283,7 +283,13 @@ module Kovid
       end
 
       def south_america_aggregate(south_america_data)
-        aggregated_table(south_america_data, 'South America', Kovid::Request::SOUTH_AMERICA_ISOS, "🌎")
+        aggregated_table(south_america_data,
+                         'South America',
+                         Kovid::Request::SOUTH_AMERICA_ISOS, '🌎')
+      end
+
+      def asia_aggregate(asia_data)
+        aggregated_table(asia_data, 'Asia', Kovid::Request::ASIA_ISOS, '🌏')
       end
 
       private
@@ -300,7 +306,8 @@ module Kovid
       end
 
       def country_emoji(iso)
-        COUNTRY_LETTERS.values_at(*iso.chars).pack('U*') + 8203.chr(Encoding::UTF_8)
+        COUNTRY_LETTERS.values_at(*iso.chars).pack('U*') + \
+          8203.chr(Encoding::UTF_8)
       end
 
       def transpose(load)
@@ -316,9 +323,11 @@ module Kovid
 
       def aggregated_table(collated_data, continent, iso, emoji)
         title = if emoji.codepoints.size > 1
-                  emoji + 8203.chr(Encoding::UTF_8) + " Aggregated Data on #{continent} (#{iso.size} States)".upcase
+                  emoji + 8203.chr(Encoding::UTF_8) + \
+                    " Aggregated Data on #{continent} (#{iso.size} States)".upcase
                 else
-                  emoji + " Aggregated Data on #{continent} (#{iso.size} States)".upcase
+                  emoji + \
+                    " Aggregated Data on #{continent} (#{iso.size} States)".upcase
                 end
 
         rows = []

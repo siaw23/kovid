@@ -77,6 +77,12 @@ module Kovid
       data_source
     end
 
+    desc 'asia', 'Returns aggregated data on Asia.'
+    def asia
+      puts Kovid.asia_aggregate
+      data_source
+    end
+
     desc 'version', 'Returns version of kovid'
     def version
       puts Kovid::VERSION

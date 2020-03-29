@@ -44,10 +44,16 @@ You can fetch aggregated Europe (all 44 countries combined) data:
 You can fetch aggregated EU (all 27 countries combined) data:
 * `kovid eu`.
 
+
 🌎🌎🌎
 
 You can fetch aggregated South America (all 15 countries combined) data:
 * `kovid sa`.
+
+🌏🌏🌏
+
+You can fetch aggregated Asia (all 51 countries combined) data:
+* `kovid asia`.
 
 🇺🇸🇺🇸🇺🇸
 
