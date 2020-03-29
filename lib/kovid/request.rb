@@ -84,8 +84,11 @@ module Kovid
 
       def state(state)
         response = fetch_state(state)
-
-        Kovid::Tablelize.full_state_table(response)
+        if response.nil?
+          not_found(state)
+        else
+          Kovid::Tablelize.full_state_table(response)
+        end
       rescue JSON::ParserError
         puts SERVER_DOWN
       end
