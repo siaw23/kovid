@@ -184,9 +184,9 @@ module Kovid
           [
             state.fetch('state').upcase,
             comma_delimit(state.fetch('cases')),
-            check_if_positve(state["todayCases"]),
-            comma_delimit(state["deaths"]),
-            check_if_positve(state["todayDeaths"]),
+            check_if_positve(state['todayCases']),
+            comma_delimit(state['deaths']),
+            check_if_positve(state['todayDeaths']),
             comma_delimit(state.fetch('active'))
           ]
         end

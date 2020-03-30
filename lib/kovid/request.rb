@@ -163,7 +163,6 @@ module Kovid
 
       def fetch_states(list)
         states_json = JSON.parse(Typhoeus.get(STATES_URL, cache_ttl: 900).response_body)
-
         states_array = []
 
         states_json.select do |state|
