@@ -2,8 +2,8 @@
 
 require 'terminal-table'
 require 'date'
-require_relative 'painter'
 require 'ascii_charts'
+require_relative 'painter'
 
 module Kovid
   class Tablelize
@@ -58,11 +58,29 @@ module Kovid
         'Recovered'.paint_green
       ].freeze
 
+      FULL_COUNTRY_TABLE_HEADINGS = [
+        'Cases'.paint_white,
+        'Deaths'.paint_red,
+        'Recovered'.paint_green,
+        'Cases Today'.paint_white,
+        'Deaths Today'.paint_red,
+        'Critical'.paint_yellow,
+        'Cases/Million'.paint_white
+      ].freeze
+
+      COMPARE_STATES_HEADINGS = [
+        'State'.paint_white,
+        'Cases'.paint_white,
+        'Cases Today'.paint_white,
+        'Deaths'.paint_red,
+        'Deaths Today'.paint_red,
+        'Active'.paint_yellow
+      ].freeze
+
       FOOTER_LINE = ['------------', '------------', '------------'].freeze
       COUNTRY_LETTERS = 'A'.upto('Z').with_index(127_462).to_h.freeze
 
       def country_table(data)
-        headings = CASES_DEATHS_RECOVERED_CTODAY_DTODAY
         rows = [
           [
             comma_delimit(data['cases']),
@@ -73,24 +91,18 @@ module Kovid
           ]
         ]
 
-        if iso = data['countryInfo']['iso2']
-          Terminal::Table.new(title: "#{country_emoji(iso)} #{data['country'].upcase}", headings: headings, rows: rows)
+        if (iso = data['countryInfo']['iso2'])
+          Terminal::Table.new(title: "#{country_emoji(iso)} #{data['country'].upcase}",
+                              headings: CASES_DEATHS_RECOVERED_CTODAY_DTODAY,
+                              rows: rows)
         else
-          Terminal::Table.new(title: data['country'].upcase, headings: headings, rows: rows)
+          Terminal::Table.new(title: data['country'].upcase,
+                              headings: CASES_DEATHS_RECOVERED_CTODAY_DTODAY,
+                              rows: rows)
         end
       end
 
       def full_country_table(data)
-        headings = [
-          'Cases'.paint_white,
-          'Deaths'.paint_red,
-          'Recovered'.paint_green,
-          'Cases Today'.paint_white,
-          'Deaths Today'.paint_red,
-          'Critical'.paint_yellow,
-          'Cases/Million'.paint_white
-        ]
-
         rows = []
         rows << [
           comma_delimit(data['cases']),
@@ -104,14 +116,13 @@ module Kovid
 
         if iso = data['countryInfo']['iso2']
           Terminal::Table.new(title: "#{country_emoji(iso)} #{data['country'].upcase}",
-                              headings: headings,
+                              headings: FULL_COUNTRY_TABLE_HEADINGS,
                               rows: rows)
         else
           Terminal::Table.new(title: data['country'].upcase,
-                              headings: headings,
+                              headings: FULL_COUNTRY_TABLE_HEADINGS,
                               rows: rows)
         end
-        # TODO: Rafactor this
       end
 
       def full_state_table(state)
@@ -166,6 +177,21 @@ module Kovid
         end
 
         Terminal::Table.new(headings: COMPARE_COUNTRY_TABLE_FULL, rows: rows)
+      end
+
+      def compare_us_states(data)
+        rows = data.map do |state|
+          [
+            state.fetch('state').upcase,
+            comma_delimit(state.fetch('cases')),
+            check_if_positve(state["todayCases"]),
+            comma_delimit(state["deaths"]),
+            check_if_positve(state["todayDeaths"]),
+            comma_delimit(state.fetch('active'))
+          ]
+        end
+
+        Terminal::Table.new(headings: COMPARE_STATES_HEADINGS, rows: rows)
       end
 
       def cases(cases)
@@ -273,7 +299,7 @@ module Kovid
 
           scale("Scale on Y: #{y_interval}:#{(y_interval / last_two_y.last.to_f * positive_cases_figures.last).round(2) / y_interval}")
 
-          puts "Experimental feature, please report issues."
+          puts 'Experimental feature, please report issues.'
 
           AsciiCharts::Cartesian.new(data, bar: true, hide_zero: true).draw
         end
