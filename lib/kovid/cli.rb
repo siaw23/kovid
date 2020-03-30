@@ -41,6 +41,11 @@ module Kovid
       data_source
     end
 
+    desc 'states STATE STATE', 'Returns full comparison table for the given states. Accepts multiple states.'
+    def states(*states)
+      puts Kovid.states(states)
+    end
+
     desc 'world', 'Returns total number of cases, deaths and recoveries.'
     def world
       puts Kovid.cases

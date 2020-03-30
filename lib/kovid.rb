@@ -42,7 +42,7 @@ module Kovid
     Kovid::Request.state(state)
   end
 
-  def states(*states)
+  def states(states)
     Kovid::Request.states(states)
   end
 

@@ -26,8 +26,8 @@ You can run `kovid --help` to see the full list of available commands.
 #### Commands Overview
 
 😷 **Fetching**
-* `kovid check COUNTRY` OR `kovid country COUNTRY`.
-* `kovid check COUNTRY -f` OR `kovid check COUNTRY --full`.
+* `kovid check COUNTRY` aliased as `kovid country COUNTRY`.
+* `kovid check COUNTRY -f` aliased as `kovid country COUNTRY --full`.
 
 You can get continental information with the following commands:
 
@@ -52,8 +52,10 @@ Where `FOO` and `BAR` are different countries.
 
 You can compare as many countries as you want; `kovid compare FOO BAR BAZ` OR `kovid compare FOO BAR BAZ -f`
 
-##### 🔜 Upcoming Compare Features 👷‍♂️
-* `kovid compare US_STATE1 US_STATE ...` Side-by-side stats on two/more US states.
+🇺🇸🇺🇸🇺🇸
+
+You can compare US states with:
+* `kovid compare STATE STATE` Example: `kovid states illinois "new york" california`
 ___
 😷 **History**
 * `kovid history COUNTRY` (full history).
