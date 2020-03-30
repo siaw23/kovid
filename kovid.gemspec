@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.description   = %q{A CLI to fetch and compare the 2019 coronavirus pandemic statistics.}
   spec.homepage      = "https://github.com/siaw23/kovid"
   spec.license       = "MIT"
-  spec.required_ruby_version = Gem::Requirement.new(">= 2.3.0")
+  spec.required_ruby_version = Gem::Requirement.new(">= 2.4.0")
 
   spec.metadata["allowed_push_host"] = "https://rubygems.org/"
 
