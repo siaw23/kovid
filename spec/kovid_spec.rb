@@ -92,7 +92,7 @@ RSpec.describe Kovid do
       table = Kovid.history('ghana', '7')
 
       expect(table.headings.first.cells.first.value).to include('Date')
-      expect(table.headings.first.cells.last.value).to include('Deaths')
+      expect(table.headings.first.cells.last.value).to include('Recovered')
     end
   end
 end

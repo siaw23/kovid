@@ -22,10 +22,11 @@ module Kovid
         'Deaths Today'.paint_red
       ].freeze
 
-      DATE_CASES_DEATHS = [
+      DATE_CASES_DEATHS_RECOVERED = [
         'Date'.paint_white,
         'Cases'.paint_white,
-        'Deaths'.paint_red
+        'Deaths'.paint_red,
+        'Recovered'.paint_green
       ].freeze
 
       CONTINENTAL_AGGREGATE_HEADINGS = [
@@ -77,7 +78,7 @@ module Kovid
         'Active'.paint_yellow
       ].freeze
 
-      FOOTER_LINE = ['------------', '------------', '------------'].freeze
+      FOOTER_LINE = ['------------', '------------', '------------', '------------'].freeze
       COUNTRY_LETTERS = 'A'.upto('Z').with_index(127_462).to_h.freeze
 
       def country_table(data)
@@ -209,7 +210,7 @@ module Kovid
 
       def history(country, last)
         # Write checks for when country is spelt wrong.
-        headings = DATE_CASES_DEATHS
+        headings = DATE_CASES_DEATHS_RECOVERED
         rows = []
 
         stats = if last
@@ -238,7 +239,7 @@ module Kovid
 
         if stats.size > 10
           rows << FOOTER_LINE
-          rows << DATE_CASES_DEATHS
+          rows << DATE_CASES_DEATHS_RECOVERED
         end
 
         Terminal::Table.new(
