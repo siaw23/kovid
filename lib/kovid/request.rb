@@ -189,16 +189,6 @@ module Kovid
           isos.include?(hash['countryInfo']['iso2'])
         end
 
-        # You can't do this for Ruby veresion < 2.6.0
-        # #merge behaviour was changed in Ruby 2.6.0
-        # head, *tail = country_array
-        # data = head.merge(*tail) do |key, left, right|
-        #   left ||= 0
-        #   right ||= 0
-
-        #   left + right unless %w[country countryInfo].include?(key)
-        # end.compact
-
         data = country_array.inject do |base, other|
           base.merge(other) do |key, left, right|
             left ||= 0
