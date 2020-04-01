@@ -13,11 +13,18 @@ module Kovid
 
     SERVER_DOWN = 'Server overwhelmed. Please try again in a moment.'
 
-    EU_ISOS = %w[AT BE BG CY CZ DE DK EE ES FI FR GR HR HU IE IT LT LU LV MT NL PL PT RO SE SI SK].freeze
-    EUROPE_ISOS = EU_ISOS + %w[GB IS NO CH MC AD SM VA BA RS ME MK AL BY UA RU MD]
-    AFRICA_ISOS = %w[DZ AO BJ BW BF BI CM CV CF TD KM CD CG CI DJ EG GQ ER SZ ET GA GM GH GN GW KE LS LR LY MG MW ML MR MU MA MZ NA NE NG RW ST SN SC SL SO ZA SS SD TZ TG TN UG ZM ZW EH].freeze
-    SOUTH_AMERICA_ISOS = ['AR' 'BO', 'BV', 'BR', 'CL', 'CO', 'EC', 'FK', 'GF', 'GY', 'PY', 'PE', 'GS', 'SR', 'UY', 'VE'].freeze
-    ASIA_ISOS = %w[AE AF AM AZ BD BH BN BT CC CN CX GE HK ID IL IN IQ IR JO JP KG KH KP KR KW KZ LA LB LK MM MN MO MY NP OM PH PK PS QA SA SG SY TH TJ TL TM TR TW UZ VN YE].freeze
+    EU_ISOS = %w[AT BE BG CY CZ DE DK EE ES FI FR GR HR HU IE IT LT \
+                 LU LV MT NL PL PT RO SE SI SK].freeze
+    EUROPE_ISOS = EU_ISOS + %w[GB IS NO CH MC AD SM VA BA RS ME MK AL\
+                               BY UA RU MD]
+    AFRICA_ISOS = %w[DZ AO BJ BW BF BI CM CV CF TD KM CD CG CI DJ EG \
+                     GQ ER SZ ET GA GM GH GN GW KE LS LR LY MG MW ML MR MU MA MZ NA NE \
+                     NG RW ST SN SC SL SO ZA SS SD TZ TG TN UG ZM ZW EH].freeze
+    SOUTH_AMERICA_ISOS = ['AR' 'BO', 'BV', 'BR', 'CL', 'CO', 'EC', \
+                          'FK', 'GF', 'GY', 'PY', 'PE', 'GS', 'SR', 'UY', 'VE'].freeze
+    ASIA_ISOS = %w[AE AF AM AZ BD BH BN BT CC CN CX GE HK ID IL IN \
+                   IQ IR JO JP KG KH KP KR KW KZ LA LB LK MM MN MO MY NP OM PH PK \
+                   PS QA SA SG SY TH TJ TL TM TR TW UZ VN YE].freeze
 
     class << self
       def eu_aggregate
