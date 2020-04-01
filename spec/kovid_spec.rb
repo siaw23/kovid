@@ -5,6 +5,35 @@ RSpec.describe Kovid do
     expect(Kovid::VERSION).not_to be nil
   end
 
+  describe 'province(name)' do
+    let(:province) { 'ontario' }
+    let(:inexistent_province) { 'wonderland' }
+    it 'returns table with province data' do
+      table = Kovid.province(province)
+
+      expect(table.title).to include('ONTARIO')
+    end
+
+    it 'outputs message informing of wrong spelling or no reported case.' do
+      table = Kovid.province(inexistent_province)
+      not_found = "Wrong spelling/No reported cases on #{inexistent_province.upcase}."
+
+      expect(table.rows.first.cells.first.value).to eq(not_found)
+    end
+  end
+
+  describe 'provinces(names)' do
+    let(:provinces) { %w(ontario manitoba) }
+    
+    it 'returns table with provinces data' do
+      table = Kovid.provinces(provinces)
+
+      first_columns = table.rows.map { |row| row.cells.first.value }
+      
+      expect(first_columns).to include("MANITOBA").and include("ONTARIO")
+    end
+  end
+
   describe 'country(name)' do
     let(:country) { 'ghana' }
     let(:inexistent_country) { 'wonderland' }
