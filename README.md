@@ -43,6 +43,12 @@ You can get continental information with the following commands:
 You can fetch US state-specific data:
 * `kovid state STATE` OR `kovid state "STATE NAME"`.
 
+Provinces
+
+You can fetch province specific data:
+
+* `kovid province PROVINCE` or `kovid province "PROVINCE NAME"`.
+
 ___
 😷 **Comparing**
 * `kovid compare FOO BAR` (sorts by cases DESC).
@@ -56,6 +62,9 @@ You can compare as many countries as you want; `kovid compare FOO BAR BAZ` OR `k
 
 You can compare US states with:
 * `kovid compare STATE STATE` Example: `kovid states illinois "new york" california`
+
+You can compare provicnes with:
+* `kovid provinces PROVINCE PROVINCE` Example: `kovid provinces ontario manitoba`
 ___
 😷 **History**
 * `kovid history COUNTRY` (full history).

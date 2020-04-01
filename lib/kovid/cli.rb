@@ -11,6 +11,18 @@ module Kovid
       true
     end
 
+    desc 'province PROVINCE or province "PROVINCE NAME"', 'Returns reported data on provided province. eg "kovid check "new brunswick".'
+    method_option :full, aliases: '-p'
+    def province(name)
+      puts Kovid.province(name)
+      data_source
+    end
+
+    desc 'provinces PROVINCE PROVINCE', 'Returns full comparison table for the given provinces. Accepts multiple provinces.'
+    def provinces(*names)
+      puts Kovid.provinces(names)
+    end
+
     desc 'check COUNTRY or check "COUNTRY NAME"', 'Returns reported data on provided country. eg: "kovid check "hong kong".'
     method_option :full, aliases: '-f'
     def check(name)
