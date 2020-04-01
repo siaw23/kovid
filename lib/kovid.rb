@@ -38,6 +38,14 @@ module Kovid
     Kovid::Request.by_country_full(name)
   end
 
+  def province(name)
+    Kovid::Request.province(name)
+  end
+  
+  def provinces(names)
+    Kovid::Request.provinces(names)
+  end
+
   def state(state)
     Kovid::Request.state(state)
   end

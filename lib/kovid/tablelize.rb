@@ -78,6 +78,13 @@ module Kovid
         'Active'.paint_yellow
       ].freeze
 
+      COMPARE_PROVINCES_HEADINGS = [
+        'Province'.paint_white,
+        'Confirmed'.paint_white,
+        'Deaths'.paint_red,
+        'Recovered'.paint_green
+      ].freeze
+
       FOOTER_LINE = ['------------', '------------', '------------', '------------'].freeze
       COUNTRY_LETTERS = 'A'.upto('Z').with_index(127_462).to_h.freeze
 
@@ -124,6 +131,18 @@ module Kovid
                               headings: FULL_COUNTRY_TABLE_HEADINGS,
                               rows: rows)
         end
+      end
+
+      def full_province_table(province)
+        headings = [
+          'Confirmed'.paint_white,
+          'Deaths'.paint_red,
+          'Recovered'.paint_green
+        ]
+        rows = []
+        rows << [province['stats']['confirmed'], province['stats']['deaths'], province['stats']['recovered']]
+
+        Terminal::Table.new(title: province['province'].upcase, headings: headings, rows: rows)
       end
 
       def full_state_table(state)
@@ -193,6 +212,19 @@ module Kovid
         end
 
         Terminal::Table.new(headings: COMPARE_STATES_HEADINGS, rows: rows)
+      end
+
+      def compare_provinces(data)
+        rows = data.map do |province|
+          [
+            province['province'].upcase,
+            province['stats']['confirmed'],
+            province['stats']['deaths'],
+            province['stats']['recovered']
+          ]
+        end
+
+        Terminal::Table.new(headings: COMPARE_PROVINCES_HEADINGS, rows: rows)
       end
 
       def cases(cases)

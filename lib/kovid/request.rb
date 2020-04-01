@@ -9,6 +9,7 @@ module Kovid
   class Request
     COUNTRIES_PATH = UriBuilder.new('/countries').url
     STATES_URL = UriBuilder.new('/states').url
+    JHUCSSE_URL = UriBuilder.new('/v2/jhucsse').url
 
     SERVER_DOWN = 'Server overwhelmed. Please try again in a moment.'
 
@@ -81,6 +82,21 @@ module Kovid
         end
       rescue JSON::ParserError
         puts SERVER_DOWN
+      end
+
+      def province(province)
+        response = fetch_province(province)
+        if response.nil?
+          not_found(province)
+        else
+          Kovid::Tablelize.full_province_table(response)
+        end
+      end
+
+      def provinces(names)
+        array = fetch_provinces(names)
+
+        Kovid::Tablelize.compare_provinces(array)
       end
 
       def state(state)
@@ -174,6 +190,21 @@ module Kovid
         country_url = COUNTRIES_PATH + "/#{country_name}"
 
         JSON.parse(Typhoeus.get(country_url, cache_ttl: 900).response_body)
+      end
+
+      def fetch_jhucsse
+        JSON.parse(Typhoeus.get(JHUCSSE_URL, cache_ttl: 900).response_body)
+      end
+
+      def fetch_province(province)
+        response = fetch_jhucsse
+        response.select { |datum| datum['province'] == capitalize_words(province) }.first
+      end
+
+      def fetch_provinces(provinces)
+        provinces.map!(&method(:capitalize_words))
+        response = fetch_jhucsse
+        response.select { |datum| provinces.include? datum['province'] }
       end
 
       def fetch_state(state)
