@@ -42,12 +42,8 @@ Gem::Specification.new do |spec|
       with the novel coronavirus, I think stats on the issue should be
       accessible.
 
-      There isn't much we can do now besides:
-
-      * Washing our hands with soap frequently.
-      * Limiting our movements, how much we touch our faces & social distancing.
-      * Disinfecting our phones, keys, doorknobs, keyboards, etc.
-      * Being there for each other.
+      There isn't much we can do now besides following procedures and hoping
+      for the best.
 
       Stay safe!
       Emmanuel Hayford.
@@ -57,7 +53,7 @@ Gem::Specification.new do |spec|
         * JHU CSSE GISand Data
         * https://www.worldometers.info/coronavirus/
 
-      PS: Please update often, contribute code/ideas, report issues 🙏.
+      PS: I'm in search of a Rails/Ruby job. You can hire me (siawmensah@gmail.com).
     ============================================================================
     }
 end
