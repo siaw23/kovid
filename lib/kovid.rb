@@ -41,7 +41,7 @@ module Kovid
   def province(name)
     Kovid::Request.province(name)
   end
-  
+
   def provinces(names)
     Kovid::Request.provinces(names)
   end
