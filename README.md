@@ -63,7 +63,7 @@ You can compare as many countries as you want; `kovid compare FOO BAR BAZ` OR `k
 🇺🇸🇺🇸🇺🇸
 
 You can compare US states with:
-* `kovid compare STATE STATE` Example: `kovid states illinois "new york" california`
+* `kovid states STATE STATE` Example: `kovid states illinois "new york" california`
 
 You can compare provicnes with:
 * `kovid provinces PROVINCE PROVINCE` Example: `kovid provinces ontario manitoba`
