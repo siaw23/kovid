@@ -2,6 +2,8 @@
 [![Open Source Helpers](https://www.codetriage.com/siaw23/kovid/badges/users.svg)](https://www.codetriage.com/siaw23/kovid)
 
 
+If you're looking to consume this in your Ruby-based application, you might want to check [Sarskov](https://github.com/siaw23/sarskov) out. Sarskov returns statistics in a JSON format.
+
 # 🦠 Kovid
 
 Kovid is a small CLI app to fetch data surrounding the coronavirus pandemic of 2019. I found myself checking [Wikipedia](https://en.wikipedia.org/wiki/2019%E2%80%9320_coronavirus_pandemic) constantly for information so I thought I'd build this to provide info directly in the terminal. It's where some of us spend time more.
