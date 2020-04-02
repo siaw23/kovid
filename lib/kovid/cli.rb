@@ -21,6 +21,7 @@ module Kovid
     desc 'provinces PROVINCE PROVINCE', 'Returns full comparison table for the given provinces. Accepts multiple provinces.'
     def provinces(*names)
       puts Kovid.provinces(names)
+      data_source
     end
 
     desc 'check COUNTRY or check "COUNTRY NAME"', 'Returns reported data on provided country. eg: "kovid check "hong kong".'
@@ -56,6 +57,7 @@ module Kovid
     desc 'states STATE STATE', 'Returns full comparison table for the given states. Accepts multiple states.'
     def states(*states)
       puts Kovid.states(states)
+      data_source
     end
 
     desc 'world', 'Returns total number of cases, deaths and recoveries.'
