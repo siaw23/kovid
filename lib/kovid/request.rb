@@ -229,7 +229,7 @@ module Kovid
 
         data = country_array.inject do |base, other|
           base.merge(other) do |key, left, right|
-            left ||= 0
+            left  ||= 0
             right ||= 0
 
             left + right unless %w[country countryInfo].include?(key)

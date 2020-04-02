@@ -23,14 +23,14 @@ RSpec.describe Kovid do
   end
 
   describe 'provinces(names)' do
-    let(:provinces) { %w(ontario manitoba) }
-    
+    let(:provinces) { %w[ontario manitoba] }
+
     it 'returns table with provinces data' do
       table = Kovid.provinces(provinces)
 
       first_columns = table.rows.map { |row| row.cells.first.value }
-      
-      expect(first_columns).to include("MANITOBA").and include("ONTARIO")
+
+      expect(first_columns).to include('MANITOBA').and include('ONTARIO')
     end
   end
 
