@@ -47,13 +47,15 @@ Gem::Specification.new do |spec|
 
       Stay safe!
       Emmanuel Hayford.
-      https://emmanuelhayford.com/
+      https://emmanuelhayford.com
 
       Data Sources:
         * JHU CSSE GISand Data
-        * https://www.worldometers.info/coronavirus/
+        * https://www.worldometers.info/coronavirus
 
-      PS: I'm in search of a Rails/Ruby job. You can hire me (siawmensah@gmail.com).
+      PS: I'm in search of a Rails/Ruby job.
+
+      You can hire me (siawmensah@gmail.com).
     ============================================================================
     }
 end
