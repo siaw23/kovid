@@ -88,6 +88,13 @@ module Kovid
       FOOTER_LINE = ['------------', '------------', '------------', '------------'].freeze
       COUNTRY_LETTERS = 'A'.upto('Z').with_index(127_462).to_h.freeze
 
+      RIGHT_ALIGN_COLUMNS = {
+        compare_country_table_full: [1, 2, 3, 4, 5, 6, 7],
+        compare_country_table: [1, 2, 3, 4, 5],
+        compare_us_states: [1, 2, 3, 4, 5],
+        compare_provinces: [1, 2, 3]
+      }.freeze
+
       def country_table(data)
         rows = [
           [
@@ -179,7 +186,9 @@ module Kovid
                   end
         end
 
-        Terminal::Table.new(headings: COMPARE_COUNTRIES_TABLE_HEADINGS, rows: rows)
+        align_columns(:compare_country_table,
+                      Terminal::Table.new(headings: COMPARE_COUNTRIES_TABLE_HEADINGS,
+                                          rows: rows))
       end
 
       def compare_countries_table_full(data)
@@ -196,7 +205,9 @@ module Kovid
           ]
         end
 
-        Terminal::Table.new(headings: COMPARE_COUNTRY_TABLE_FULL, rows: rows)
+        align_columns(:compare_country_table_full,
+                      Terminal::Table.new(headings: COMPARE_COUNTRY_TABLE_FULL,
+                                          rows: rows))
       end
 
       def compare_us_states(data)
@@ -211,7 +222,9 @@ module Kovid
           ]
         end
 
-        Terminal::Table.new(headings: COMPARE_STATES_HEADINGS, rows: rows)
+        align_columns(:compare_us_states,
+                      Terminal::Table.new(headings: COMPARE_STATES_HEADINGS,
+                                          rows: rows))
       end
 
       def compare_provinces(data)
@@ -224,7 +237,9 @@ module Kovid
           ]
         end
 
-        Terminal::Table.new(headings: COMPARE_PROVINCES_HEADINGS, rows: rows)
+        align_columns(:compare_provinces,
+                      Terminal::Table.new(headings: COMPARE_PROVINCES_HEADINGS,
+                                          rows: rows))
       end
 
       def cases(cases)
@@ -415,6 +430,15 @@ module Kovid
           headings: CONTINENTAL_AGGREGATE_HEADINGS,
           rows: rows
         )
+      end
+
+      def align_columns(table_type, table)
+        return table unless RIGHT_ALIGN_COLUMNS[table_type]
+
+        RIGHT_ALIGN_COLUMNS[table_type].each do |col_no|
+          table.align_column(col_no, :right)
+        end
+        table
       end
     end
   end
