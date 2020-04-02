@@ -49,10 +49,6 @@ Gem::Specification.new do |spec|
       Emmanuel Hayford.
       https://emmanuelhayford.com
 
-      Data Sources:
-        * JHU CSSE GISand Data
-        * https://www.worldometers.info/coronavirus
-
       PS: I'm in search of a Rails/Ruby job.
 
       You can hire me (siawmensah@gmail.com).
