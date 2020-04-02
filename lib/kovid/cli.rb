@@ -133,12 +133,12 @@ module Kovid
 
     def data_source
       source = <<~TEXT
-        Sources:           #{Time.now}
+        #{Time.now}
+        Sources:
          * JHU CSSE GISand Data
          * https://www.worldometers.info/coronavirus/
       TEXT
       puts source
-      puts
     end
   end
 end
