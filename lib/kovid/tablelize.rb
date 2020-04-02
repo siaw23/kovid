@@ -278,8 +278,7 @@ module Kovid
         end
 
         stats.each_with_index do |val, index|
-          date_to_parse = Date.strptime(dates[index], '%m/%d/%y').to_s
-          val.unshift(Date.parse(date_to_parse).strftime('%d %b, %y'))
+          val.unshift(Kovid.dateman(dates[index]))
         end.each do |row|
           rows << row
         end
