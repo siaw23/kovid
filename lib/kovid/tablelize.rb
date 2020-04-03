@@ -16,10 +16,10 @@ module Kovid
 
       CASES_DEATHS_RECOVERED_CTODAY_DTODAY = [
         'Cases'.paint_white,
-        'Deaths'.paint_red,
-        'Recovered'.paint_green,
         'Cases Today'.paint_white,
-        'Deaths Today'.paint_red
+        'Deaths'.paint_red,
+        'Deaths Today'.paint_red,
+        'Recovered'.paint_green
       ].freeze
 
       DATE_CASES_DEATHS_RECOVERED = [
@@ -99,10 +99,10 @@ module Kovid
         rows = [
           [
             comma_delimit(data['cases']),
-            comma_delimit(data['deaths']),
-            comma_delimit(data['recovered']),
             check_if_positve(data['todayCases']),
-            check_if_positve(data['todayDeaths'])
+            comma_delimit(data['deaths']),
+            check_if_positve(data['todayDeaths']),
+            comma_delimit(data['recovered'])
           ]
         ]
 
