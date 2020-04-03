@@ -39,7 +39,7 @@ Gem::Specification.new do |spec|
 
   spec.post_install_message = "
     ============================================================================
-      COVID-19 has devasted the world. But while we're fighting
+      COVID-19 has devasted the world. While we're fighting
       with the novel coronavirus, I think stats on the issue should be
       accessible.
 
