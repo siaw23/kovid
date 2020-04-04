@@ -56,7 +56,10 @@ module Kovid
 
     desc 'states STATE STATE', 'Returns full comparison table for the given states. Accepts multiple states.'
     def states(*states)
-      puts Kovid.states(states)
+      # This ensures this command is case insensitive.
+      downcased_states = states.map(&:downcase)
+
+      puts Kovid.states(downcased_states)
       data_source
     end
 

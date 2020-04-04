@@ -117,10 +117,10 @@ module Kovid
         puts SERVER_DOWN
       end
 
-      def states(list)
-        array = fetch_states(list)
+      def states(states)
+        compared_states = fetch_compared_states(states)
 
-        Kovid::Tablelize.compare_us_states(array)
+        Kovid::Tablelize.compare_us_states(compared_states)
       rescue JSON::ParserError
         puts SERVER_DOWN
       end
@@ -191,13 +191,10 @@ module Kovid
         array = array.sort_by { |json| -json['cases'] }
       end
 
-      def fetch_states(list)
-        states_json = JSON.parse(Typhoeus.get(STATES_URL, cache_ttl: 900).response_body)
-        states_array = []
+      def fetch_compared_states(submitted_states)
+        state_data = fetch_state_data
 
-        states_json.select do |state|
-          states_array << state if list.include?(state['state'].downcase)
-        end
+        state_data.select { |state| submitted_states.include?(state['state'].downcase) }
       end
 
       def fetch_state_data
