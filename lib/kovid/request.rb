@@ -125,6 +125,13 @@ module Kovid
         puts SERVER_DOWN
       end
 
+      def all_us_states
+        state_data = fetch_state_data
+        Kovid::Tablelize.compare_us_states(state_data)
+      rescue JSON::ParserError
+        puts SERVER_DOWN
+      end
+
       def by_country_comparison(list)
         array = fetch_countries(list)
         Kovid::Tablelize.compare_countries_table(array)
@@ -191,6 +198,10 @@ module Kovid
         states_json.select do |state|
           states_array << state if list.include?(state['state'].downcase)
         end
+      end
+
+      def fetch_state_data
+        JSON.parse(Typhoeus.get(STATES_URL, cache_ttl: 900).response_body)
       end
 
       def fetch_country(country_name)

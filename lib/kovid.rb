@@ -54,6 +54,10 @@ module Kovid
     Kovid::Request.states(states)
   end
 
+  def all_us_states
+    Kovid::Request.all_us_states
+  end
+
   def country_comparison(names_array)
     Kovid::Request.by_country_comparison(names_array)
   end

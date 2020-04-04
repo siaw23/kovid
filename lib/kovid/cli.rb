@@ -60,6 +60,12 @@ module Kovid
       data_source
     end
 
+    desc 'all_us_states', 'Returns full comparison table for all US states'
+    def all_us_states
+      puts Kovid.all_us_states
+      data_source
+    end
+
     desc 'world', 'Returns total number of cases, deaths and recoveries.'
     def world
       puts Kovid.cases
