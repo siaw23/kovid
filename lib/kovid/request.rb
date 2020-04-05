@@ -182,23 +182,15 @@ module Kovid
       end
 
       def fetch_countries(list)
-        array = []
-
-        list.each do |country|
-          array << JSON.parse(Typhoeus.get(COUNTRIES_PATH + "/#{country}", cache_ttl: 900).response_body)
-        end
-
-        array = array.sort_by { |json| -json['cases'] }
+        list.map do |country|
+          JSON.parse(Typhoeus.get(COUNTRIES_PATH + "/#{country}", cache_ttl: 900).response_body)
+        end.sort_by { |json| -json['cases'] }
       end
 
       def fetch_compared_states(submitted_states)
         state_data = fetch_state_data
 
         state_data.select { |state| submitted_states.include?(state['state'].downcase) }
-      end
-
-      def fetch_state_data
-        JSON.parse(Typhoeus.get(STATES_URL, cache_ttl: 900).response_body)
       end
 
       def fetch_country(country_name)
