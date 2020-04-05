@@ -56,9 +56,19 @@ module Kovid
 
     desc 'states STATE STATE', 'Returns full comparison table for the given states. Accepts multiple states.'
     def states(*states)
-      puts Kovid.states(states)
+      # This ensures this command is case insensitive.
+      downcased_states = states.map(&:downcase)
+
+      puts Kovid.states(downcased_states)
       data_source
     end
+
+    desc 'all_us_states', 'Returns full comparison table for all US states'
+    def all_us_states
+      puts Kovid.all_us_states
+      data_source
+    end
+    map aus: :all_us_states
 
     desc 'world', 'Returns total number of cases, deaths and recoveries.'
     def world

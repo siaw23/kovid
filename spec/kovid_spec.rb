@@ -116,6 +116,18 @@ RSpec.describe Kovid do
     end
   end
 
+  describe 'all_us_states' do
+    before do
+      allow(Kovid::Request).to receive(:all_us_states)
+    end
+
+    it 'calls all_us_states on Kovid::Request' do
+      Kovid.all_us_states
+
+      expect(Kovid::Request).to have_received(:all_us_states)
+    end
+  end
+
   describe 'history' do
     it 'returns history of given location' do
       table = Kovid.history('ghana', '7')
