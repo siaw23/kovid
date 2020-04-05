@@ -193,6 +193,10 @@ module Kovid
         state_data.select { |state| submitted_states.include?(state['state'].downcase) }
       end
 
+      def fetch_state_data
+        JSON.parse(Typhoeus.get(STATES_URL, cache_ttl: 900).response_body)
+      end
+
       def fetch_country(country_name)
         country_url = COUNTRIES_PATH + "/#{country_name}"
 
