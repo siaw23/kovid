@@ -211,15 +211,26 @@ module Kovid
       end
 
       def compare_us_states(data)
-        rows = data.map do |state|
-          [
-            state.fetch('state').upcase,
-            comma_delimit(state.fetch('cases')),
-            check_if_positve(state['todayCases']),
-            comma_delimit(state['deaths']),
-            check_if_positve(state['todayDeaths']),
-            comma_delimit(state.fetch('active'))
-          ]
+        rows = data.map.with_index do |state, index|
+          if index.odd?
+            [
+              state.fetch('state').upcase,
+              comma_delimit(state.fetch('cases')),
+              check_if_positve(state['todayCases']),
+              comma_delimit(state['deaths']),
+              check_if_positve(state['todayDeaths']),
+              comma_delimit(state.fetch('active'))
+            ]
+          else
+            [
+              state.fetch('state').upcase.paint_highlight,
+              comma_delimit(state.fetch('cases')).paint_highlight,
+              check_if_positve(state['todayCases']).paint_highlight,
+              comma_delimit(state['deaths']).paint_highlight,
+              check_if_positve(state['todayDeaths']).paint_highlight,
+              comma_delimit(state.fetch('active')).paint_highlight
+            ]
+          end
         end
 
         align_columns(:compare_us_states,
