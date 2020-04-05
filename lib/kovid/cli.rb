@@ -68,6 +68,7 @@ module Kovid
       puts Kovid.all_us_states
       data_source
     end
+    map aus: :all_us_states
 
     desc 'world', 'Returns total number of cases, deaths and recoveries.'
     def world

@@ -44,7 +44,7 @@ You can get continental information with the following commands:
 
 You can fetch US state-specific data:
 * `kovid state STATE` OR `kovid state "STATE NAME"`.
-* `kovid all_us_states`.
+* `kovid aus` for data on all US states.
 
 Provinces
 
