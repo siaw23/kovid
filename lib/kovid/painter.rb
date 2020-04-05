@@ -18,4 +18,8 @@ class String
   def paint_yellow
     Rainbow(self).yellow.bg(:black).bold
   end
+
+  def paint_highlight
+    Rainbow(self).underline
+  end
 end
