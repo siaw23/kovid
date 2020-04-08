@@ -33,6 +33,7 @@ Metrics/ClassLength:
   Max: 209
   Exclude:
     - 'lib/kovid/request.rb'
+    - 'lib/kovid/tablelize.rb'
 
 # Offense count: 10
 # Configuration parameters: CountComments, ExcludedMethods.

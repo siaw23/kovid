@@ -27,7 +27,8 @@ module Kovid
         ]
 
         if (iso = data['countryInfo']['iso2'])
-          Terminal::Table.new(title: "#{country_emoji(iso)} #{data['country'].upcase}",
+          title = "#{country_emoji(iso)} #{data['country'].upcase}"
+          Terminal::Table.new(title: title,
                               headings: CASES_DEATHS_RECOVERED_CTODAY_DTODAY,
                               rows: rows)
         else
@@ -50,7 +51,8 @@ module Kovid
         ]
 
         if (iso = data['countryInfo']['iso2'])
-          Terminal::Table.new(title: "#{country_emoji(iso)} #{data['country'].upcase}",
+          title = "#{country_emoji(iso)} #{data['country'].upcase}"
+          Terminal::Table.new(title: title,
                               headings: FULL_COUNTRY_TABLE_HEADINGS,
                               rows: rows)
         else
@@ -67,9 +69,15 @@ module Kovid
           'Recovered'.paint_green
         ]
         rows = []
-        rows << [province['stats']['confirmed'], province['stats']['deaths'], province['stats']['recovered']]
+        rows << [
+          province['stats']['confirmed'],
+          province['stats']['deaths'],
+          province['stats']['recovered']
+        ]
 
-        Terminal::Table.new(title: province['province'].upcase, headings: headings, rows: rows)
+        Terminal::Table.new(
+          title: province['province'].upcase, headings: headings, rows: rows
+        )
       end
 
       def full_state_table(state)
@@ -90,7 +98,9 @@ module Kovid
           comma_delimit(state['active'])
         ]
 
-        Terminal::Table.new(title: state['state'].upcase, headings: headings, rows: rows)
+        Terminal::Table.new(
+          title: state['state'].upcase, headings: headings, rows: rows
+        )
       end
 
       def compare_countries_table(data)
@@ -106,15 +116,20 @@ module Kovid
           ]
 
           rows << if (iso = country['countryInfo']['iso2'])
-                    base_rows.unshift("#{country_emoji(iso)} #{country['country'].upcase}")
+                    c_col = "#{country_emoji(iso)} #{country['country'].upcase}"
+                    base_rows.unshift(c_col)
                   else
                     base_rows.unshift(country['country'].upcase.to_s)
                   end
         end
 
-        align_columns(:compare_country_table,
-                      Terminal::Table.new(headings: COMPARE_COUNTRIES_TABLE_HEADINGS,
-                                          rows: rows))
+        align_columns(
+          :compare_country_table,
+          Terminal::Table.new(
+            headings: COMPARE_COUNTRIES_TABLE_HEADINGS,
+            rows: rows
+          )
+        )
       end
 
       def compare_countries_table_full(data)
@@ -189,7 +204,11 @@ module Kovid
           ]
         ]
 
-        Terminal::Table.new(title: '🌍 Total Number of Incidents Worldwide'.upcase, headings: headings, rows: rows)
+        Terminal::Table.new(
+          title: '🌍 Total Number of Incidents Worldwide'.upcase,
+          headings: headings,
+          rows: rows
+        )
       end
 
       private
@@ -222,12 +241,12 @@ module Kovid
       end
 
       def aggregated_table(collated_data, continent, iso, emoji)
+        aggregated_data_continent = ' Aggregated Data on ' \
+                                    "#{continent} (#{iso.size} States)".upcase
         title = if emoji.codepoints.size > 1
-                  emoji + 8203.chr(Encoding::UTF_8) + \
-                    " Aggregated Data on #{continent} (#{iso.size} States)".upcase
+                  emoji + 8203.chr(Encoding::UTF_8) + aggregated_data_continent
                 else
-                  emoji + \
-                    " Aggregated Data on #{continent} (#{iso.size} States)".upcase
+                  emoji + aggregated_data_continent
                 end
 
         rows = []
