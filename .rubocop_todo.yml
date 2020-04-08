@@ -31,6 +31,8 @@ Metrics/BlockLength:
 # Configuration parameters: CountComments.
 Metrics/ClassLength:
   Max: 209
+  Exclude:
+    - 'lib/kovid/request.rb'
 
 # Offense count: 10
 # Configuration parameters: CountComments, ExcludedMethods.

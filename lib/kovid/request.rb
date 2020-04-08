@@ -18,13 +18,15 @@ module Kovid
     EUROPE_ISOS = EU_ISOS + %w[GB IS NO CH MC AD SM VA BA RS ME MK AL \
                                BY UA RU MD].freeze
     AFRICA_ISOS = %w[DZ AO BJ BW BF BI CM CV CF TD KM CD CG CI DJ EG \
-                     GQ ER SZ ET GA GM GH GN GW KE LS LR LY MG MW ML MR MU MA MZ NA NE \
-                     NG RW ST SN SC SL SO ZA SS SD TZ TG TN UG ZM ZW EH].freeze
+                     GQ ER SZ ET GA GM GH GN GW KE LS LR LY MG MW ML \
+                     MR MU MA MZ NA NE NG RW ST SN SC SL SO ZA SS SD \
+                     TZ TG TN UG ZM ZW EH].freeze
     SOUTH_AMERICA_ISOS = %w[AR BO BV BR CL CO EC FK GF GY PY PE GS SR \
                             UY VE].freeze
     ASIA_ISOS = %w[AE AF AM AZ BD BH BN BT CC CN CX GE HK ID IL IN \
-                   IQ IR JO JP KG KH KP KR KW KZ LA LB LK MM MN MO MY NP OM PH PK \
-                   PS QA SA SG SY TH TJ TL TM TR TW UZ VN YE].freeze
+                   IQ IR JO JP KG KH KP KR KW KZ LA LB LK MM MN MO \
+                   MY NP OM PH PK PS QA SA SG SY TH TJ TL TM TR TW \
+                   UZ VN YE].freeze
 
     class << self
       def eu_aggregate
@@ -147,7 +149,9 @@ module Kovid
       end
 
       def cases
-        response = JSON.parse(Typhoeus.get(UriBuilder.new('/all').url, cache_ttl: 900).response_body)
+        response = JSON.parse(
+          Typhoeus.get(UriBuilder.new('/all').url, cache_ttl: 900).response_body
+        )
 
         Kovid::Tablelize.cases(response)
       rescue JSON::ParserError
@@ -156,7 +160,11 @@ module Kovid
 
       def history(country, last)
         history_path = UriBuilder.new('/v2/historical').url
-        response = JSON.parse(Typhoeus.get(history_path + "/#{country}", cache_ttl: 900).response_body)
+        response = JSON.parse(
+          Typhoeus.get(
+            history_path + "/#{country}", cache_ttl: 900
+          ).response_body
+        )
 
         Kovid::Tablelize.history(response, last)
       rescue JSON::ParserError
@@ -165,7 +173,11 @@ module Kovid
 
       def histogram(country, date)
         history_path = UriBuilder.new('/v2/historical').url
-        response = JSON.parse(Typhoeus.get(history_path + "/#{country}", cache_ttl: 900).response_body)
+        response = JSON.parse(
+          Typhoeus.get(
+            history_path + "/#{country}", cache_ttl: 900
+          ).response_body
+        )
 
         Kovid::Tablelize.histogram(response, date)
       end
@@ -183,14 +195,20 @@ module Kovid
 
       def fetch_countries(list)
         list.map do |country|
-          JSON.parse(Typhoeus.get(COUNTRIES_PATH + "/#{country}", cache_ttl: 900).response_body)
+          JSON.parse(
+            Typhoeus.get(
+              COUNTRIES_PATH + "/#{country}", cache_ttl: 900
+            ).response_body
+          )
         end.sort_by { |json| -json['cases'] }
       end
 
       def fetch_compared_states(submitted_states)
         state_data = fetch_state_data
 
-        state_data.select { |state| submitted_states.include?(state['state'].downcase) }
+        state_data.select do |state|
+          submitted_states.include?(state['state'].downcase)
+        end
       end
 
       def fetch_state_data
@@ -209,7 +227,9 @@ module Kovid
 
       def fetch_province(province)
         response = fetch_jhucsse
-        response.select { |datum| datum['province'] == capitalize_words(province) }.first
+        response.select do |datum|
+          datum['province'] == capitalize_words(province)
+        end.first
       end
 
       def fetch_provinces(provinces)
@@ -219,13 +239,21 @@ module Kovid
       end
 
       def fetch_state(state)
-        states_array = JSON.parse(Typhoeus.get(STATES_URL, cache_ttl: 900).response_body)
+        states_array = JSON.parse(
+          Typhoeus.get(STATES_URL, cache_ttl: 900).response_body
+        )
 
-        states_array.select { |state_name| state_name['state'] == capitalize_words(state) }.first
+        states_array.select do |state_name|
+          state_name['state'] == capitalize_words(state)
+        end.first
       end
 
       def aggregator(isos, meth)
-        countries_array = JSON.parse(Typhoeus.get(UriBuilder.new('/countries').url, cache_ttl: 900).response_body)
+        countries_array = JSON.parse(
+          Typhoeus.get(
+            UriBuilder.new('/countries').url, cache_ttl: 900
+          ).response_body
+        )
 
         country_array = countries_array.select do |hash|
           isos.include?(hash['countryInfo']['iso2'])
