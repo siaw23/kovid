@@ -49,7 +49,7 @@ module Kovid
           comma_delimit(data['casesPerOneMillion'])
         ]
 
-        if iso = data['countryInfo']['iso2']
+        if (iso = data['countryInfo']['iso2'])
           Terminal::Table.new(title: "#{country_emoji(iso)} #{data['country'].upcase}",
                               headings: FULL_COUNTRY_TABLE_HEADINGS,
                               rows: rows)

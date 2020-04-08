@@ -7,20 +7,9 @@
 # versions of RuboCop, may require this file to be generated again.
 
 # Offense count: 1
-# Configuration parameters: AllowSafeAssignment.
-Lint/AssignmentInCondition:
-  Exclude:
-    - 'lib/kovid/tablelize.rb'
-
-# Offense count: 1
 Lint/DuplicateMethods:
   Exclude:
     - 'lib/kovid/cli.rb'
-
-# Offense count: 1
-Lint/ImplicitStringConcatenation:
-  Exclude:
-    - 'lib/kovid/request.rb'
 
 # Offense count: 1
 # Configuration parameters: MaximumRangeSize.
