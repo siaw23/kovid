@@ -5,8 +5,6 @@ require 'kovid'
 
 module Kovid
   class CLI < Thor
-    FULL_FLAG = %w[-f --full].freeze
-
     def self.exit_on_failure?
       true
     end
@@ -26,31 +24,27 @@ module Kovid
 
     desc 'check COUNTRY or check "COUNTRY NAME"', 'Returns reported data on provided country. eg: "kovid check "hong kong".'
     method_option :full, aliases: '-f'
-    def check(name)
-      fetch_country_stats(name)
+    def check(*name)
+      if name.size == 1
+        fetch_country_stats(name.pop)
+      elsif options[:full]
+        puts Kovid.country_comparison_full(name)
+      else
+        puts Kovid.country_comparison(name)
+      end
       data_source
     end
+    map country: :check
 
-    desc 'country COUNTRY or country "COUNTRY NAME"', 'Returns reported data on provided country. eg: "kovid country "hong kong".'
-    method_option :full, aliases: '-f'
-    def country(name)
-      fetch_country_stats(name)
-      data_source
+    desc 'compare COUNTRY COUNTRY', 'Deprecated. Will be removed in v7.0.0'
+    def compare(*_name)
+      Kovid.info_table("#compare is deprecated and will be removed in v7.0.0. \
+         \nPlease do `kovid check COUNTRY COUNTRY ...` instead.")
     end
 
     desc 'state STATE', 'Return reported data on provided state.'
     def state(state)
       puts Kovid.state(state)
-      data_source
-    end
-
-    desc 'compare COUNTRY COUNTRY', 'Returns full comparison table for given countries. Accepts multiple countries.'
-    def compare(*name)
-      if FULL_FLAG.include?(name.fetch(-1))
-        puts Kovid.country_comparison_full(name[0..-2])
-      else
-        puts Kovid.country_comparison(name)
-      end
       data_source
     end
 

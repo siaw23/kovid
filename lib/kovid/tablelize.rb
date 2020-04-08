@@ -82,7 +82,13 @@ module Kovid
         ]
 
         rows = []
-        rows << [state['cases'], check_if_positve(state['todayCases']), state['deaths'], check_if_positve(state['todayDeaths']), state['active']]
+        rows << [
+          comma_delimit(state['cases']),
+          check_if_positve(state['todayCases']),
+          comma_delimit(state['deaths']),
+          check_if_positve(state['todayDeaths']),
+          comma_delimit(state['active'])
+        ]
 
         Terminal::Table.new(title: state['state'].upcase, headings: headings, rows: rows)
       end
