@@ -22,10 +22,10 @@ Metrics/AbcSize:
   Max: 56
 
 # Offense count: 1
-# Configuration parameters: CountComments, ExcludedMethods.
-# ExcludedMethods: refine
 Metrics/BlockLength:
-  Max: 103
+  Exclude:
+    - 'kovid.gemspec'
+    - 'spec/kovid_spec.rb'
 
 # Offense count: 3
 # Configuration parameters: CountComments.
@@ -67,9 +67,3 @@ Style/MultilineBlockChain:
   Exclude:
     - 'lib/kovid/historians.rb'
     - 'lib/kovid/request.rb'
-
-# Offense count: 41
-# Configuration parameters: AllowHeredoc, AllowURI, URISchemes, IgnoreCopDirectives, IgnoredPatterns.
-# URISchemes: http, https
-Metrics/LineLength:
-  Max: 145

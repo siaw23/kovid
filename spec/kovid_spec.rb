@@ -16,9 +16,10 @@ RSpec.describe Kovid do
 
     it 'outputs message informing of wrong spelling or no reported case.' do
       table = Kovid.province(inexistent_province)
-      not_found = "Wrong spelling/No reported cases on #{inexistent_province.upcase}."
 
-      expect(table.rows.first.cells.first.value).to eq(not_found)
+      expect(table.rows.first.cells.first.value).to eq(
+        "Wrong spelling/No reported cases on #{inexistent_province.upcase}."
+      )
     end
   end
 
@@ -45,9 +46,10 @@ RSpec.describe Kovid do
 
     it 'outputs message informing of wrong spelling or no reported case.' do
       table = Kovid.country(inexistent_country)
-      not_found = "Wrong spelling/No reported cases on #{inexistent_country.upcase}."
 
-      expect(table.rows.first.cells.first.value).to eq(not_found)
+      expect(table.rows.first.cells.first.value).to eq(
+        "Wrong spelling/No reported cases on #{inexistent_country.upcase}."
+      )
     end
   end
 
@@ -63,9 +65,10 @@ RSpec.describe Kovid do
 
     it 'outputs message informing of wrong spelling or no reported case.' do
       table = Kovid.country_full(inexistent_country)
-      not_found = "Wrong spelling/No reported cases on #{inexistent_country.upcase}."
 
-      expect(table.rows.first.cells.first.value).to eq(not_found)
+      expect(table.rows.first.cells.first.value).to eq(
+        "Wrong spelling/No reported cases on #{inexistent_country.upcase}."
+      )
     end
   end
 
