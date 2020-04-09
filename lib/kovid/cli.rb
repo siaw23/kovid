@@ -48,18 +48,16 @@ module Kovid
       data_source
     end
 
-    desc 'states STATE STATE', 'Returns full comparison table for the given states. Accepts multiple states.'
-    def states(*states)
-      downcased_states = states.map(&:downcase)
-
-      puts Kovid.states(downcased_states)
-      data_source
-    end
-
-    desc 'states -a', 'Returns full comparison table for all US states'
+    desc 'states STATE STATE or states --all', 'Returns full comparison table for the given states. Accepts multiple states.'
     method_option :all, aliases: '-a'
-    def states
-      puts Kovid.all_us_states
+    def states(*states)
+      if options[:all]
+        puts Kovid.all_us_states
+      else
+        downcased_states = states.map(&:downcase)
+        puts Kovid.states(downcased_states)
+      end
+
       data_source
     end
 
