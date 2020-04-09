@@ -39,6 +39,8 @@ Metrics/ClassLength:
 # Configuration parameters: CountComments, ExcludedMethods.
 Metrics/MethodLength:
   Max: 39
+  Exclude:
+    - 'lib/kovid/historians.rb'
 
 # Offense count: 1
 Metrics/PerceivedComplexity:

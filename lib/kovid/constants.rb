@@ -79,7 +79,13 @@ module Kovid
       'Recovered'.paint_green
     ].freeze
 
-    FOOTER_LINE = ['------------', '------------', '------------', '------------'].freeze
+    FOOTER_LINE = [
+      '------------',
+      '------------',
+      '------------',
+      '------------'
+    ].freeze
+
     COUNTRY_LETTERS = 'A'.upto('Z').with_index(127_462).to_h.freeze
 
     RIGHT_ALIGN_COLUMNS = {
