@@ -69,26 +69,24 @@ module Kovid
 
       def by_country(country_name)
         response = fetch_country(country_name)
-        Kovid::Tablelize.country_table(response)
 
-        # if response.values.first.include?('not found')
-        #   not_found(country_name)
-        # else
-        #   Kovid::Tablelize.country_table(response)
-        # end
+        if response.key?('message')
+          not_found(country_name)
+        else
+          Kovid::Tablelize.country_table(response)
+        end
       rescue JSON::ParserError
         puts SERVER_DOWN
       end
 
       def by_country_full(country_name)
         response = fetch_country(country_name)
-        Kovid::Tablelize.full_country_table(response)
 
-        # if response.values.first.include?('not found')
-        #   not_found(country_name)
-        # else
-        #   Kovid::Tablelize.full_country_table(response)
-        # end
+        if response.key?('message')
+          not_found(country_name)
+        else
+          Kovid::Tablelize.full_country_table(response)
+        end
       rescue JSON::ParserError
         puts SERVER_DOWN
       end

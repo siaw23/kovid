@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    kovid (0.6.2)
+    kovid (0.6.3)
       ascii_charts (~> 0.9.1)
       rainbow (~> 3.0)
       terminal-table (~> 1.8)
