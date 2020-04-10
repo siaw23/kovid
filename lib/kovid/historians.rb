@@ -10,9 +10,9 @@ module Kovid
       rows = []
 
       stats = if last
-                transpose(country).last(last.to_i)
+                Kovid.format_country_history_numbers(country).last(last.to_i)
               else
-                transpose(country)
+                Kovid.format_country_history_numbers(country)
               end
 
       dates = if last

@@ -18,11 +18,11 @@ module Kovid
       def country_table(data)
         rows = [
           [
-            comma_delimit(data['cases']),
-            check_if_positve(data['todayCases']),
-            comma_delimit(data['deaths']),
-            check_if_positve(data['todayDeaths']),
-            comma_delimit(data['recovered'])
+            Kovid.comma_delimit(data['cases']),
+            Kovid.add_plus_sign(data['todayCases']),
+            Kovid.comma_delimit(data['deaths']),
+            Kovid.add_plus_sign(data['todayDeaths']),
+            Kovid.comma_delimit(data['recovered'])
           ]
         ]
 
@@ -41,13 +41,13 @@ module Kovid
       def full_country_table(data)
         rows = []
         rows << [
-          comma_delimit(data['cases']),
-          comma_delimit(data['deaths']),
-          comma_delimit(data['recovered']),
-          check_if_positve(data['todayCases']),
-          check_if_positve(data['todayDeaths']),
-          comma_delimit(data['critical']),
-          comma_delimit(data['casesPerOneMillion'])
+          Kovid.comma_delimit(data['cases']),
+          Kovid.comma_delimit(data['deaths']),
+          Kovid.comma_delimit(data['recovered']),
+          Kovid.add_plus_sign(data['todayCases']),
+          Kovid.add_plus_sign(data['todayDeaths']),
+          Kovid.comma_delimit(data['critical']),
+          Kovid.comma_delimit(data['casesPerOneMillion'])
         ]
 
         if (iso = data['countryInfo']['iso2'])
@@ -91,11 +91,11 @@ module Kovid
 
         rows = []
         rows << [
-          comma_delimit(state['cases']),
-          check_if_positve(state['todayCases']),
-          comma_delimit(state['deaths']),
-          check_if_positve(state['todayDeaths']),
-          comma_delimit(state['active'])
+          Kovid.comma_delimit(state['cases']),
+          Kovid.add_plus_sign(state['todayCases']),
+          Kovid.comma_delimit(state['deaths']),
+          Kovid.add_plus_sign(state['todayDeaths']),
+          Kovid.comma_delimit(state['active'])
         ]
 
         Terminal::Table.new(
@@ -108,11 +108,11 @@ module Kovid
 
         data.each do |country|
           base_rows = [
-            comma_delimit(country['cases']),
-            check_if_positve(country['todayCases']),
-            comma_delimit(country['deaths']),
-            check_if_positve(country['todayDeaths']),
-            comma_delimit(country['recovered'])
+            Kovid.comma_delimit(country['cases']),
+            Kovid.add_plus_sign(country['todayCases']),
+            Kovid.comma_delimit(country['deaths']),
+            Kovid.add_plus_sign(country['todayDeaths']),
+            Kovid.comma_delimit(country['recovered'])
           ]
 
           rows << if (iso = country['countryInfo']['iso2'])
@@ -136,13 +136,13 @@ module Kovid
         rows = data.map do |country|
           [
             country.fetch('country'),
-            comma_delimit(country.fetch('cases')),
-            comma_delimit(country.fetch('deaths')),
-            comma_delimit(country.fetch('recovered')),
-            check_if_positve(country.fetch('todayCases')),
-            check_if_positve(country.fetch('todayDeaths')),
-            comma_delimit(country.fetch('critical')),
-            comma_delimit(country.fetch('casesPerOneMillion'))
+            Kovid.comma_delimit(country.fetch('cases')),
+            Kovid.comma_delimit(country.fetch('deaths')),
+            Kovid.comma_delimit(country.fetch('recovered')),
+            Kovid.add_plus_sign(country.fetch('todayCases')),
+            Kovid.add_plus_sign(country.fetch('todayDeaths')),
+            Kovid.comma_delimit(country.fetch('critical')),
+            Kovid.comma_delimit(country.fetch('casesPerOneMillion'))
           ]
         end
 
@@ -156,20 +156,20 @@ module Kovid
           if index.odd?
             [
               state.fetch('state').upcase,
-              comma_delimit(state.fetch('cases')),
-              check_if_positve(state['todayCases']),
-              comma_delimit(state['deaths']),
-              check_if_positve(state['todayDeaths']),
-              comma_delimit(state.fetch('active'))
+              Kovid.comma_delimit(state.fetch('cases')),
+              Kovid.add_plus_sign(state['todayCases']),
+              Kovid.comma_delimit(state['deaths']),
+              Kovid.add_plus_sign(state['todayDeaths']),
+              Kovid.comma_delimit(state.fetch('active'))
             ]
           else
             [
               state.fetch('state').upcase.paint_highlight,
-              comma_delimit(state.fetch('cases')).paint_highlight,
-              check_if_positve(state['todayCases']).paint_highlight,
-              comma_delimit(state['deaths']).paint_highlight,
-              check_if_positve(state['todayDeaths']).paint_highlight,
-              comma_delimit(state.fetch('active')).paint_highlight
+              Kovid.comma_delimit(state.fetch('cases')).paint_highlight,
+              Kovid.add_plus_sign(state['todayCases']).paint_highlight,
+              Kovid.comma_delimit(state['deaths']).paint_highlight,
+              Kovid.add_plus_sign(state['todayDeaths']).paint_highlight,
+              Kovid.comma_delimit(state.fetch('active')).paint_highlight
             ]
           end
         end
@@ -198,9 +198,9 @@ module Kovid
         headings = CASES_DEATHS_RECOVERED
         rows = [
           [
-            comma_delimit(cases['cases']),
-            comma_delimit(cases['deaths']),
-            comma_delimit(cases['recovered'])
+            Kovid.comma_delimit(cases['cases']),
+            Kovid.comma_delimit(cases['deaths']),
+            Kovid.comma_delimit(cases['recovered'])
           ]
         ]
 
@@ -213,26 +213,9 @@ module Kovid
 
       private
 
-      def comma_delimit(number)
-        number.to_s.chars.to_a.reverse.each_slice(3)
-              .map(&:join)
-              .join(',')
-              .reverse
-      end
-
-      def check_if_positve(num)
-        num.to_i.positive? ? "+#{comma_delimit(num)}" : comma_delimit(num).to_s
-      end
-
       def country_emoji(iso)
         COUNTRY_LETTERS.values_at(*iso.chars).pack('U*') + \
           8203.chr(Encoding::UTF_8)
-      end
-
-      def transpose(load)
-        load['timeline'].values.map(&:values).transpose.each do |data|
-          data.map! { |number| comma_delimit(number) }
-        end
       end
 
       def scale(msg)
@@ -251,13 +234,13 @@ module Kovid
 
         rows = []
         rows << [
-          comma_delimit(collated_data['cases']),
-          check_if_positve(collated_data['todayCases']),
-          comma_delimit(collated_data['deaths']),
-          check_if_positve(collated_data['todayDeaths']),
-          comma_delimit(collated_data['recovered']),
-          comma_delimit(collated_data['active']),
-          comma_delimit(collated_data['critical'])
+          Kovid.comma_delimit(collated_data['cases']),
+          Kovid.add_plus_sign(collated_data['todayCases']),
+          Kovid.comma_delimit(collated_data['deaths']),
+          Kovid.add_plus_sign(collated_data['todayDeaths']),
+          Kovid.comma_delimit(collated_data['recovered']),
+          Kovid.comma_delimit(collated_data['active']),
+          Kovid.comma_delimit(collated_data['critical'])
         ]
 
         Terminal::Table.new(
