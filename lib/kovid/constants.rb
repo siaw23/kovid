@@ -63,6 +63,20 @@ module Kovid
       'Cases/Million'.paint_white
     ].freeze
 
+    FULL_PROVINCE_TABLE_HEADINGS = [
+      'Confirmed'.paint_white,
+      'Deaths'.paint_red,
+      'Recovered'.paint_green
+    ].freeze
+
+    FULL_STATE_TABLE_HEADINGS = [
+      'Cases'.paint_white,
+      'Cases Today'.paint_white,
+      'Deaths'.paint_red,
+      'Deaths Today'.paint_red,
+      'Active'.paint_yellow
+    ].freeze
+
     COMPARE_STATES_HEADINGS = [
       'State'.paint_white,
       'Cases'.paint_white,

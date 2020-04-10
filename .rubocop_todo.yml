@@ -7,19 +7,14 @@
 # versions of RuboCop, may require this file to be generated again.
 
 # Offense count: 1
-Lint/DuplicateMethods:
-  Exclude:
-    - 'lib/kovid/cli.rb'
-
-# Offense count: 1
 # Configuration parameters: MaximumRangeSize.
 Lint/MissingCopEnableDirective:
   Exclude:
     - 'Rakefile'
 
-# Offense count: 10
+# Offense count: 3
 Metrics/AbcSize:
-  Max: 56
+  Max: 54
 
 # Offense count: 1
 Metrics/BlockLength:
@@ -35,12 +30,13 @@ Metrics/ClassLength:
     - 'lib/kovid/request.rb'
     - 'lib/kovid/tablelize.rb'
 
-# Offense count: 10
+# Offense count: 3
 # Configuration parameters: CountComments, ExcludedMethods.
 Metrics/MethodLength:
-  Max: 39
+  Max: 44
   Exclude:
     - 'lib/kovid/historians.rb'
+    - 'lib/kovid/request.rb'
 
 # Offense count: 1
 Metrics/PerceivedComplexity:

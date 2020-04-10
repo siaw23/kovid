@@ -37,11 +37,18 @@ RSpec.describe Kovid do
 
   describe 'country(name)' do
     let(:country) { 'ghana' }
+    let(:inexistent_iso) { 'diamond princess' }
     let(:inexistent_country) { 'wonderland' }
     it 'returns table with country data' do
       table = Kovid.country(country)
 
       expect(table.title).to include('GHANA')
+    end
+
+    it 'returns table title with inexistent iso' do
+      table = Kovid.country(inexistent_iso)
+
+      expect(table.title).to eq('DIAMOND PRINCESS')
     end
 
     it 'outputs message informing of wrong spelling or no reported case.' do
@@ -55,12 +62,19 @@ RSpec.describe Kovid do
 
   describe 'country_full(name)' do
     let(:country) { 'italy' }
+    let(:inexistent_iso) { 'diamond princess' }
     let(:inexistent_country) { 'wonderland' }
 
     it 'returns table with country data' do
       table = Kovid.country_full(country)
 
       expect(table.title).to include('ITALY')
+    end
+
+    it 'returns table title with inexistent iso' do
+      table = Kovid.country(inexistent_iso)
+
+      expect(table.title).to eq('DIAMOND PRINCESS')
     end
 
     it 'outputs message informing of wrong spelling or no reported case.' do

@@ -16,90 +16,30 @@ module Kovid
 
     class << self
       def country_table(data)
-        rows = [
-          [
-            Kovid.comma_delimit(data['cases']),
-            Kovid.add_plus_sign(data['todayCases']),
-            Kovid.comma_delimit(data['deaths']),
-            Kovid.add_plus_sign(data['todayDeaths']),
-            Kovid.comma_delimit(data['recovered'])
-          ]
-        ]
-
-        if (iso = data['countryInfo']['iso2'])
-          title = "#{country_emoji(iso)} #{data['country'].upcase}"
-          Terminal::Table.new(title: title,
-                              headings: CASES_DEATHS_RECOVERED_CTODAY_DTODAY,
-                              rows: rows)
-        else
-          Terminal::Table.new(title: data['country'].upcase,
-                              headings: CASES_DEATHS_RECOVERED_CTODAY_DTODAY,
-                              rows: rows)
-        end
+        Terminal::Table.new(title: country_title(data),
+                            headings: CASES_DEATHS_RECOVERED_CTODAY_DTODAY,
+                            rows: [country_row(data)])
       end
 
       def full_country_table(data)
-        rows = []
-        rows << [
-          Kovid.comma_delimit(data['cases']),
-          Kovid.comma_delimit(data['deaths']),
-          Kovid.comma_delimit(data['recovered']),
-          Kovid.add_plus_sign(data['todayCases']),
-          Kovid.add_plus_sign(data['todayDeaths']),
-          Kovid.comma_delimit(data['critical']),
-          Kovid.comma_delimit(data['casesPerOneMillion'])
-        ]
-
-        if (iso = data['countryInfo']['iso2'])
-          title = "#{country_emoji(iso)} #{data['country'].upcase}"
-          Terminal::Table.new(title: title,
-                              headings: FULL_COUNTRY_TABLE_HEADINGS,
-                              rows: rows)
-        else
-          Terminal::Table.new(title: data['country'].upcase,
-                              headings: FULL_COUNTRY_TABLE_HEADINGS,
-                              rows: rows)
-        end
+        Terminal::Table.new(title: country_title(data),
+                            headings: FULL_COUNTRY_TABLE_HEADINGS,
+                            rows: [full_country_row(data)])
       end
 
       def full_province_table(province)
-        headings = [
-          'Confirmed'.paint_white,
-          'Deaths'.paint_red,
-          'Recovered'.paint_green
-        ]
-        rows = []
-        rows << [
-          province['stats']['confirmed'],
-          province['stats']['deaths'],
-          province['stats']['recovered']
-        ]
-
         Terminal::Table.new(
-          title: province['province'].upcase, headings: headings, rows: rows
+          title: province['province'].upcase,
+          headings: FULL_PROVINCE_TABLE_HEADINGS,
+          rows: [province_row(province)]
         )
       end
 
       def full_state_table(state)
-        headings = [
-          'Cases'.paint_white,
-          'Cases Today'.paint_white,
-          'Deaths'.paint_red,
-          'Deaths Today'.paint_red,
-          'Active'.paint_yellow
-        ]
-
-        rows = []
-        rows << [
-          Kovid.comma_delimit(state['cases']),
-          Kovid.add_plus_sign(state['todayCases']),
-          Kovid.comma_delimit(state['deaths']),
-          Kovid.add_plus_sign(state['todayDeaths']),
-          Kovid.comma_delimit(state['active'])
-        ]
-
         Terminal::Table.new(
-          title: state['state'].upcase, headings: headings, rows: rows
+          title: state['state'].upcase,
+          headings: FULL_STATE_TABLE_HEADINGS,
+          rows: [country_row(state)]
         )
       end
 
@@ -107,44 +47,19 @@ module Kovid
         rows = []
 
         data.each do |country|
-          base_rows = [
-            Kovid.comma_delimit(country['cases']),
-            Kovid.add_plus_sign(country['todayCases']),
-            Kovid.comma_delimit(country['deaths']),
-            Kovid.add_plus_sign(country['todayDeaths']),
-            Kovid.comma_delimit(country['recovered'])
-          ]
-
-          rows << if (iso = country['countryInfo']['iso2'])
-                    c_col = "#{country_emoji(iso)} #{country['country'].upcase}"
-                    base_rows.unshift(c_col)
-                  else
-                    base_rows.unshift(country['country'].upcase.to_s)
-                  end
+          base_rows = country_row(country)
+          rows << base_rows.unshift(country_title(country))
         end
 
-        align_columns(
-          :compare_country_table,
-          Terminal::Table.new(
-            headings: COMPARE_COUNTRIES_TABLE_HEADINGS,
-            rows: rows
-          )
-        )
+        align_columns(:compare_country_table,
+                      Terminal::Table.new(
+                        headings: COMPARE_COUNTRIES_TABLE_HEADINGS,
+                        rows: rows
+                      ))
       end
 
       def compare_countries_table_full(data)
-        rows = data.map do |country|
-          [
-            country.fetch('country'),
-            Kovid.comma_delimit(country.fetch('cases')),
-            Kovid.comma_delimit(country.fetch('deaths')),
-            Kovid.comma_delimit(country.fetch('recovered')),
-            Kovid.add_plus_sign(country.fetch('todayCases')),
-            Kovid.add_plus_sign(country.fetch('todayDeaths')),
-            Kovid.comma_delimit(country.fetch('critical')),
-            Kovid.comma_delimit(country.fetch('casesPerOneMillion'))
-          ]
-        end
+        rows = data.map { |country| compare_countries_full_row(country) }
 
         align_columns(:compare_country_table_full,
                       Terminal::Table.new(headings: COMPARE_COUNTRY_TABLE_FULL,
@@ -154,23 +69,9 @@ module Kovid
       def compare_us_states(data)
         rows = data.map.with_index do |state, index|
           if index.odd?
-            [
-              state.fetch('state').upcase,
-              Kovid.comma_delimit(state.fetch('cases')),
-              Kovid.add_plus_sign(state['todayCases']),
-              Kovid.comma_delimit(state['deaths']),
-              Kovid.add_plus_sign(state['todayDeaths']),
-              Kovid.comma_delimit(state.fetch('active'))
-            ]
+            us_state_row(state)
           else
-            [
-              state.fetch('state').upcase.paint_highlight,
-              Kovid.comma_delimit(state.fetch('cases')).paint_highlight,
-              Kovid.add_plus_sign(state['todayCases']).paint_highlight,
-              Kovid.comma_delimit(state['deaths']).paint_highlight,
-              Kovid.add_plus_sign(state['todayDeaths']).paint_highlight,
-              Kovid.comma_delimit(state.fetch('active')).paint_highlight
-            ]
+            us_state_row(state).map(&:paint_highlight)
           end
         end
 
@@ -180,14 +81,7 @@ module Kovid
       end
 
       def compare_provinces(data)
-        rows = data.map do |province|
-          [
-            province['province'].upcase,
-            province['stats']['confirmed'],
-            province['stats']['deaths'],
-            province['stats']['recovered']
-          ]
-        end
+        rows = data.map { |province| compare_provinces_row(province) }
 
         align_columns(:compare_provinces,
                       Terminal::Table.new(headings: COMPARE_PROVINCES_HEADINGS,
@@ -195,27 +89,103 @@ module Kovid
       end
 
       def cases(cases)
-        headings = CASES_DEATHS_RECOVERED
-        rows = [
-          [
-            Kovid.comma_delimit(cases['cases']),
-            Kovid.comma_delimit(cases['deaths']),
-            Kovid.comma_delimit(cases['recovered'])
-          ]
-        ]
-
         Terminal::Table.new(
           title: '🌍 Total Number of Incidents Worldwide'.upcase,
-          headings: headings,
-          rows: rows
+          headings: CASES_DEATHS_RECOVERED,
+          rows: [cases_row(cases)]
         )
       end
 
       private
 
+      def country_title(data)
+        iso = data['countryInfo']['iso2']
+        if iso.nil?
+          data['country'].upcase
+        else
+          "#{country_emoji(iso)} #{data['country'].upcase}"
+        end
+      end
+
       def country_emoji(iso)
         COUNTRY_LETTERS.values_at(*iso.chars).pack('U*') + \
           8203.chr(Encoding::UTF_8)
+      end
+
+      def cases_row(data)
+        [
+          Kovid.comma_delimit(data['cases']),
+          Kovid.comma_delimit(data['deaths']),
+          Kovid.comma_delimit(data['recovered'])
+        ]
+      end
+
+      # Also works for state
+      def country_row(data)
+        [
+          Kovid.comma_delimit(data['cases']),
+          Kovid.add_plus_sign(data['todayCases']),
+          Kovid.comma_delimit(data['deaths']),
+          Kovid.add_plus_sign(data['todayDeaths']),
+          Kovid.comma_delimit(data['recovered'])
+        ]
+      end
+
+      def full_country_row(data)
+        [
+          Kovid.comma_delimit(data['cases']),
+          Kovid.comma_delimit(data['deaths']),
+          Kovid.comma_delimit(data['recovered']),
+          Kovid.add_plus_sign(data['todayCases']),
+          Kovid.add_plus_sign(data['todayDeaths']),
+          Kovid.comma_delimit(data['critical']),
+          Kovid.comma_delimit(data['casesPerOneMillion'])
+        ]
+      end
+
+      def province_row(data)
+        [
+          data['stats']['confirmed'],
+          data['stats']['deaths'],
+          data['stats']['recovered']
+        ]
+      end
+
+      def compare_provinces_row(data)
+        [
+          data['province'].upcase,
+          province_row(data)
+        ].flatten
+      end
+
+      def compare_countries_full_row(data)
+        [
+          data.fetch('country'),
+          full_country_row(data)
+        ].flatten
+      end
+
+      def us_state_row(data)
+        [
+          data.fetch('state').upcase,
+          Kovid.comma_delimit(data.fetch('cases')),
+          Kovid.add_plus_sign(data['todayCases']),
+          Kovid.comma_delimit(data['deaths']),
+          Kovid.add_plus_sign(data['todayDeaths']),
+          Kovid.comma_delimit(data.fetch('active'))
+        ]
+      end
+
+      def aggregated_row(data)
+        [
+          Kovid.comma_delimit(data['cases']),
+          Kovid.add_plus_sign(data['todayCases']),
+          Kovid.comma_delimit(data['deaths']),
+          Kovid.add_plus_sign(data['todayDeaths']),
+          Kovid.comma_delimit(data['recovered']),
+          Kovid.comma_delimit(data['active']),
+          Kovid.comma_delimit(data['critical'])
+        ]
       end
 
       def scale(msg)
@@ -224,30 +194,24 @@ module Kovid
       end
 
       def aggregated_table(collated_data, continent, iso, emoji)
-        aggregated_data_continent = ' Aggregated Data on ' \
-                                    "#{continent} (#{iso.size} States)".upcase
-        title = if emoji.codepoints.size > 1
-                  emoji + 8203.chr(Encoding::UTF_8) + aggregated_data_continent
-                else
-                  emoji + aggregated_data_continent
-                end
-
-        rows = []
-        rows << [
-          Kovid.comma_delimit(collated_data['cases']),
-          Kovid.add_plus_sign(collated_data['todayCases']),
-          Kovid.comma_delimit(collated_data['deaths']),
-          Kovid.add_plus_sign(collated_data['todayDeaths']),
-          Kovid.comma_delimit(collated_data['recovered']),
-          Kovid.comma_delimit(collated_data['active']),
-          Kovid.comma_delimit(collated_data['critical'])
-        ]
+        title = aggregated_table_title(continent, iso, emoji)
 
         Terminal::Table.new(
           title: title,
           headings: CONTINENTAL_AGGREGATE_HEADINGS,
-          rows: rows
+          rows: [aggregated_row(collated_data)]
         )
+      end
+
+      def aggregated_table_title(continent, iso, emoji)
+        aggregated_data_continent = ' Aggregated Data on ' \
+          "#{continent} (#{iso.size} States)".upcase
+
+        if emoji.codepoints.size > 1
+          emoji + 8203.chr(Encoding::UTF_8) + aggregated_data_continent
+        else
+          emoji + aggregated_data_continent
+        end
       end
 
       def align_columns(table_type, table)
