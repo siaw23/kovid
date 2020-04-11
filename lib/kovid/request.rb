@@ -6,6 +6,7 @@ require_relative 'cache'
 require_relative 'uri_builder'
 
 module Kovid
+  # Makes requests to external source to collect cases data
   class Request
     COUNTRIES_PATH = UriBuilder.new('/countries').url
     STATES_URL = UriBuilder.new('/states').url

@@ -51,21 +51,12 @@ Style/CaseEquality:
   Exclude:
     - 'lib/kovid/request.rb'
 
-# Offense count: 11
 Style/Documentation:
   Exclude:
     - 'spec/**/*'
     - 'test/**/*'
     - 'lib/kovid.rb'
-    - 'lib/kovid/aggregators.rb'
-    - 'lib/kovid/cache.rb'
-    - 'lib/kovid/cli.rb'
     - 'lib/kovid/helpers.rb'
-    - 'lib/kovid/historians.rb'
-    - 'lib/kovid/painter.rb'
-    - 'lib/kovid/request.rb'
-    - 'lib/kovid/tablelize.rb'
-    - 'lib/kovid/uri_builder.rb'
 
 # Offense count: 5
 Style/MultilineBlockChain:

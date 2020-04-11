@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Kovid
+  # Constructs history data for specified country
   module Historians
     include Constants
 
