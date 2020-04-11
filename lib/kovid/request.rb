@@ -217,6 +217,10 @@ module Kovid
       end
 
       def fetch_country(country_name)
+        # TODO: Match ISOs to full country names
+        if country_name == "netherlands"
+          country_name = "nl"
+        end
         country_url = COUNTRIES_PATH + "/#{country_name}"
 
         JSON.parse(Typhoeus.get(country_url, cache_ttl: 900).response_body)
