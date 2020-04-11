@@ -3,6 +3,7 @@
 require 'uri'
 
 module Kovid
+  # Prepares base URI before requests
   class UriBuilder
     attr_reader :path
 

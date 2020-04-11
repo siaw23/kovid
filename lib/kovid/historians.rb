@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Kovid
+  # Constructs history data for specified country
   module Historians
     include Constants
 
@@ -10,9 +11,9 @@ module Kovid
       rows = []
 
       stats = if last
-                transpose(country).last(last.to_i)
+                Kovid.format_country_history_numbers(country).last(last.to_i)
               else
-                transpose(country)
+                Kovid.format_country_history_numbers(country)
               end
 
       dates = if last
@@ -53,8 +54,9 @@ module Kovid
       end
 
       # From dates where number of !cases.zero?
-      positive_cases_figures = country['timeline']['cases'].values.reject(&:zero?)
-      dates = country['timeline']['cases'].reject { |_k, v| v.zero? }.keys
+      country_cases = country['timeline']['cases']
+      positive_cases_figures = country_cases.values.reject(&:zero?)
+      dates = country_cases.reject { |_k, v| v.zero? }.keys
       data = []
 
       # TODO: Refactor
@@ -88,12 +90,16 @@ module Kovid
         dates.each_with_index do |val, index|
           data << [val, positive_cases_figures[index]]
         end
-        y_range = AsciiCharts::Cartesian.new(data, bar: true, hide_zero: true).y_range
+        y_range = AsciiCharts::Cartesian.new(
+          data, bar: true, hide_zero: true
+        ).y_range
 
         last_two_y = y_range.last 2
         y_interval = last_two_y.last - last_two_y.first
 
-        scale("Scale on Y: #{y_interval}:#{(y_interval / last_two_y.last.to_f * positive_cases_figures.last).round(2) / y_interval}")
+        scale("Scale on Y: #{y_interval}:#{(
+          y_interval / last_two_y.last.to_f * positive_cases_figures.last
+        ).round(2) / y_interval}")
 
         puts 'Experimental feature, please report issues.'
 

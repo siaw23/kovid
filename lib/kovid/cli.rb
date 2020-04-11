@@ -4,25 +4,33 @@ require 'thor'
 require 'kovid'
 
 module Kovid
+  # Describes the commands that can be run by the user
+  # Descriptions are returned to STDOUT
   class CLI < Thor
     def self.exit_on_failure?
       true
     end
 
-    desc 'province PROVINCE or province "PROVINCE NAME"', 'Returns reported data on provided province. eg "kovid check "new brunswick".'
+    desc 'province PROVINCE or province "PROVINCE NAME"',
+         'Returns reported data on provided province. ' \
+         'eg "kovid check "new brunswick".'
     method_option :full, aliases: '-p'
     def province(name)
       puts Kovid.province(name)
       data_source
     end
 
-    desc 'provinces PROVINCE PROVINCE', 'Returns full comparison table for the given provinces. Accepts multiple provinces.'
+    desc 'provinces PROVINCE PROVINCE',
+         'Returns full comparison table for the given provinces. ' \
+         'Accepts multiple provinces.'
     def provinces(*names)
       puts Kovid.provinces(names)
       data_source
     end
 
-    desc 'check COUNTRY or check "COUNTRY NAME"', 'Returns reported data on provided country. eg: "kovid check "hong kong".'
+    desc 'check COUNTRY or check "COUNTRY NAME"',
+         'Returns reported data on provided country. ' \
+         'eg: "kovid check "hong kong".'
     method_option :full, aliases: '-f'
     def check(*name)
       if name.size == 1
@@ -48,7 +56,9 @@ module Kovid
       data_source
     end
 
-    desc 'states STATE STATE or states --all', 'Returns full comparison table for the given states. Accepts multiple states.'
+    desc 'states STATE STATE or states --all',
+         'Returns full comparison table for the given states. ' \
+         'Accepts multiple states.'
     method_option :all, aliases: '-a'
     def states(*states)
       if options[:all]
@@ -67,7 +77,8 @@ module Kovid
       data_source
     end
 
-    desc 'history COUNTRY or history COUNTRY N', 'Return history of incidents of COUNTRY (in the last N days)'
+    desc 'history COUNTRY or history COUNTRY N',
+         'Return history of incidents of COUNTRY (in the last N days)'
     def history(*params)
       if params.size == 2
         puts Kovid.history(params.first, params.last)

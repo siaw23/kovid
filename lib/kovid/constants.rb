@@ -63,6 +63,20 @@ module Kovid
       'Cases/Million'.paint_white
     ].freeze
 
+    FULL_PROVINCE_TABLE_HEADINGS = [
+      'Confirmed'.paint_white,
+      'Deaths'.paint_red,
+      'Recovered'.paint_green
+    ].freeze
+
+    FULL_STATE_TABLE_HEADINGS = [
+      'Cases'.paint_white,
+      'Cases Today'.paint_white,
+      'Deaths'.paint_red,
+      'Deaths Today'.paint_red,
+      'Active'.paint_yellow
+    ].freeze
+
     COMPARE_STATES_HEADINGS = [
       'State'.paint_white,
       'Cases'.paint_white,
@@ -79,7 +93,13 @@ module Kovid
       'Recovered'.paint_green
     ].freeze
 
-    FOOTER_LINE = ['------------', '------------', '------------', '------------'].freeze
+    FOOTER_LINE = [
+      '------------',
+      '------------',
+      '------------',
+      '------------'
+    ].freeze
+
     COUNTRY_LETTERS = 'A'.upto('Z').with_index(127_462).to_h.freeze
 
     RIGHT_ALIGN_COLUMNS = {

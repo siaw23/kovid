@@ -2,6 +2,7 @@
 
 require 'rainbow'
 
+# Adds text color functionalities to String class
 class String
   def paint_white
     Rainbow(self).white.bg(:black).bold

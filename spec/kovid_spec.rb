@@ -16,9 +16,10 @@ RSpec.describe Kovid do
 
     it 'outputs message informing of wrong spelling or no reported case.' do
       table = Kovid.province(inexistent_province)
-      not_found = "Wrong spelling/No reported cases on #{inexistent_province.upcase}."
 
-      expect(table.rows.first.cells.first.value).to eq(not_found)
+      expect(table.rows.first.cells.first.value).to eq(
+        "Wrong spelling/No reported cases on #{inexistent_province.upcase}."
+      )
     end
   end
 
@@ -36,6 +37,7 @@ RSpec.describe Kovid do
 
   describe 'country(name)' do
     let(:country) { 'ghana' }
+    let(:inexistent_iso) { 'diamond princess' }
     let(:inexistent_country) { 'wonderland' }
     it 'returns table with country data' do
       table = Kovid.country(country)
@@ -43,16 +45,24 @@ RSpec.describe Kovid do
       expect(table.title).to include('GHANA')
     end
 
+    it 'returns table title with inexistent iso' do
+      table = Kovid.country(inexistent_iso)
+
+      expect(table.title).to eq('DIAMOND PRINCESS')
+    end
+
     it 'outputs message informing of wrong spelling or no reported case.' do
       table = Kovid.country(inexistent_country)
-      not_found = "Wrong spelling/No reported cases on #{inexistent_country.upcase}."
 
-      expect(table.rows.first.cells.first.value).to eq(not_found)
+      expect(table.rows.first.cells.first.value).to eq(
+        "Wrong spelling/No reported cases on #{inexistent_country.upcase}."
+      )
     end
   end
 
   describe 'country_full(name)' do
     let(:country) { 'italy' }
+    let(:inexistent_iso) { 'diamond princess' }
     let(:inexistent_country) { 'wonderland' }
 
     it 'returns table with country data' do
@@ -61,11 +71,18 @@ RSpec.describe Kovid do
       expect(table.title).to include('ITALY')
     end
 
+    it 'returns table title with inexistent iso' do
+      table = Kovid.country(inexistent_iso)
+
+      expect(table.title).to eq('DIAMOND PRINCESS')
+    end
+
     it 'outputs message informing of wrong spelling or no reported case.' do
       table = Kovid.country_full(inexistent_country)
-      not_found = "Wrong spelling/No reported cases on #{inexistent_country.upcase}."
 
-      expect(table.rows.first.cells.first.value).to eq(not_found)
+      expect(table.rows.first.cells.first.value).to eq(
+        "Wrong spelling/No reported cases on #{inexistent_country.upcase}."
+      )
     end
   end
 

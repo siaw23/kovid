@@ -7,3 +7,4 @@ RSpec::Core::RakeTask.new(:spec)
 
 # rubocop:disable Style/HashSyntax
 task :default => :spec
+# rubocop:enable Style/HashSyntax

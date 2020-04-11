@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Kovid
+  # Sends info about continents to Tablelize
   module Aggregators
     def eu_aggregate(eu_data)
       aggregated_table(eu_data, 'The EU', Kovid::Request::EU_ISOS, '🇪🇺')
