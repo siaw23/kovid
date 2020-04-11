@@ -249,17 +249,25 @@ module Kovid
       end
 
       def aggregator(isos, meth)
-        countries_array = JSON.parse(
-          Typhoeus.get(
-            UriBuilder.new('/countries').url, cache_ttl: 900
-          ).response_body
-        )
-
+        countries_array = JSON.parse(countries_request)
         country_array = countries_array.select do |hash|
           isos.include?(hash['countryInfo']['iso2'])
         end
+        data = countries_aggregator(country_array)
 
-        data = country_array.inject do |base, other|
+        meth === data
+      rescue JSON::ParserError
+        puts SERVER_DOWN
+      end
+
+      def countries_request
+        Typhoeus.get(
+          UriBuilder.new('/countries').url, cache_ttl: 900
+        ).response_body
+      end
+
+      def countries_aggregator(country_array)
+        country_array.inject do |base, other|
           base.merge(other) do |key, left, right|
             left  ||= 0
             right ||= 0
@@ -267,10 +275,6 @@ module Kovid
             left + right unless %w[country countryInfo].include?(key)
           end
         end.compact
-
-        meth === data
-      rescue JSON::ParserError
-        puts SERVER_DOWN
       end
     end
   end
