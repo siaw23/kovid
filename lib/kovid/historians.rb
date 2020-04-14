@@ -6,7 +6,6 @@ module Kovid
 
     def history(country, last)
       # TODO: Write checks for when country is spelt wrong.
-      headings = DATE_CASES_DEATHS_RECOVERED
       rows = []
 
       stats = if last
@@ -39,7 +38,7 @@ module Kovid
 
       Terminal::Table.new(
         title: country['country'].upcase,
-        headings: headings,
+        headings: DATE_CASES_DEATHS_RECOVERED,
         rows: rows
       )
     end
