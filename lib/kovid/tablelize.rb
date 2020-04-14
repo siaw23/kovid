@@ -9,7 +9,6 @@ require_relative 'aggregators'
 require_relative 'historians'
 
 module Kovid
-  # Constructs the tables according to specified input
   class Tablelize
     extend Kovid::Constants
     extend Kovid::Aggregators

@@ -1,12 +1,11 @@
 # frozen_string_literal: true
 
 module Kovid
-  # Constructs history data for specified country
   module Historians
     include Constants
 
     def history(country, last)
-      # Write checks for when country is spelt wrong.
+      # TODO: Write checks for when country is spelt wrong.
       headings = DATE_CASES_DEATHS_RECOVERED
       rows = []
 

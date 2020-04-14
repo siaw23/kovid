@@ -4,8 +4,6 @@ require 'thor'
 require 'kovid'
 
 module Kovid
-  # Describes the commands that can be run by the user
-  # Descriptions are returned to STDOUT
   class CLI < Thor
     def self.exit_on_failure?
       true

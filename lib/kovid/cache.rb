@@ -1,11 +1,7 @@
 # frozen_string_literal: true
 
 require 'typhoeus'
-
-# rubocop:disable Style/Documentation
 module Kovid
-  # rubocop:enable Style/Documentation
-  # Caches HTTP requests
   class Cache
     def initialize
       @memory = {}
