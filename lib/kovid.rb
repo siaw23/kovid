@@ -6,8 +6,6 @@ require 'kovid/request'
 module Kovid
   require 'kovid/helpers'
 
-  class Error < StandardError; end
-
   module_function
 
   def eu_aggregate
