@@ -46,6 +46,8 @@ You can fetch US state-specific data:
 * `kovid state STATE` OR `kovid state "STATE NAME"`.
 * `kovid states --all` or `kovid states -a` for data on all US states.
 
+You can also use USPS abbreviations.  Example: `kovid state me`
+
 Provinces
 
 You can fetch province specific data:
@@ -64,7 +66,7 @@ You can compare as many countries as you want; `kovid compare FOO BAR BAZ` OR `k
 🇺🇸🇺🇸🇺🇸
 
 You can compare US states with:
-* `kovid states STATE STATE` Example: `kovid states illinois "new york" california`
+* `kovid states STATE STATE` Example: `kovid states illinois "new york" california` OR `kovid states il ny ca`
 
 You can compare provicnes with:
 * `kovid provinces PROVINCE PROVINCE` Example: `kovid provinces ontario manitoba`
