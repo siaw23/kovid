@@ -30,4 +30,10 @@ module Kovid
       data.map! { |number| Kovid.comma_delimit(number) }
     end
   end
+
+  def lookup_us_state(state)
+    us = Carmen::Country.coded('USA')
+    lookup = us.subregions.coded(state) || us.subregions.named(state)
+    lookup ? lookup.name : state
+  end
 end

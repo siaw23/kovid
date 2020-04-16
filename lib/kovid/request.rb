@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'json'
+require 'carmen'
 require_relative 'tablelize'
 require_relative 'cache'
 require_relative 'uri_builder'
@@ -109,7 +110,7 @@ module Kovid
       end
 
       def state(state)
-        response = fetch_state(state)
+        response = fetch_state(Kovid.lookup_us_state(state))
         if response.nil?
           not_found(state)
         else
@@ -121,7 +122,6 @@ module Kovid
 
       def states(states)
         compared_states = fetch_compared_states(states)
-
         Kovid::Tablelize.compare_us_states(compared_states)
       rescue JSON::ParserError
         puts SERVER_DOWN
@@ -204,10 +204,10 @@ module Kovid
       end
 
       def fetch_compared_states(submitted_states)
-        state_data = fetch_state_data
+        submitted_states.map! { |s| Kovid.lookup_us_state(s) }
 
-        state_data.select do |state|
-          submitted_states.include?(state['state'].downcase)
+        fetch_state_data.select do |state|
+          submitted_states.include?(state['state'])
         end
       end
 

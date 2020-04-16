@@ -125,11 +125,31 @@ RSpec.describe Kovid do
   end
 
   describe 'state' do
+
     it 'returns a US state data' do
       table = Kovid.state('michigan')
 
       expect(table.headings.first.cells.first.value).to include('Cases')
       expect(table.headings.first.cells.last.value).to include('Active')
+    end
+
+    it 'accepts US state abbreviations' do
+      expect(Kovid.state('michigan').title).to eq Kovid.state('mi').title
+      expect(Kovid.state('Alabama').title).to eq Kovid.state('AL').title
+      expect(Kovid.state('Maine').title).to eq Kovid.state('Me').title
+    end
+
+    it 'outputs message informing of wrong spelling or no reported case.' do
+      expect(Kovid.state("Mediocristan").title).to eq("You checked: MEDIOCRISTAN")
+    end
+
+  end
+
+  describe 'states' do
+    let(:us_states) { %w[AK CA NY VA] }
+    it 'returns table with state data' do
+      table = Kovid.states(us_states)
+      expect(table.rows.size).to eq(4)
     end
   end
 
