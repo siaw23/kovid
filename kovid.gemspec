@@ -27,7 +27,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'terminal-table', '~> 1.8'
   spec.add_dependency 'thor', '~> 1.0'
   spec.add_dependency 'typhoeus', '~> 1.3'
-
+  spec.add_dependency 'carmen', '~> 1.1.3'
   spec.add_development_dependency 'simplecov', '~>  0.18'
 
   # Specify which files should be added to the gem when it is released.
