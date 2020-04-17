@@ -8,8 +8,8 @@ require_relative 'uri_builder'
 
 module Kovid
   class Request
-    COUNTRIES_PATH = UriBuilder.new('/countries').url
-    STATES_URL = UriBuilder.new('/states').url
+    COUNTRIES_PATH = UriBuilder.new('/v2/countries').url
+    STATES_URL = UriBuilder.new('/v2/states').url
     JHUCSSE_URL = UriBuilder.new('/v2/jhucsse').url
 
     SERVER_DOWN = 'Server overwhelmed. Please try again in a moment.'
@@ -150,7 +150,7 @@ module Kovid
 
       def cases
         response = JSON.parse(
-          Typhoeus.get(UriBuilder.new('/all').url, cache_ttl: 900).response_body
+          Typhoeus.get(UriBuilder.new('/v2/all').url, cache_ttl: 900).response_body
         )
 
         Kovid::Tablelize.cases(response)
@@ -264,7 +264,7 @@ module Kovid
 
       def countries_request
         Typhoeus.get(
-          UriBuilder.new('/countries').url, cache_ttl: 900
+          UriBuilder.new('/v2/countries').url, cache_ttl: 900
         ).response_body
       end
 
