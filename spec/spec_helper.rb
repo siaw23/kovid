@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 require 'simplecov'
-SimpleCov.start
+SimpleCov.start do
+  add_filter 'lib/kovid/ascii_charts.rb'
+end
 
 require 'bundler/setup'
 require 'kovid'
