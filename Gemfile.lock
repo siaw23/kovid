@@ -1,8 +1,9 @@
 PATH
   remote: .
   specs:
-    kovid (0.6.6)
+    kovid (0.6.7)
       ascii_charts (~> 0.9.1)
+      carmen (~> 1.1.3)
       rainbow (~> 3.0)
       terminal-table (~> 1.8)
       thor (~> 1.0)
@@ -63,7 +64,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  carmen (~> 1.1.3)
   kovid!
   rake (~> 12.0)
   rspec (~> 3.0)
