@@ -2,7 +2,7 @@
 
 require 'terminal-table'
 require 'date'
-require 'ascii_charts'
+require_relative 'ascii_charts'
 require_relative 'painter'
 require_relative 'constants'
 require_relative 'aggregators'

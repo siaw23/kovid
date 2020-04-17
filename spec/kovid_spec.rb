@@ -125,7 +125,6 @@ RSpec.describe Kovid do
   end
 
   describe 'state' do
-
     it 'returns a US state data' do
       table = Kovid.state('michigan')
 
@@ -140,9 +139,8 @@ RSpec.describe Kovid do
     end
 
     it 'outputs message informing of wrong spelling or no reported case.' do
-      expect(Kovid.state("Mediocristan").title).to eq("You checked: MEDIOCRISTAN")
+      expect(Kovid.state('Mediocristan').title).to eq('You checked: MEDIOCRISTAN')
     end
-
   end
 
   describe 'states' do
