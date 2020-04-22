@@ -145,8 +145,8 @@ module Kovid
       source = <<~TEXT
         #{Time.now}
         Sources:
-         * JHU CSSE GISand Data
-         * https://www.worldometers.info/coronavirus/
+         * Johns Hopkins University
+         * https://www.worldometers.info/coronavirus
       TEXT
       puts source
     end
