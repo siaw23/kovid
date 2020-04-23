@@ -5,23 +5,13 @@ module Kovid
     include Constants
     include AsciiCharts
 
-    def history(country, last)
-      # TODO: Write checks for when country is spelt wrong.
+    def history(location, days)
       rows = []
 
-      stats = if last
-                Kovid.format_country_history_numbers(country).last(last.to_i)
-              else
-                Kovid.format_country_history_numbers(country)
-              end
+      stats = Kovid.format_country_history_numbers(location).last(days.to_i)
+      dates = location['timeline']['cases'].keys.last(days.to_i)
 
-      dates = if last
-                country['timeline']['cases'].keys.last(last.to_i)
-              else
-                country['timeline']['cases'].keys
-              end
-
-      unless last
+      if days.to_i >= 30
         stats = stats.reject { |stat| stat[0].to_i.zero? && stat[1].to_i.zero? }
         dates = dates.last(stats.count)
       end
@@ -32,14 +22,25 @@ module Kovid
         rows << row
       end
 
+      # Title and Column format if Country or US State
+      if location['country']
+        title      = location['country'].try(:upcase)
+        col_format = DATE_CASES_DEATHS_RECOVERED
+        footer     = FOOTER_LINE_FOUR_COLUMNS
+      else
+        title      = location['state'].try(:upcase)
+        col_format = DATE_CASES_DEATHS
+        footer     = FOOTER_LINE_THREE_COLUMNS
+      end
+
       if stats.size > 10
-        rows << FOOTER_LINE
-        rows << DATE_CASES_DEATHS_RECOVERED
+        rows << footer
+        rows << col_format
       end
 
       Terminal::Table.new(
-        title: country['country'].upcase,
-        headings: DATE_CASES_DEATHS_RECOVERED,
+        title: title,
+        headings: col_format,
         rows: rows
       )
     end

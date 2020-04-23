@@ -23,6 +23,12 @@ module Kovid
       'Recovered'.paint_green
     ].freeze
 
+    DATE_CASES_DEATHS = [
+      'Date'.paint_white,
+      'Cases'.paint_white,
+      'Deaths'.paint_red
+    ].freeze
+
     CONTINENTAL_AGGREGATE_HEADINGS = [
       'Cases'.paint_white,
       'Cases Today'.paint_white,
@@ -93,7 +99,13 @@ module Kovid
       'Recovered'.paint_green
     ].freeze
 
-    FOOTER_LINE = [
+    FOOTER_LINE_THREE_COLUMNS = [
+      '------------',
+      '------------',
+      '------------'
+    ].freeze
+
+    FOOTER_LINE_FOUR_COLUMNS = [
       '------------',
       '------------',
       '------------',
