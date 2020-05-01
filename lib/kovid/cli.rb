@@ -75,13 +75,15 @@ module Kovid
       data_source
     end
 
-    desc 'history COUNTRY or history COUNTRY N',
-         'Return history of incidents of COUNTRY (in the last N days)'
-    def history(*params)
-      if params.size == 2
-        puts Kovid.history(params.first, params.last)
+    desc 'history COUNTRY or history COUNTRY N or' \
+         'history STATE --usa',
+         'Return history of incidents of COUNTRY|STATE (in the last N days)'
+    option :usa, :type => :boolean
+    def history(location, days=30)
+      if options[:usa]
+        puts Kovid.history_us_state(location, days)
       else
-        puts Kovid.history(params.first, nil)
+        puts Kovid.history(location, days)
       end
       data_source
     end

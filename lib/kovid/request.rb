@@ -8,9 +8,11 @@ require_relative 'uri_builder'
 
 module Kovid
   class Request
-    COUNTRIES_PATH = UriBuilder.new('/v2/countries').url
-    STATES_URL = UriBuilder.new('/v2/states').url
-    JHUCSSE_URL = UriBuilder.new('/v2/jhucsse').url
+    COUNTRIES_PATH    = UriBuilder.new('/v2/countries').url
+    STATES_URL        = UriBuilder.new('/v2/states').url
+    JHUCSSE_URL       = UriBuilder.new('/v2/jhucsse').url
+    HISTORICAL_URL    = UriBuilder.new('/v2/historical').url
+    HISTORICAL_US_URL = UriBuilder.new('/v2/historical/usacounties').url
 
     SERVER_DOWN = 'Server overwhelmed. Please try again in a moment.'
 
@@ -158,17 +160,55 @@ module Kovid
         puts SERVER_DOWN
       end
 
-      def history(country, last)
+      def history(country, days)
         history_path = UriBuilder.new('/v2/historical').url
+
         response = JSON.parse(
           Typhoeus.get(
             history_path + "/#{country}", cache_ttl: 900
           ).response_body
         )
 
-        Kovid::Tablelize.history(response, last)
+        if response.key?('message')
+          not_found(country) do |c|
+            "Could not find cases for #{c}.\nIf searching United States, add --usa option" 
+          end
+        else
+          Kovid::Tablelize.history(response, days)
+        end
       rescue JSON::ParserError
         puts SERVER_DOWN
+      end
+
+      def history_us_state(state, days)
+        history_path = UriBuilder.new('/v2/historical/usacounties').url
+        state        = Kovid.lookup_us_state(state).downcase()
+
+        response = JSON.parse(
+          Typhoeus.get(
+            history_path + "/#{state}", cache_ttl: 900
+          ).response_body
+        )
+
+        if response.respond_to?(:key?) and response.key?('message')
+          return not_found(state)
+        end
+
+        # API Endpoint returns list of counties for given state, so
+        # we aggreage cases for all counties
+        # Note: no data for 'Recovered'
+        cases  = usacounties_aggregator(response, 'cases')
+        deaths = usacounties_aggregator(response, 'deaths')
+
+        # normalize data so we can call Kovid::Tablelize.history on US State data
+        response = {
+          "state"    => state,
+          "timeline" => { "cases" => cases, "deaths" => deaths }
+        }
+
+        Kovid::Tablelize.history(response, days)
+      rescue JSON::ParserError
+          puts SERVER_DOWN
       end
 
       def histogram(country, date)
@@ -188,9 +228,17 @@ module Kovid
 
       private
 
-      def not_found(country)
-        rows = [["Wrong spelling/No reported cases on #{country.upcase}."]]
-        Terminal::Table.new title: "You checked: #{country.upcase}", rows: rows
+      def not_found(location)
+        rows = []
+        default_warning = "Wrong spelling/No reported cases on #{location.upcase}."
+
+        if block_given?
+          rows << [ yield(location) ]
+        else
+          rows << [ default_warning ]
+        end
+
+        Terminal::Table.new title: "You checked: #{location.upcase}", rows: rows
       end
 
       def fetch_countries(list)
@@ -275,6 +323,16 @@ module Kovid
             right ||= 0
 
             left + right unless %w[country countryInfo].include?(key)
+          end
+        end.compact
+      end
+
+      def usacounties_aggregator(data, key=nil)
+        data.inject({}) do |base,other|
+          base.merge(other['timeline'][key]) do |k,l,r|
+            l ||= 0
+            l ||= 0
+            l + r
           end
         end.compact
       end

@@ -164,11 +164,46 @@ RSpec.describe Kovid do
   end
 
   describe 'history' do
-    it 'returns history of given location' do
+    it 'returns history of given country' do
       table = Kovid.history('ghana', '7')
-
       expect(table.headings.first.cells.first.value).to include('Date')
       expect(table.headings.first.cells.last.value).to include('Recovered')
+    end
+
+    it 'outputs message informing no reported case.' do
+      table = Kovid.history('Extremistan')
+
+      expect(table.rows.first.cells.first.value).to start_with(
+        "Could not find cases for Extremistan"
+      )
+    end
+
+    it 'returns history of given state' do
+      table = Kovid.history_us_state('va', '14')
+      expect(table.headings.first.cells.first.value).to include('Date')
+      expect(table.headings.first.cells.last.value).to include('Deaths')
+      expect(table.title).to eq('VIRGINIA')
+    end
+
+    it 'returns correct amount of records' do
+      table1 = Kovid.history_us_state('ny', '7')
+      expect(table1.rows.size).to eq(7)
+
+      table2 = Kovid.history_us_state('nj', 5)
+      expect(table2.rows.size).to eq(5)
+    end
+
+    it 'adds footers rows when reocrds greater than 10' do
+      table = Kovid.history_us_state('md', '22')
+      expect(table.rows.size).to eq(24)
+    end
+
+    it 'defaults to days (30) for history' do
+      table = Kovid.history_us_state('md')
+      expect(table.title).to eq('MARYLAND')
+
+      # Footer rows add two additional rows
+      expect(table.rows.size).to eq(32)
     end
   end
 end

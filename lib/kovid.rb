@@ -68,8 +68,12 @@ module Kovid
     Kovid::Request.cases
   end
 
-  def history(country, last)
-    Kovid::Request.history(country, last)
+  def history(country, days=30)
+    Kovid::Request.history(country, days)
+  end
+
+  def history_us_state(state, days=30)
+    Kovid::Request.history_us_state(state, days)
   end
 
   def histogram(country, date)

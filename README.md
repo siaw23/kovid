@@ -74,6 +74,7 @@ ___
 😷 **History**
 * `kovid history COUNTRY` (full history).
 * `kovid history COUNTRY N` (history in the last N days).
+* `kovid history STATE --usa`
 ___
 
 **NOTE:** If you find it irritating to have to type `kovid state STATE`, `covid state STATE` works as well.
