@@ -129,7 +129,7 @@ RSpec.describe Kovid do
       table = Kovid.state('michigan')
 
       expect(table.headings.first.cells.first.value).to include('Cases')
-      expect(table.headings.first.cells.last.value).to include('Active')
+      expect(table.headings.first.cells.last.value).to include('Tests')
     end
 
     it 'accepts US state abbreviations' do

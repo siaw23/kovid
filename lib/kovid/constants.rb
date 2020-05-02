@@ -80,7 +80,8 @@ module Kovid
       'Cases Today'.paint_white,
       'Deaths'.paint_red,
       'Deaths Today'.paint_red,
-      'Active'.paint_yellow
+      'Active'.paint_yellow,
+      'Tests'.paint_white
     ].freeze
 
     COMPARE_STATES_HEADINGS = [
