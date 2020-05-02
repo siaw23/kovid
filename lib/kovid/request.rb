@@ -114,8 +114,6 @@ module Kovid
       def state(state)
         response = fetch_state(Kovid.lookup_us_state(state))
 
-        # {"state"=>"Colorado", "cases"=>15768, "todayCases"=>0, "deaths"=>820, "todayDeaths"=>0, "active"=>14389, "tests"=>75259, "testsPerOneMillion"=>13606}
-
         if response.nil?
           not_found(state)
         else
