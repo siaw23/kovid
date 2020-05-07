@@ -174,7 +174,7 @@ RSpec.describe Kovid do
       table = Kovid.history('Extremistan')
 
       expect(table.rows.first.cells.first.value).to start_with(
-        "Could not find cases for Extremistan"
+        'Could not find cases for Extremistan'
       )
     end
 

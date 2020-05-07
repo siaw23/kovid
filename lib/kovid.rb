@@ -68,11 +68,11 @@ module Kovid
     Kovid::Request.cases
   end
 
-  def history(country, days=30)
+  def history(country, days = 30)
     Kovid::Request.history(country, days)
   end
 
-  def history_us_state(state, days=30)
+  def history_us_state(state, days = 30)
     Kovid::Request.history_us_state(state, days)
   end
 

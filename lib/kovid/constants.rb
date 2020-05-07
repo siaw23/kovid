@@ -13,7 +13,8 @@ module Kovid
       'Cases Today'.paint_white,
       'Deaths'.paint_red,
       'Deaths Today'.paint_red,
-      'Recovered'.paint_green
+      'Recovered'.paint_green,
+      'Tests'.paint_white,
     ].freeze
 
     DATE_CASES_DEATHS_RECOVERED = [

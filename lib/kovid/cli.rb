@@ -78,8 +78,8 @@ module Kovid
     desc 'history COUNTRY or history COUNTRY N or' \
          'history STATE --usa',
          'Return history of incidents of COUNTRY|STATE (in the last N days)'
-    option :usa, :type => :boolean
-    def history(location, days=30)
+    option :usa, type: :boolean
+    def history(location, days = 30)
       if options[:usa]
         puts Kovid.history_us_state(location, days)
       else

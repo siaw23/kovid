@@ -8,28 +8,28 @@ require_relative 'uri_builder'
 
 module Kovid
   class Request
-    COUNTRIES_PATH    = UriBuilder.new('/v2/countries').url
-    STATES_URL        = UriBuilder.new('/v2/states').url
-    JHUCSSE_URL       = UriBuilder.new('/v2/jhucsse').url
-    HISTORICAL_URL    = UriBuilder.new('/v2/historical').url
-    HISTORICAL_US_URL = UriBuilder.new('/v2/historical/usacounties').url
+    COUNTRIES_PATH      = UriBuilder.new('/v2/countries').url
+    STATES_URL          = UriBuilder.new('/v2/states').url
+    JHUCSSE_URL         = UriBuilder.new('/v2/jhucsse').url
+    HISTORICAL_URL      = UriBuilder.new('/v2/historical').url
+    HISTORICAL_US_URL   = UriBuilder.new('/v2/historical/usacounties').url
 
-    SERVER_DOWN = 'Server overwhelmed. Please try again in a moment.'
+    SERVER_DOWN         = 'Server overwhelmed. Please try again in a moment.'
 
-    EU_ISOS = %w[AT BE BG CY CZ DE DK EE ES FI FR GR HR HU IE IT LT \
-                 LU LV MT NL PL PT RO SE SI SK].freeze
-    EUROPE_ISOS = EU_ISOS + %w[GB IS NO CH MC AD SM VA BA RS ME MK AL \
-                               BY UA RU MD].freeze
-    AFRICA_ISOS = %w[DZ AO BJ BW BF BI CM CV CF TD KM CD CG CI DJ EG \
-                     GQ ER SZ ET GA GM GH GN GW KE LS LR LY MG MW ML \
-                     MR MU MA MZ NA NE NG RW ST SN SC SL SO ZA SS SD \
-                     TZ TG TN UG ZM ZW EH].freeze
-    SOUTH_AMERICA_ISOS = %w[AR BO BV BR CL CO EC FK GF GY PY PE GS SR \
-                            UY VE].freeze
-    ASIA_ISOS = %w[AE AF AM AZ BD BH BN BT CC CN CX GE HK ID IL IN \
-                   IQ IR JO JP KG KH KP KR KW KZ LA LB LK MM MN MO \
-                   MY NP OM PH PK PS QA SA SG SY TH TJ TL TM TR TW \
-                   UZ VN YE].freeze
+    EU_ISOS             = %w[AT BE BG CY CZ DE DK EE ES FI FR GR HR HU IE IT LT \
+                             LU LV MT NL PL PT RO SE SI SK].freeze
+    EUROPE_ISOS         = EU_ISOS + %w[GB IS NO CH MC AD SM VA BA RS ME MK AL \
+                                       BY UA RU MD].freeze
+    AFRICA_ISOS         = %w[DZ AO BJ BW BF BI CM CV CF TD KM CD CG CI DJ EG \
+                             GQ ER SZ ET GA GM GH GN GW KE LS LR LY MG MW ML \
+                             MR MU MA MZ NA NE NG RW ST SN SC SL SO ZA SS SD \
+                             TZ TG TN UG ZM ZW EH].freeze
+    SOUTH_AMERICA_ISOS  = %w[AR BO BV BR CL CO EC FK GF GY PY PE GS SR \
+                             UY VE].freeze
+    ASIA_ISOS           = %w[AE AF AM AZ BD BH BN BT CC CN CX GE HK ID IL IN \
+                             IQ IR JO JP KG KH KP KR KW KZ LA LB LK MM MN MO \
+                             MY NP OM PH PK PS QA SA SG SY TH TJ TL TM TR TW \
+                             UZ VN YE].freeze
 
     class << self
       def eu_aggregate
@@ -172,7 +172,7 @@ module Kovid
 
         if response.key?('message')
           not_found(country) do |c|
-            "Could not find cases for #{c}.\nIf searching United States, add --usa option" 
+            "Could not find cases for #{c}.\nIf searching United States, add --usa option"
           end
         else
           Kovid::Tablelize.history(response, days)
@@ -183,7 +183,7 @@ module Kovid
 
       def history_us_state(state, days)
         history_path = UriBuilder.new('/v2/historical/usacounties').url
-        state        = Kovid.lookup_us_state(state).downcase()
+        state        = Kovid.lookup_us_state(state).downcase
 
         response = JSON.parse(
           Typhoeus.get(
@@ -191,7 +191,7 @@ module Kovid
           ).response_body
         )
 
-        if response.respond_to?(:key?) and response.key?('message')
+        if response.respond_to?(:key?) && response.key?('message')
           return not_found(state)
         end
 
@@ -203,13 +203,13 @@ module Kovid
 
         # normalize data so we can call Kovid::Tablelize.history on US State data
         response = {
-          "state"    => state,
-          "timeline" => { "cases" => cases, "deaths" => deaths }
+          'state' => state,
+          'timeline' => { 'cases' => cases, 'deaths' => deaths }
         }
 
         Kovid::Tablelize.history(response, days)
       rescue JSON::ParserError
-          puts SERVER_DOWN
+        puts SERVER_DOWN
       end
 
       def histogram(country, date)
@@ -233,11 +233,11 @@ module Kovid
         rows = []
         default_warning = "Wrong spelling/No reported cases on #{location.upcase}."
 
-        if block_given?
-          rows << [ yield(location) ]
-        else
-          rows << [ default_warning ]
-        end
+        rows << if block_given?
+                  [yield(location)]
+                else
+                  [default_warning]
+                end
 
         Terminal::Table.new title: "You checked: #{location.upcase}", rows: rows
       end
@@ -328,9 +328,9 @@ module Kovid
         end.compact
       end
 
-      def usacounties_aggregator(data, key=nil)
-        data.inject({}) do |base,other|
-          base.merge(other['timeline'][key]) do |k,l,r|
+      def usacounties_aggregator(data, key = nil)
+        data.inject({}) do |base, other|
+          base.merge(other['timeline'][key]) do |_k, l, r|
             l ||= 0
             l ||= 0
             l + r
