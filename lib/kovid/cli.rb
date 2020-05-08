@@ -147,8 +147,8 @@ module Kovid
       source = <<~TEXT
         #{Time.now}
         Sources:
+         * worldometers.info/coronavirus
          * Johns Hopkins University
-         * https://www.worldometers.info/coronavirus
       TEXT
       puts source
     end
