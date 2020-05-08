@@ -57,7 +57,8 @@ module Kovid
       'Cases Today'.paint_white,
       'Deaths'.paint_red,
       'Deaths Today'.paint_red,
-      'Recovered'.paint_green
+      'Recovered'.paint_green,
+      'Tests'.paint_white
     ].freeze
 
     FULL_COUNTRY_TABLE_HEADINGS = [
