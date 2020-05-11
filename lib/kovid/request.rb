@@ -332,7 +332,7 @@ module Kovid
         data.inject({}) do |base, other|
           base.merge(other['timeline'][key]) do |_k, l, r|
             l ||= 0
-            l ||= 0
+            r ||= 0
             l + r
           end
         end.compact
