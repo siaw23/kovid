@@ -141,7 +141,9 @@ module Kovid
     method_option :cases, aliases: '-c'
     method_option :deaths, aliases: '-d'
     def top(count = 5)
-      puts Kovid.top(count.to_i, prepare_top_params(options))
+      count = count.to_i
+      count = 5 if count.zero?
+      puts Kovid.top(count, prepare_top_params(options))
       data_source
     end
 
