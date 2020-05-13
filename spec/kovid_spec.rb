@@ -212,28 +212,28 @@ RSpec.describe Kovid do
       table = Kovid.top(5)
       expect(table.headings.first.cells.first.value).to include('Country')
       expect(table.headings.first.cells.last.value).to include('Cases/Million')
-      expect(table.title).to include('TOP 5 COUNTRIES IN CASES')
+      expect(table.title).to include('TOP 5 COUNTRIES BY CASES')
     end
 
     it 'returns top countries in deaths' do
       table = Kovid.top(5, { location: :countries, incident: :deaths })
       expect(table.headings.first.cells.first.value).to include('Country')
       expect(table.headings.first.cells.last.value).to include('Cases/Million')
-      expect(table.title).to include('TOP 5 COUNTRIES IN DEATHS')
+      expect(table.title).to include('TOP 5 COUNTRIES BY DEATHS')
     end
 
     it 'returns top states in cases' do
       table = Kovid.top(5, { location: :states, incident: :cases })
       expect(table.headings.first.cells.first.value).to include('State')
       expect(table.headings.first.cells.last.value).to include('Tests')
-      expect(table.title).to include('TOP 5 STATES IN CASES')
+      expect(table.title).to include('TOP 5 STATES BY CASES')
     end
 
     it 'returns top states in deaths' do
       table = Kovid.top(5, { location: :states, incident: :deaths })
       expect(table.headings.first.cells.first.value).to include('State')
       expect(table.headings.first.cells.last.value).to include('Tests')
-      expect(table.title).to include('TOP 5 STATES IN DEATHS')
+      expect(table.title).to include('TOP 5 STATES BY DEATHS')
     end
 
     it 'returns correct amount of records' do

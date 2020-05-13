@@ -264,7 +264,7 @@ module Kovid
       def top_title(options)
         incident = options[:incident].to_s
         location = options[:location].to_s
-        "🌍 Top #{options[:count]} #{location} in #{incident}".upcase
+        "🌍 Top #{options[:count]} #{location} by #{incident}".upcase
       end
     end
   end
