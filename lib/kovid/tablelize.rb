@@ -255,11 +255,10 @@ module Kovid
       end
 
       def top_heading(options)
-        if options[:location] == :countries
-          return ['Country'.paint_white] + FULL_COUNTRY_TABLE_HEADINGS
-        end
+        full_country_table = ['Country'.paint_white] + FULL_COUNTRY_TABLE_HEADINGS
+        full_state_table = ['State'.paint_white] + FULL_STATE_TABLE_HEADINGS
 
-        ['State'.paint_white] + FULL_STATE_TABLE_HEADINGS
+        options[:location] == :countries ? full_country_table : full_state_table
       end
 
       def top_title(options)
