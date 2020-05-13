@@ -76,6 +76,12 @@ ___
 * `kovid history COUNTRY N` (history in the last N days).
 * `kovid history STATE --usa`
 ___
+😷 **Tops**
+* `kovid top N` (top N countries in number of cases).
+* `kovid top N -d` OR `kovid top N --deaths` (top N countries in number of deaths).
+* `kovid top N --states` (top N US states in number of cases).
+* `kovid top N --states -d` (top N countries in number of deaths).
+___
 
 **NOTE:** If you find it irritating to have to type `kovid state STATE`, `covid state STATE` works as well.
 
@@ -136,6 +142,32 @@ You can check historical statistics by running
 To check for total figures:
 
 `kovid world`
+
+![kovid](https://i.gyazo.com/e01f4769a2b9e31ce50cec212e55810c.png "Covid data.")
+
+To fetch top 5 countries in number of cases or deaths:
+
+`kovid top`
+
+![kovid](https://i.gyazo.com/e01f4769a2b9e31ce50cec212e55810c.png "Covid data.")
+
+`kovid top --deaths` OR `kovid top -d`
+
+![kovid](https://i.gyazo.com/e01f4769a2b9e31ce50cec212e55810c.png "Covid data.")
+
+It is also possible to fetch top US states in number of cases or deaths:
+
+`kovid top --states`
+
+![kovid](https://i.gyazo.com/e01f4769a2b9e31ce50cec212e55810c.png "Covid data.")
+
+`kovid top --states --deaths` OR `kovid top --states -d`
+
+![kovid](https://i.gyazo.com/e01f4769a2b9e31ce50cec212e55810c.png "Covid data.")
+
+To fetch more number of countries or US states you can pass N. eg:
+
+`kovid top 10`
 
 ![kovid](https://i.gyazo.com/e01f4769a2b9e31ce50cec212e55810c.png "Covid data.")
 

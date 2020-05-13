@@ -96,6 +96,22 @@ module Kovid
         )
       end
 
+      def top(data, options)
+        headings = top_heading(options)
+        rows = data.map { |location| top_row(location, options) }
+
+        if options[:count] > 10
+          rows << FOOTER_LINE_COLUMN * headings.count
+          rows << headings
+        end
+
+        Terminal::Table.new(
+          title: top_title(options),
+          headings: headings,
+          rows: rows
+        )
+      end
+
       private
 
       def country_title(data)
@@ -222,6 +238,34 @@ module Kovid
           table.align_column(col_no, :right)
         end
         table
+      end
+
+      def top_row(data, options)
+        if options[:location] == :countries
+          return [
+            country_title(data),
+            full_country_row(data)
+          ].flatten
+        end
+
+        [
+          data['state'].upcase,
+          country_row(data)
+        ].flatten
+      end
+
+      def top_heading(options)
+        if options[:location] == :countries
+          return ['Country'.paint_white] + FULL_COUNTRY_TABLE_HEADINGS
+        end
+
+        ['State'.paint_white] + FULL_STATE_TABLE_HEADINGS
+      end
+
+      def top_title(options)
+        incident = options[:incident].to_s
+        location = options[:location].to_s
+        "🌍 Top #{options[:count]} #{location} in #{incident}".upcase
       end
     end
   end

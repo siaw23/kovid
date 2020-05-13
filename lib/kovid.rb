@@ -79,4 +79,8 @@ module Kovid
   def histogram(country, date)
     Kovid::Request.histogram(country, date)
   end
+
+  def top(count, options = { location: :countries, incident: :cases })
+    Kovid::Request.top(count, options)
+  end
 end

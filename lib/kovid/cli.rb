@@ -133,6 +133,20 @@ module Kovid
       end
     end
 
+    desc 'top N',
+         'Returns top N countries or states in an incident (number of cases or
+    deaths).'
+    method_option :countries
+    method_option :states
+    method_option :cases, aliases: '-c'
+    method_option :deaths, aliases: '-d'
+    def top(count = 5)
+      count = count.to_i
+      count = 5 if count.zero?
+      puts Kovid.top(count, prepare_top_params(options))
+      data_source
+    end
+
     private
 
     def fetch_country_stats(country)
@@ -151,6 +165,22 @@ module Kovid
          * Johns Hopkins University
       TEXT
       puts source
+    end
+
+    def prepare_top_params(options)
+      params = {
+        location: :countries,
+        incident: :cases
+      }
+
+      if !options[:states].nil? && options[:countries].nil?
+        params[:location] = :states
+      end
+
+      if !options[:deaths].nil? && options[:cases].nil?
+        params[:incident] = :deaths
+      end
+      params
     end
   end
 end

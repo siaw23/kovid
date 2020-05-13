@@ -102,18 +102,13 @@ module Kovid
       'Recovered'.paint_green
     ].freeze
 
-    FOOTER_LINE_THREE_COLUMNS = [
-      '------------',
-      '------------',
+    FOOTER_LINE_COLUMN = [
       '------------'
     ].freeze
 
-    FOOTER_LINE_FOUR_COLUMNS = [
-      '------------',
-      '------------',
-      '------------',
-      '------------'
-    ].freeze
+    FOOTER_LINE_THREE_COLUMNS = FOOTER_LINE_COLUMN * 3
+
+    FOOTER_LINE_FOUR_COLUMNS = FOOTER_LINE_COLUMN * 4
 
     COUNTRY_LETTERS = 'A'.upto('Z').with_index(127_462).to_h.freeze
 

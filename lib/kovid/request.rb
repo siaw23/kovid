@@ -223,6 +223,19 @@ module Kovid
         Kovid::Tablelize.histogram(response, date)
       end
 
+      def top(count, options)
+        response = JSON.parse(
+          Typhoeus.get(
+            top_url(options[:location]) +
+            "?sort=#{options[:incident]}",
+            cache_ttl: 900
+          ).response_body
+        )
+
+        Kovid::Tablelize.top(response.first(count),
+                             options.merge({ count: count }))
+      end
+
       def capitalize_words(string)
         string.split.map(&:capitalize).join(' ')
       end
@@ -336,6 +349,10 @@ module Kovid
             l + r
           end
         end.compact
+      end
+
+      def top_url(location)
+        location == :countries ? COUNTRIES_PATH : STATES_URL
       end
     end
   end
