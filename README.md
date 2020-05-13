@@ -76,7 +76,7 @@ ___
 * `kovid history COUNTRY N` (history in the last N days).
 * `kovid history STATE --usa`
 ___
-😷 **Tops**
+😷 **Top N (by cases/deaths for countries and US States)**
 * `kovid top N` (top N countries in number of cases).
 * `kovid top N -d` OR `kovid top N --deaths` (top N countries in number of deaths).
 * `kovid top N --states` (top N US states in number of cases).
@@ -149,27 +149,27 @@ To fetch top 5 countries in number of cases or deaths:
 
 `kovid top`
 
-![kovid](https://i.gyazo.com/e01f4769a2b9e31ce50cec212e55810c.png "Covid data.")
+![kovid](https://i.gyazo.com/79443079a6c834094fc21c90dd02b78c.png "Covid data.")
 
 `kovid top --deaths` OR `kovid top -d`
 
-![kovid](https://i.gyazo.com/e01f4769a2b9e31ce50cec212e55810c.png "Covid data.")
+![kovid](https://i.gyazo.com/8136a7acc2cb67d1621b3db0df822cd5.png "Covid data.")
 
 It is also possible to fetch top US states in number of cases or deaths:
 
 `kovid top --states`
 
-![kovid](https://i.gyazo.com/e01f4769a2b9e31ce50cec212e55810c.png "Covid data.")
+![kovid](https://i.gyazo.com/7ee5a1e6affdec838783183024c4604d.png "Covid data.")
 
 `kovid top --states --deaths` OR `kovid top --states -d`
 
-![kovid](https://i.gyazo.com/e01f4769a2b9e31ce50cec212e55810c.png "Covid data.")
+![kovid](https://i.gyazo.com/2c3cb7e1218deff44c9d440dab93a3b1.png "Covid data.")
 
 To fetch more number of countries or US states you can pass N. eg:
 
 `kovid top 10`
 
-![kovid](https://i.gyazo.com/e01f4769a2b9e31ce50cec212e55810c.png "Covid data.")
+![kovid](https://i.gyazo.com/64663ff25c1ff61701e84871948640f4.png "Covid data.")
 
 ## 👩🏾‍🔬 Experimental Feature
 
