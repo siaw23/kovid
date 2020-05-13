@@ -123,5 +123,17 @@ module Kovid
       compare_us_states: [1, 2, 3, 4, 5],
       compare_provinces: [1, 2, 3]
     }.freeze
+
+    COUNTRY_CASES_DEATHS = [
+      'Country'.paint_white,
+      'Cases'.paint_white,
+      'Deaths'.paint_red
+    ].freeze
+
+    STATE_CASES_DEATHS = [
+      'State'.paint_white,
+      'Cases'.paint_white,
+      'Deaths'.paint_red
+    ].freeze
   end
 end

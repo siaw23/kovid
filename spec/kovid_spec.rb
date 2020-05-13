@@ -206,4 +206,57 @@ RSpec.describe Kovid do
       expect(table.rows.size).to eq(32)
     end
   end
+
+  describe 'top' do
+    it 'defaults to top countries in cases' do
+      table = Kovid.top(5)
+      expect(table.headings.first.cells.first.value).to include('Country')
+      expect(table.headings.first.cells[1].value).to include('Cases')
+      expect(table.headings.first.cells.last.value).to include('Deaths')
+      expect(table.title).to include('TOP 5 COUNTRIES IN CASES')
+    end
+
+    it 'returns top countries in deaths' do
+      table = Kovid.top(5, { location: :countries, incident: :deaths })
+      expect(table.headings.first.cells.first.value).to include('Country')
+      expect(table.headings.first.cells[1].value).to include('Cases')
+      expect(table.headings.first.cells.last.value).to include('Deaths')
+      expect(table.title).to include('TOP 5 COUNTRIES IN DEATHS')
+    end
+
+    it 'returns top states in cases' do
+      table = Kovid.top(5, { location: :states, incident: :cases })
+      expect(table.headings.first.cells.first.value).to include('State')
+      expect(table.headings.first.cells[1].value).to include('Cases')
+      expect(table.headings.first.cells.last.value).to include('Deaths')
+      expect(table.title).to include('TOP 5 STATES IN CASES')
+    end
+
+    it 'returns top states in deaths' do
+      table = Kovid.top(5, { location: :states, incident: :deaths })
+      expect(table.headings.first.cells.first.value).to include('State')
+      expect(table.headings.first.cells[1].value).to include('Cases')
+      expect(table.headings.first.cells.last.value).to include('Deaths')
+      expect(table.title).to include('TOP 5 STATES IN DEATHS')
+    end
+
+    it 'returns correct amount of records' do
+      table1 = Kovid.top(3)
+      expect(table1.rows.size).to eq(3)
+
+      table2 = Kovid.top(7)
+      expect(table2.rows.size).to eq(7)
+    end
+
+    it 'returns sorted stat' do
+      table = Kovid.top(5)
+      cases = table.columns[1].sort.reverse
+      expect(cases.sort.reverse).to eq(cases)
+    end
+
+    it 'adds footers rows when records greater than 10' do
+      table = Kovid.top(17)
+      expect(table.rows.size).to eq(19)
+    end
+  end
 end
