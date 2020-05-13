@@ -78,9 +78,9 @@ ___
 ___
 😷 **Tops**
 * `kovid top N` (top N countries in number of cases).
-* `kovid top N --deaths` (top N countries in number of deaths).
+* `kovid top N -d` OR `kovid top N --deaths` (top N countries in number of deaths).
 * `kovid top N --states` (top N US states in number of cases).
-* `kovid top N --states --deaths` (top N countries in number of deaths).
+* `kovid top N --states -d` (top N countries in number of deaths).
 ___
 
 **NOTE:** If you find it irritating to have to type `kovid state STATE`, `covid state STATE` works as well.

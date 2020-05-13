@@ -101,7 +101,7 @@ module Kovid
         rows = data.map { |location| top_row(location, options) }
 
         if options[:count] > 10
-          rows << FOOTER_LINE_THREE_COLUMNS
+          rows << FOOTER_LINE_COLUMN * headings.count
           rows << headings
         end
 
@@ -241,22 +241,25 @@ module Kovid
       end
 
       def top_row(data, options)
-        location_title = if options[:location] == :countries
-                           country_title(data)
-                         else
-                           data['state'].upcase
-                         end
+        if options[:location] == :countries
+          return [
+            country_title(data),
+            full_country_row(data)
+          ].flatten
+        end
+
         [
-          location_title,
-          Kovid.comma_delimit(data['cases']),
-          Kovid.comma_delimit(data['deaths'])
-        ]
+          data['state'].upcase,
+          country_row(data)
+        ].flatten
       end
 
       def top_heading(options)
-        return COUNTRY_CASES_DEATHS if options[:location] == :countries
+        if options[:location] == :countries
+          return ['Country'.paint_white] + FULL_COUNTRY_TABLE_HEADINGS
+        end
 
-        STATE_CASES_DEATHS
+        ['State'.paint_white] + FULL_STATE_TABLE_HEADINGS
       end
 
       def top_title(options)

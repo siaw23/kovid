@@ -211,32 +211,28 @@ RSpec.describe Kovid do
     it 'defaults to top countries in cases' do
       table = Kovid.top(5)
       expect(table.headings.first.cells.first.value).to include('Country')
-      expect(table.headings.first.cells[1].value).to include('Cases')
-      expect(table.headings.first.cells.last.value).to include('Deaths')
+      expect(table.headings.first.cells.last.value).to include('Cases/Million')
       expect(table.title).to include('TOP 5 COUNTRIES IN CASES')
     end
 
     it 'returns top countries in deaths' do
       table = Kovid.top(5, { location: :countries, incident: :deaths })
       expect(table.headings.first.cells.first.value).to include('Country')
-      expect(table.headings.first.cells[1].value).to include('Cases')
-      expect(table.headings.first.cells.last.value).to include('Deaths')
+      expect(table.headings.first.cells.last.value).to include('Cases/Million')
       expect(table.title).to include('TOP 5 COUNTRIES IN DEATHS')
     end
 
     it 'returns top states in cases' do
       table = Kovid.top(5, { location: :states, incident: :cases })
       expect(table.headings.first.cells.first.value).to include('State')
-      expect(table.headings.first.cells[1].value).to include('Cases')
-      expect(table.headings.first.cells.last.value).to include('Deaths')
+      expect(table.headings.first.cells.last.value).to include('Tests')
       expect(table.title).to include('TOP 5 STATES IN CASES')
     end
 
     it 'returns top states in deaths' do
       table = Kovid.top(5, { location: :states, incident: :deaths })
       expect(table.headings.first.cells.first.value).to include('State')
-      expect(table.headings.first.cells[1].value).to include('Cases')
-      expect(table.headings.first.cells.last.value).to include('Deaths')
+      expect(table.headings.first.cells.last.value).to include('Tests')
       expect(table.title).to include('TOP 5 STATES IN DEATHS')
     end
 

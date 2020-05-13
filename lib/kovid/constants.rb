@@ -102,18 +102,13 @@ module Kovid
       'Recovered'.paint_green
     ].freeze
 
-    FOOTER_LINE_THREE_COLUMNS = [
-      '------------',
-      '------------',
+    FOOTER_LINE_COLUMN = [
       '------------'
     ].freeze
 
-    FOOTER_LINE_FOUR_COLUMNS = [
-      '------------',
-      '------------',
-      '------------',
-      '------------'
-    ].freeze
+    FOOTER_LINE_THREE_COLUMNS = FOOTER_LINE_COLUMN * 3
+
+    FOOTER_LINE_FOUR_COLUMNS = FOOTER_LINE_COLUMN * 4
 
     COUNTRY_LETTERS = 'A'.upto('Z').with_index(127_462).to_h.freeze
 
@@ -123,17 +118,5 @@ module Kovid
       compare_us_states: [1, 2, 3, 4, 5],
       compare_provinces: [1, 2, 3]
     }.freeze
-
-    COUNTRY_CASES_DEATHS = [
-      'Country'.paint_white,
-      'Cases'.paint_white,
-      'Deaths'.paint_red
-    ].freeze
-
-    STATE_CASES_DEATHS = [
-      'State'.paint_white,
-      'Cases'.paint_white,
-      'Deaths'.paint_red
-    ].freeze
   end
 end
