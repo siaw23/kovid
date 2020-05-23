@@ -162,13 +162,7 @@ module Kovid
       end
 
       def history(country, days)
-        history_path = UriBuilder.new('/v2/historical').url
-
-        response = JSON.parse(
-          Typhoeus.get(
-            history_path + "/#{country}", cache_ttl: 900
-          ).response_body
-        )
+        response = fetch_history(country)
 
         if response.key?('message')
           not_found(country) do |c|
@@ -182,14 +176,8 @@ module Kovid
       end
 
       def history_us_state(state, days)
-        history_path = UriBuilder.new('/v2/historical/usacounties').url
-        state        = Kovid.lookup_us_state(state).downcase
-
-        response = JSON.parse(
-          Typhoeus.get(
-            history_path + "/#{state}", cache_ttl: 900
-          ).response_body
-        )
+        state    = Kovid.lookup_us_state(state).downcase
+        response = fetch_us_history(state)
 
         if response.respond_to?(:key?) && response.key?('message')
           return not_found(state)
@@ -201,22 +189,20 @@ module Kovid
         cases  = usacounties_aggregator(response, 'cases')
         deaths = usacounties_aggregator(response, 'deaths')
 
-        # normalize data so we can call Kovid::Tablelize.history on US State data
         response = {
           'state' => state,
           'timeline' => { 'cases' => cases, 'deaths' => deaths }
         }
 
-        Kovid::Tablelize.history(response, days)
+        Kovid::Tablelize.history_us_state(response, days)
       rescue JSON::ParserError
         puts SERVER_DOWN
       end
 
       def histogram(country, date)
-        history_path = UriBuilder.new('/v2/historical').url
         response = JSON.parse(
           Typhoeus.get(
-            history_path + "/#{country}", cache_ttl: 900
+            HISTORICAL_URL + "/#{country}", cache_ttl: 900
           ).response_body
         )
 
@@ -312,6 +298,22 @@ module Kovid
         end.first
       end
 
+      def fetch_history(country)
+        JSON.parse(
+          Typhoeus.get(
+            HISTORICAL_URL + "/#{country}", cache_ttl: 900
+          ).response_body
+        )
+      end
+
+      def fetch_us_history(state)
+        JSON.parse(
+          Typhoeus.get(
+            HISTORICAL_US_URL + "/#{state}", cache_ttl: 900
+          ).response_body
+        )
+      end
+
       def aggregator(isos, meth)
         countries_array = JSON.parse(countries_request)
         country_array = countries_array.select do |hash|
@@ -325,9 +327,7 @@ module Kovid
       end
 
       def countries_request
-        Typhoeus.get(
-          UriBuilder.new('/v2/countries').url, cache_ttl: 900
-        ).response_body
+        Typhoeus.get(COUNTRIES_PATH, cache_ttl: 900).response_body
       end
 
       def countries_aggregator(country_array)

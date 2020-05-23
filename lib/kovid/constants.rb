@@ -110,6 +110,9 @@ module Kovid
 
     FOOTER_LINE_FOUR_COLUMNS = FOOTER_LINE_COLUMN * 4
 
+    # Add footer if rows exceed this number
+    ADD_FOOTER_SIZE = 10
+
     COUNTRY_LETTERS = 'A'.upto('Z').with_index(127_462).to_h.freeze
 
     RIGHT_ALIGN_COLUMNS = {
