@@ -25,12 +25,6 @@ module Kovid
     num.to_i.positive? ? "+#{comma_delimit(num)}" : comma_delimit(num).to_s
   end
 
-  def format_country_history_numbers(load)
-    load['timeline'].values.map(&:values).transpose.each do |data|
-      data.map! { |number| Kovid.comma_delimit(number) }
-    end
-  end
-
   def lookup_us_state(state)
     us = Carmen::Country.coded('USA')
     lookup = us.subregions.coded(state) || us.subregions.named(state)

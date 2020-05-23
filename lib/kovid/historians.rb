@@ -5,42 +5,32 @@ module Kovid
     include Constants
     include AsciiCharts
 
-    def history(location, days)
-      rows = []
+    def history(data, days)
+      rows = history_rows(data, days)
 
-      stats = Kovid.format_country_history_numbers(location).last(days.to_i)
-      dates = location['timeline']['cases'].keys.last(days.to_i)
-
-      if days.to_i >= 30
-        stats = stats.reject { |stat| stat[0].to_i.zero? && stat[1].to_i.zero? }
-        dates = dates.last(stats.count)
-      end
-
-      stats.each_with_index do |val, index|
-        val.unshift(Kovid.dateman(dates[index]))
-      end.each do |row|
-        rows << row
-      end
-
-      # Title and Column format if Country or US State
-      if location['country']
-        title      = location['country'].try(:upcase)
-        col_format = DATE_CASES_DEATHS_RECOVERED
-        footer     = FOOTER_LINE_FOUR_COLUMNS
-      else
-        title      = location['state'].try(:upcase)
-        col_format = DATE_CASES_DEATHS
-        footer     = FOOTER_LINE_THREE_COLUMNS
-      end
-
-      if stats.size > 10
-        rows << footer
-        rows << col_format
+      if rows.size > ADD_FOOTER_SIZE
+        rows << FOOTER_LINE_FOUR_COLUMNS
+        rows << DATE_CASES_DEATHS_RECOVERED
       end
 
       Terminal::Table.new(
-        title: title,
-        headings: col_format,
+        title: data['country'].try(:upcase),
+        headings: DATE_CASES_DEATHS_RECOVERED,
+        rows: rows
+      )
+    end
+
+    def history_us_state(data, days)
+      rows = history_rows(data, days)
+
+      if rows.size > ADD_FOOTER_SIZE
+        rows << FOOTER_LINE_THREE_COLUMNS
+        rows << DATE_CASES_DEATHS 
+      end
+
+      Terminal::Table.new(
+        title: data['state'].try(:upcase),
+        headings:  DATE_CASES_DEATHS,
         rows: rows
       )
     end
@@ -106,5 +96,20 @@ module Kovid
         AsciiCharts::Cartesian.new(data, bar: true, hide_zero: true).draw
       end
     end
+
+    private
+
+      def history_rows(data, days)
+        data['timeline']['cases'].map do |date, cases|
+          formatted_date = Kovid.dateman(date)
+          cases          = Kovid.comma_delimit(cases)
+          deaths         = Kovid.comma_delimit(data['timeline']['deaths'][date])
+          recovered      = Kovid.comma_delimit(data['timeline']['recovered'][date]) if data['timeline'].has_key? 'recovered'
+
+          row = [formatted_date, cases, deaths]
+          row << recovered unless recovered.nil?
+          row
+        end.last(days.to_i)
+      end
   end
 end
