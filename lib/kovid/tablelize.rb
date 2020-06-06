@@ -39,7 +39,7 @@ module Kovid
         Terminal::Table.new(
           title: state['state'].upcase,
           headings: FULL_STATE_TABLE_HEADINGS,
-          rows: [country_row(state)]
+          rows: [state_row(state)]
         )
       end
 
@@ -136,7 +136,6 @@ module Kovid
         ]
       end
 
-      # Also works for state
       def country_row(data)
         [
           Kovid.comma_delimit(data['cases']),
@@ -144,6 +143,7 @@ module Kovid
           Kovid.comma_delimit(data['deaths']),
           Kovid.add_plus_sign(data['todayDeaths']),
           Kovid.comma_delimit(data['active']),
+          Kovid.comma_delimit(data['recovered']),
           Kovid.comma_delimit(data['tests'])
         ]
       end
@@ -151,12 +151,26 @@ module Kovid
       def full_country_row(data)
         [
           Kovid.comma_delimit(data['cases']),
-          Kovid.comma_delimit(data['deaths']),
-          Kovid.comma_delimit(data['recovered']),
           Kovid.add_plus_sign(data['todayCases']),
+          Kovid.comma_delimit(data['deaths']),
           Kovid.add_plus_sign(data['todayDeaths']),
+          Kovid.comma_delimit(data['active']),
+          Kovid.comma_delimit(data['recovered']),
+          Kovid.comma_delimit(data['tests']),
+
           Kovid.comma_delimit(data['critical']),
           Kovid.comma_delimit(data['casesPerOneMillion'])
+        ]
+      end
+
+      def state_row(data)
+        [
+          Kovid.comma_delimit(data['cases']),
+          Kovid.add_plus_sign(data['todayCases']),
+          Kovid.comma_delimit(data['deaths']),
+          Kovid.add_plus_sign(data['todayDeaths']),
+          Kovid.comma_delimit(data['active']),
+          Kovid.comma_delimit(data['tests'])
         ]
       end
 

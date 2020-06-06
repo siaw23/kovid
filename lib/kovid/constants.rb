@@ -13,6 +13,7 @@ module Kovid
       'Cases Today'.paint_white,
       'Deaths'.paint_red,
       'Deaths Today'.paint_red,
+      'Active'.paint_yellow,
       'Recovered'.paint_green,
       'Tests'.paint_white
     ].freeze
@@ -63,10 +64,12 @@ module Kovid
 
     FULL_COUNTRY_TABLE_HEADINGS = [
       'Cases'.paint_white,
-      'Deaths'.paint_red,
-      'Recovered'.paint_green,
       'Cases Today'.paint_white,
+      'Deaths'.paint_red,
       'Deaths Today'.paint_red,
+      'Active'.paint_yellow,
+      'Recovered'.paint_green,
+      'Tests'.paint_white,
       'Critical'.paint_yellow,
       'Cases/Million'.paint_white
     ].freeze
