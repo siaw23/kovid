@@ -44,11 +44,13 @@ module Kovid
     COMPARE_COUNTRY_TABLE_FULL = [
       'Country'.paint_white,
       'Cases'.paint_white,
-      'Deaths'.paint_red,
-      'Recovered'.paint_green,
       'Cases Today'.paint_white,
+      'Deaths'.paint_red,
       'Deaths Today'.paint_red,
+      'Active'.paint_yellow,
+      'Recovered'.paint_green,
       'Critical'.paint_yellow,
+      'Tests'.paint_white,
       'Cases/Million'.paint_white
     ].freeze
 
@@ -58,6 +60,7 @@ module Kovid
       'Cases Today'.paint_white,
       'Deaths'.paint_red,
       'Deaths Today'.paint_red,
+      'Active'.paint_yellow,
       'Recovered'.paint_green,
       'Tests'.paint_white
     ].freeze
@@ -69,8 +72,8 @@ module Kovid
       'Deaths Today'.paint_red,
       'Active'.paint_yellow,
       'Recovered'.paint_green,
-      'Tests'.paint_white,
       'Critical'.paint_yellow,
+      'Tests'.paint_white,
       'Cases/Million'.paint_white
     ].freeze
 

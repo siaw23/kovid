@@ -156,9 +156,8 @@ module Kovid
           Kovid.add_plus_sign(data['todayDeaths']),
           Kovid.comma_delimit(data['active']),
           Kovid.comma_delimit(data['recovered']),
-          Kovid.comma_delimit(data['tests']),
-
           Kovid.comma_delimit(data['critical']),
+          Kovid.comma_delimit(data['tests']),
           Kovid.comma_delimit(data['casesPerOneMillion'])
         ]
       end
