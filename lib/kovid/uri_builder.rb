@@ -6,7 +6,7 @@ module Kovid
   class UriBuilder
     attr_reader :path
 
-    BASE_URI = 'corona.lmao.ninja'
+    BASE_URI = 'disease.sh'
 
     def initialize(path = '')
       @path = path
