@@ -14,7 +14,7 @@ module Kovid
       end
 
       Terminal::Table.new(
-        title: data['country'].try(:upcase),
+        title: data['country']&.upcase,
         headings: DATE_CASES_DEATHS_RECOVERED,
         rows: rows
       )
@@ -29,7 +29,7 @@ module Kovid
       end
 
       Terminal::Table.new(
-        title: data['state'].try(:upcase),
+        title: data['state']&.upcase,
         headings:  DATE_CASES_DEATHS,
         rows: rows
       )

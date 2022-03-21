@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'json'
-require 'carmen'
 require_relative 'tablelize'
 require_relative 'cache'
 require_relative 'uri_builder'
@@ -266,7 +265,7 @@ module Kovid
       def fetch_country(country_name)
         # TODO: Match ISOs to full country names
         country_name = 'nl' if country_name == 'netherlands'
-        country_url = COUNTRIES_PATH + "/#{country_name}"
+        country_url = COUNTRIES_PATH + "/#{ERB::Util.url_encode(country_name)}"
 
         JSON.parse(Typhoeus.get(country_url, cache_ttl: 900).response_body)
       end
@@ -301,7 +300,7 @@ module Kovid
       def fetch_history(country)
         JSON.parse(
           Typhoeus.get(
-            HISTORICAL_URL + "/#{country}", cache_ttl: 900
+            HISTORICAL_URL + "/#{ERB::Util.url_encode(country)}", cache_ttl: 900
           ).response_body
         )
       end
@@ -309,7 +308,7 @@ module Kovid
       def fetch_us_history(state)
         JSON.parse(
           Typhoeus.get(
-            HISTORICAL_US_URL + "/#{state}", cache_ttl: 900
+            HISTORICAL_US_URL + "/#{ERB::Util.url_encode(state)}", cache_ttl: 900
           ).response_body
         )
       end

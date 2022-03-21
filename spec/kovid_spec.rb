@@ -205,6 +205,11 @@ RSpec.describe Kovid do
       # Footer rows add two additional rows
       expect(table.rows.size).to eq(32)
     end
+
+    it 'returns table title with non-existent country' do
+      table = Kovid.history('DIAMOND PRINCESS')
+      expect(table.title).to eq('DIAMOND PRINCESS')
+    end
   end
 
   describe 'top' do
