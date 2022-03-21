@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
 module Kovid
-  VERSION = '0.6.15'
+  VERSION = '0.7.0'
 end
