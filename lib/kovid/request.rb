@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'json'
-require 'carmen'
 require_relative 'tablelize'
 require_relative 'cache'
 require_relative 'uri_builder'

@@ -22,7 +22,6 @@ Gem::Specification.new do |spec|
   spec.metadata['source_code_uri'] = 'https://github.com/siaw23/kovid'
   spec.metadata['changelog_uri'] = 'https://github.com/siaw23/kovid'
 
-  spec.add_dependency 'carmen', '~> 1.1.3'
   spec.add_dependency 'rainbow', '~> 3.0'
   spec.add_dependency 'terminal-table', '~> 1.8'
   spec.add_dependency 'thor', '~> 1.0'

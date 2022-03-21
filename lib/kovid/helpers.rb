@@ -26,8 +26,6 @@ module Kovid
   end
 
   def lookup_us_state(state)
-    us = Carmen::Country.coded('USA')
-    lookup = us.subregions.coded(state) || us.subregions.named(state)
-    lookup ? lookup.name : state
+    Kovid::Constants::USA_ABBREVIATIONS.fetch(state.downcase, state)
   end
 end
