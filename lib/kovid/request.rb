@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'json'
+require 'erb'
 require_relative 'tablelize'
 require_relative 'cache'
 require_relative 'uri_builder'
