@@ -124,7 +124,8 @@ module Kovid
       end
 
       def country_emoji(iso)
-        COUNTRY_LETTERS.values_at(*iso.chars).pack('U*') + \
+        #TODO: FIx ZWSP
+        COUNTRY_LETTERS.values_at(*iso.chars).pack('U*') + " " + \
           8203.chr(Encoding::UTF_8)
       end
 
