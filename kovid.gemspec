@@ -39,23 +39,4 @@ Gem::Specification.new do |spec|
   spec.bindir        = 'exe'
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
-
-  spec.post_install_message = "
-    ============================================================================
-      COVID-19 has devasted the world. While we're fighting
-      with the novel coronavirus, I think stats on the issue should be
-      accessible.
-
-      There isn't much we can do now besides following procedures and hoping
-      for the best.
-
-      Stay safe!
-      Emmanuel Hayford.
-      https://emmanuelhayford.com
-
-      PS: I'm in search of a Rails/Ruby job.
-
-      You can hire me (siawmensah@gmail.com).
-    ============================================================================
-    "
 end
